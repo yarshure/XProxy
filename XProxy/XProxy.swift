@@ -45,7 +45,7 @@ public class XProxy{
         return true
     }
     static public func startGCDProxy(){
-        
+        SocketManager.shared.startGCDServer()
     }
     static public func stopGCDProxy(){
         

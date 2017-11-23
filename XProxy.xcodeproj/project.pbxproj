@@ -10,7 +10,6 @@
 		691EBE1D1FC66D95005FDCAF /* XProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 691EBE1B1FC66D95005FDCAF /* XProxy.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		693A35661FC679B5007FDE26 /* XProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693A35651FC679B5007FDE26 /* XProxy.swift */; };
 		693A35681FC67AC2007FDE26 /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693A35671FC67AC2007FDE26 /* SocketManager.swift */; };
-		693A356B1FC67FFB007FDE26 /* DarwinCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 693A356A1FC67FFB007FDE26 /* DarwinCore.framework */; };
 		693A356D1FC68038007FDE26 /* CocoaAsyncSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 693A356C1FC68038007FDE26 /* CocoaAsyncSocket.framework */; };
 		693A356F1FC68089007FDE26 /* GCDTunnelConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693A356E1FC68089007FDE26 /* GCDTunnelConnection.swift */; };
 		693A35711FC680B8007FDE26 /* AVLTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693A35701FC680B8007FDE26 /* AVLTree.swift */; };
@@ -23,6 +22,48 @@
 		693A35C01FC6AE93007FDE26 /* SFOpt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693A35BF1FC6AE93007FDE26 /* SFOpt.swift */; };
 		693A35D51FC6B199007FDE26 /* Xcon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 693A35CF1FC6B158007FDE26 /* Xcon.framework */; };
 		693A35D71FC6B19E007FDE26 /* XRuler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 693A35C61FC6B150007FDE26 /* XRuler.framework */; };
+		693A35E31FC6C5CC007FDE26 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693A35E21FC6C5CC007FDE26 /* AppDelegate.swift */; };
+		693A35E51FC6C5CC007FDE26 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693A35E41FC6C5CC007FDE26 /* ViewController.swift */; };
+		693A35E71FC6C5CC007FDE26 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 693A35E61FC6C5CC007FDE26 /* Assets.xcassets */; };
+		693A35EA1FC6C5CC007FDE26 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 693A35E81FC6C5CC007FDE26 /* Main.storyboard */; };
+		693A35F01FC6C63C007FDE26 /* XProxy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 691EBE181FC66D95005FDCAF /* XProxy.framework */; };
+		693A35F11FC6C657007FDE26 /* AxLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 693A35721FC68125007FDE26 /* AxLogger.framework */; };
+		693A35F21FC6C657007FDE26 /* AxLogger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 693A35721FC68125007FDE26 /* AxLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		693A35F41FC6C65C007FDE26 /* CocoaAsyncSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 693A356C1FC68038007FDE26 /* CocoaAsyncSocket.framework */; };
+		693A35F51FC6C65C007FDE26 /* CocoaAsyncSocket.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 693A356C1FC68038007FDE26 /* CocoaAsyncSocket.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		693A35F81FC6C667007FDE26 /* Xcon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 693A35CF1FC6B158007FDE26 /* Xcon.framework */; };
+		693A35F91FC6C667007FDE26 /* Xcon.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 693A35CF1FC6B158007FDE26 /* Xcon.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		693A35FC1FC6C66B007FDE26 /* XRuler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 693A35C61FC6B150007FDE26 /* XRuler.framework */; };
+		693A35FD1FC6C66B007FDE26 /* XRuler.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 693A35C61FC6B150007FDE26 /* XRuler.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		693A36041FC6C685007FDE26 /* XProxy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 691EBE181FC66D95005FDCAF /* XProxy.framework */; };
+		693A36051FC6C685007FDE26 /* XProxy.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 691EBE181FC66D95005FDCAF /* XProxy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		693A36091FC6C711007FDE26 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 693A36081FC6C710007FDE26 /* SwiftyJSON.framework */; };
+		693A360A1FC6C71A007FDE26 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 693A36081FC6C710007FDE26 /* SwiftyJSON.framework */; };
+		693A360B1FC6C71A007FDE26 /* SwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 693A36081FC6C710007FDE26 /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		693A360D1FC6C726007FDE26 /* Sodium.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 693A360C1FC6C726007FDE26 /* Sodium.framework */; };
+		693A360F1FC6C72D007FDE26 /* MMDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 693A360E1FC6C72C007FDE26 /* MMDB.framework */; };
+		693A36111FC6C733007FDE26 /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 693A36101FC6C733007FDE26 /* ObjectMapper.framework */; };
+		693A36131FC6C739007FDE26 /* kcp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 693A36121FC6C739007FDE26 /* kcp.framework */; };
+		693A36151FC6C744007FDE26 /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 693A36141FC6C744007FDE26 /* CommonCrypto.framework */; };
+		693A36161FC6C74D007FDE26 /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 693A36141FC6C744007FDE26 /* CommonCrypto.framework */; };
+		693A36171FC6C74D007FDE26 /* CommonCrypto.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 693A36141FC6C744007FDE26 /* CommonCrypto.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		693A36181FC6C751007FDE26 /* kcp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 693A36121FC6C739007FDE26 /* kcp.framework */; };
+		693A36191FC6C751007FDE26 /* kcp.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 693A36121FC6C739007FDE26 /* kcp.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		693A361A1FC6C755007FDE26 /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 693A36101FC6C733007FDE26 /* ObjectMapper.framework */; };
+		693A361B1FC6C755007FDE26 /* ObjectMapper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 693A36101FC6C733007FDE26 /* ObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		693A361C1FC6C75A007FDE26 /* MMDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 693A360E1FC6C72C007FDE26 /* MMDB.framework */; };
+		693A361D1FC6C75A007FDE26 /* MMDB.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 693A360E1FC6C72C007FDE26 /* MMDB.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		693A361E1FC6C75E007FDE26 /* Sodium.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 693A360C1FC6C726007FDE26 /* Sodium.framework */; };
+		693A361F1FC6C75E007FDE26 /* Sodium.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 693A360C1FC6C726007FDE26 /* Sodium.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		693A36211FC6C797007FDE26 /* XSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 693A36201FC6C792007FDE26 /* XSocket.framework */; };
+		693A36221FC6C797007FDE26 /* XSocket.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 693A36201FC6C792007FDE26 /* XSocket.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		693A36241FC6C7AB007FDE26 /* IDZSwiftCommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 693A36231FC6C7A6007FDE26 /* IDZSwiftCommonCrypto.framework */; };
+		693A36251FC6C7AB007FDE26 /* IDZSwiftCommonCrypto.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 693A36231FC6C7A6007FDE26 /* IDZSwiftCommonCrypto.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		693A36271FC6C7C3007FDE26 /* Crypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 693A36261FC6C7BD007FDE26 /* Crypto.framework */; };
+		693A36281FC6C7C3007FDE26 /* Crypto.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 693A36261FC6C7BD007FDE26 /* Crypto.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		693A36381FC6CA2F007FDE26 /* DarwinCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 693A36351FC6CA19007FDE26 /* DarwinCore.framework */; };
+		693A36391FC6CA3B007FDE26 /* DarwinCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 693A36351FC6CA19007FDE26 /* DarwinCore.framework */; };
+		693A363A1FC6CA3B007FDE26 /* DarwinCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 693A36351FC6CA19007FDE26 /* DarwinCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,7 +88,91 @@
 			remoteGlobalIDString = 691EBE281FC66DD3005FDCAF;
 			remoteInfo = XconMac;
 		};
+		693A35FA1FC6C667007FDE26 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 693A35C71FC6B158007FDE26 /* Xcon.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 691EBE271FC66DD3005FDCAF;
+			remoteInfo = XconMac;
+		};
+		693A35FE1FC6C66B007FDE26 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 693A35C11FC6B150007FDE26 /* XRuler.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 693A358D1FC69B47007FDE26;
+			remoteInfo = XRuler;
+		};
+		693A36061FC6C685007FDE26 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 691EBE0F1FC66D95005FDCAF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 691EBE171FC66D95005FDCAF;
+			remoteInfo = XProxy;
+		};
+		693A36301FC6CA19007FDE26 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 693A36291FC6CA19007FDE26 /* DarwinCore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 69FC1AC61DDBF25400EF8AAC;
+			remoteInfo = DarwinCore;
+		};
+		693A36321FC6CA19007FDE26 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 693A36291FC6CA19007FDE26 /* DarwinCore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 69FC1AE21DDBF77300EF8AAC;
+			remoteInfo = DarwinCoreTest;
+		};
+		693A36341FC6CA19007FDE26 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 693A36291FC6CA19007FDE26 /* DarwinCore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 69B954D81DDF7D3F006AF669;
+			remoteInfo = DarwinCoreOSX;
+		};
+		693A36361FC6CA19007FDE26 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 693A36291FC6CA19007FDE26 /* DarwinCore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 69784D8E1DE0AB4A007E32C2;
+			remoteInfo = macOSTest;
+		};
+		693A363B1FC6CA3B007FDE26 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 693A36291FC6CA19007FDE26 /* DarwinCore.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 69B954D71DDF7D3F006AF669;
+			remoteInfo = DarwinCoreOSX;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		693A35F31FC6C658007FDE26 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				693A36221FC6C797007FDE26 /* XSocket.framework in Embed Frameworks */,
+				693A363A1FC6CA3B007FDE26 /* DarwinCore.framework in Embed Frameworks */,
+				693A35F51FC6C65C007FDE26 /* CocoaAsyncSocket.framework in Embed Frameworks */,
+				693A361F1FC6C75E007FDE26 /* Sodium.framework in Embed Frameworks */,
+				693A361B1FC6C755007FDE26 /* ObjectMapper.framework in Embed Frameworks */,
+				693A35FD1FC6C66B007FDE26 /* XRuler.framework in Embed Frameworks */,
+				693A36281FC6C7C3007FDE26 /* Crypto.framework in Embed Frameworks */,
+				693A361D1FC6C75A007FDE26 /* MMDB.framework in Embed Frameworks */,
+				693A36191FC6C751007FDE26 /* kcp.framework in Embed Frameworks */,
+				693A36251FC6C7AB007FDE26 /* IDZSwiftCommonCrypto.framework in Embed Frameworks */,
+				693A35F91FC6C667007FDE26 /* Xcon.framework in Embed Frameworks */,
+				693A36171FC6C74D007FDE26 /* CommonCrypto.framework in Embed Frameworks */,
+				693A360B1FC6C71A007FDE26 /* SwiftyJSON.framework in Embed Frameworks */,
+				693A36051FC6C685007FDE26 /* XProxy.framework in Embed Frameworks */,
+				693A35F21FC6C657007FDE26 /* AxLogger.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		691EBE181FC66D95005FDCAF /* XProxy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = XProxy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -55,7 +180,6 @@
 		691EBE1C1FC66D95005FDCAF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		693A35651FC679B5007FDE26 /* XProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XProxy.swift; sourceTree = "<group>"; };
 		693A35671FC67AC2007FDE26 /* SocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketManager.swift; sourceTree = "<group>"; };
-		693A356A1FC67FFB007FDE26 /* DarwinCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DarwinCore.framework; path = Carthage/Build/Mac/DarwinCore.framework; sourceTree = "<group>"; };
 		693A356C1FC68038007FDE26 /* CocoaAsyncSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaAsyncSocket.framework; path = Carthage/Build/Mac/CocoaAsyncSocket.framework; sourceTree = "<group>"; };
 		693A356E1FC68089007FDE26 /* GCDTunnelConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDTunnelConnection.swift; sourceTree = "<group>"; };
 		693A35701FC680B8007FDE26 /* AVLTree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVLTree.swift; sourceTree = "<group>"; };
@@ -68,6 +192,23 @@
 		693A35BF1FC6AE93007FDE26 /* SFOpt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SFOpt.swift; sourceTree = "<group>"; };
 		693A35C11FC6B150007FDE26 /* XRuler.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = XRuler.xcodeproj; path = ../../XRuler/XRuler.xcodeproj; sourceTree = "<group>"; };
 		693A35C71FC6B158007FDE26 /* Xcon.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Xcon.xcodeproj; path = ../../Xcon/Xcon.xcodeproj; sourceTree = "<group>"; };
+		693A35E01FC6C5CC007FDE26 /* XProxyTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XProxyTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		693A35E21FC6C5CC007FDE26 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		693A35E41FC6C5CC007FDE26 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		693A35E61FC6C5CC007FDE26 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		693A35E91FC6C5CC007FDE26 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		693A35EB1FC6C5CC007FDE26 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		693A35EC1FC6C5CC007FDE26 /* XProxyTest.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = XProxyTest.entitlements; sourceTree = "<group>"; };
+		693A36081FC6C710007FDE26 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/Mac/SwiftyJSON.framework; sourceTree = "<group>"; };
+		693A360C1FC6C726007FDE26 /* Sodium.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sodium.framework; path = Carthage/Build/Mac/Sodium.framework; sourceTree = "<group>"; };
+		693A360E1FC6C72C007FDE26 /* MMDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MMDB.framework; path = Carthage/Build/Mac/MMDB.framework; sourceTree = "<group>"; };
+		693A36101FC6C733007FDE26 /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = Carthage/Build/Mac/ObjectMapper.framework; sourceTree = "<group>"; };
+		693A36121FC6C739007FDE26 /* kcp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = kcp.framework; path = Carthage/Build/Mac/kcp.framework; sourceTree = "<group>"; };
+		693A36141FC6C744007FDE26 /* CommonCrypto.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CommonCrypto.framework; path = Carthage/Build/Mac/CommonCrypto.framework; sourceTree = "<group>"; };
+		693A36201FC6C792007FDE26 /* XSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XSocket.framework; path = Carthage/Build/Mac/XSocket.framework; sourceTree = "<group>"; };
+		693A36231FC6C7A6007FDE26 /* IDZSwiftCommonCrypto.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IDZSwiftCommonCrypto.framework; path = Carthage/Build/Mac/IDZSwiftCommonCrypto.framework; sourceTree = "<group>"; };
+		693A36261FC6C7BD007FDE26 /* Crypto.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crypto.framework; path = Carthage/Build/Mac/Crypto.framework; sourceTree = "<group>"; };
+		693A36291FC6CA19007FDE26 /* DarwinCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DarwinCore.xcodeproj; path = Carthage/Checkouts/DarwinCore/DarwinCore.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,7 +220,36 @@
 				693A35D51FC6B199007FDE26 /* Xcon.framework in Frameworks */,
 				693A35731FC68125007FDE26 /* AxLogger.framework in Frameworks */,
 				693A356D1FC68038007FDE26 /* CocoaAsyncSocket.framework in Frameworks */,
-				693A356B1FC67FFB007FDE26 /* DarwinCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		693A35DD1FC6C5CC007FDE26 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				693A36381FC6CA2F007FDE26 /* DarwinCore.framework in Frameworks */,
+				693A36091FC6C711007FDE26 /* SwiftyJSON.framework in Frameworks */,
+				693A36241FC6C7AB007FDE26 /* IDZSwiftCommonCrypto.framework in Frameworks */,
+				693A36041FC6C685007FDE26 /* XProxy.framework in Frameworks */,
+				693A36271FC6C7C3007FDE26 /* Crypto.framework in Frameworks */,
+				693A360A1FC6C71A007FDE26 /* SwiftyJSON.framework in Frameworks */,
+				693A35FC1FC6C66B007FDE26 /* XRuler.framework in Frameworks */,
+				693A36151FC6C744007FDE26 /* CommonCrypto.framework in Frameworks */,
+				693A361A1FC6C755007FDE26 /* ObjectMapper.framework in Frameworks */,
+				693A361E1FC6C75E007FDE26 /* Sodium.framework in Frameworks */,
+				693A360F1FC6C72D007FDE26 /* MMDB.framework in Frameworks */,
+				693A35F41FC6C65C007FDE26 /* CocoaAsyncSocket.framework in Frameworks */,
+				693A36181FC6C751007FDE26 /* kcp.framework in Frameworks */,
+				693A36211FC6C797007FDE26 /* XSocket.framework in Frameworks */,
+				693A36111FC6C733007FDE26 /* ObjectMapper.framework in Frameworks */,
+				693A36131FC6C739007FDE26 /* kcp.framework in Frameworks */,
+				693A35F81FC6C667007FDE26 /* Xcon.framework in Frameworks */,
+				693A35F01FC6C63C007FDE26 /* XProxy.framework in Frameworks */,
+				693A36391FC6CA3B007FDE26 /* DarwinCore.framework in Frameworks */,
+				693A35F11FC6C657007FDE26 /* AxLogger.framework in Frameworks */,
+				693A36161FC6C74D007FDE26 /* CommonCrypto.framework in Frameworks */,
+				693A361C1FC6C75A007FDE26 /* MMDB.framework in Frameworks */,
+				693A360D1FC6C726007FDE26 /* Sodium.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,6 +261,7 @@
 			children = (
 				693A35691FC67F9A007FDE26 /* maclib */,
 				691EBE1A1FC66D95005FDCAF /* XProxy */,
+				693A35E11FC6C5CC007FDE26 /* XProxyTest */,
 				691EBE191FC66D95005FDCAF /* Products */,
 				693A35D21FC6B199007FDE26 /* Frameworks */,
 			);
@@ -100,6 +271,7 @@
 			isa = PBXGroup;
 			children = (
 				691EBE181FC66D95005FDCAF /* XProxy.framework */,
+				693A35E01FC6C5CC007FDE26 /* XProxyTest.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -128,9 +300,18 @@
 		693A35691FC67F9A007FDE26 /* maclib */ = {
 			isa = PBXGroup;
 			children = (
+				693A36291FC6CA19007FDE26 /* DarwinCore.xcodeproj */,
+				693A36261FC6C7BD007FDE26 /* Crypto.framework */,
+				693A36231FC6C7A6007FDE26 /* IDZSwiftCommonCrypto.framework */,
+				693A36201FC6C792007FDE26 /* XSocket.framework */,
+				693A36141FC6C744007FDE26 /* CommonCrypto.framework */,
+				693A36121FC6C739007FDE26 /* kcp.framework */,
+				693A36101FC6C733007FDE26 /* ObjectMapper.framework */,
+				693A360E1FC6C72C007FDE26 /* MMDB.framework */,
+				693A360C1FC6C726007FDE26 /* Sodium.framework */,
+				693A36081FC6C710007FDE26 /* SwiftyJSON.framework */,
 				693A35721FC68125007FDE26 /* AxLogger.framework */,
 				693A356C1FC68038007FDE26 /* CocoaAsyncSocket.framework */,
-				693A356A1FC67FFB007FDE26 /* DarwinCore.framework */,
 			);
 			name = maclib;
 			sourceTree = "<group>";
@@ -157,6 +338,30 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		693A35E11FC6C5CC007FDE26 /* XProxyTest */ = {
+			isa = PBXGroup;
+			children = (
+				693A35E21FC6C5CC007FDE26 /* AppDelegate.swift */,
+				693A35E41FC6C5CC007FDE26 /* ViewController.swift */,
+				693A35E61FC6C5CC007FDE26 /* Assets.xcassets */,
+				693A35E81FC6C5CC007FDE26 /* Main.storyboard */,
+				693A35EB1FC6C5CC007FDE26 /* Info.plist */,
+				693A35EC1FC6C5CC007FDE26 /* XProxyTest.entitlements */,
+			);
+			path = XProxyTest;
+			sourceTree = "<group>";
+		};
+		693A362A1FC6CA19007FDE26 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				693A36311FC6CA19007FDE26 /* DarwinCore.framework */,
+				693A36331FC6CA19007FDE26 /* DarwinCoreTest.app */,
+				693A36351FC6CA19007FDE26 /* DarwinCore.framework */,
+				693A36371FC6CA19007FDE26 /* macOSTest.app */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -191,18 +396,45 @@
 			productReference = 691EBE181FC66D95005FDCAF /* XProxy.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		693A35DF1FC6C5CC007FDE26 /* XProxyTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 693A35ED1FC6C5CC007FDE26 /* Build configuration list for PBXNativeTarget "XProxyTest" */;
+			buildPhases = (
+				693A35DC1FC6C5CC007FDE26 /* Sources */,
+				693A35DD1FC6C5CC007FDE26 /* Frameworks */,
+				693A35DE1FC6C5CC007FDE26 /* Resources */,
+				693A35F31FC6C658007FDE26 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				693A35FB1FC6C667007FDE26 /* PBXTargetDependency */,
+				693A35FF1FC6C66B007FDE26 /* PBXTargetDependency */,
+				693A36071FC6C685007FDE26 /* PBXTargetDependency */,
+				693A363C1FC6CA3B007FDE26 /* PBXTargetDependency */,
+			);
+			name = XProxyTest;
+			productName = XProxyTest;
+			productReference = 693A35E01FC6C5CC007FDE26 /* XProxyTest.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		691EBE0F1FC66D95005FDCAF /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0910;
 				LastUpgradeCheck = 0910;
 				ORGANIZATIONNAME = yarshure;
 				TargetAttributes = {
 					691EBE171FC66D95005FDCAF = {
 						CreatedOnToolsVersion = 9.1;
 						LastSwiftMigration = 0910;
+						ProvisioningStyle = Automatic;
+					};
+					693A35DF1FC6C5CC007FDE26 = {
+						CreatedOnToolsVersion = 9.1;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -213,11 +445,16 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 691EBE0E1FC66D95005FDCAF;
 			productRefGroup = 691EBE191FC66D95005FDCAF /* Products */;
 			projectDirPath = "";
 			projectReferences = (
+				{
+					ProductGroup = 693A362A1FC6CA19007FDE26 /* Products */;
+					ProjectRef = 693A36291FC6CA19007FDE26 /* DarwinCore.xcodeproj */;
+				},
 				{
 					ProductGroup = 693A35C81FC6B158007FDE26 /* Products */;
 					ProjectRef = 693A35C71FC6B158007FDE26 /* Xcon.xcodeproj */;
@@ -230,6 +467,7 @@
 			projectRoot = "";
 			targets = (
 				691EBE171FC66D95005FDCAF /* XProxy */,
+				693A35DF1FC6C5CC007FDE26 /* XProxyTest */,
 			);
 		};
 /* End PBXProject section */
@@ -256,6 +494,34 @@
 			remoteRef = 693A35CE1FC6B158007FDE26 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		693A36311FC6CA19007FDE26 /* DarwinCore.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = DarwinCore.framework;
+			remoteRef = 693A36301FC6CA19007FDE26 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		693A36331FC6CA19007FDE26 /* DarwinCoreTest.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = DarwinCoreTest.app;
+			remoteRef = 693A36321FC6CA19007FDE26 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		693A36351FC6CA19007FDE26 /* DarwinCore.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = DarwinCore.framework;
+			remoteRef = 693A36341FC6CA19007FDE26 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		693A36371FC6CA19007FDE26 /* macOSTest.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = macOSTest.app;
+			remoteRef = 693A36361FC6CA19007FDE26 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -263,6 +529,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		693A35DE1FC6C5CC007FDE26 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				693A35E71FC6C5CC007FDE26 /* Assets.xcassets in Resources */,
+				693A35EA1FC6C5CC007FDE26 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,7 +561,50 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		693A35DC1FC6C5CC007FDE26 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				693A35E51FC6C5CC007FDE26 /* ViewController.swift in Sources */,
+				693A35E31FC6C5CC007FDE26 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		693A35FB1FC6C667007FDE26 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = XconMac;
+			targetProxy = 693A35FA1FC6C667007FDE26 /* PBXContainerItemProxy */;
+		};
+		693A35FF1FC6C66B007FDE26 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = XRuler;
+			targetProxy = 693A35FE1FC6C66B007FDE26 /* PBXContainerItemProxy */;
+		};
+		693A36071FC6C685007FDE26 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 691EBE171FC66D95005FDCAF /* XProxy */;
+			targetProxy = 693A36061FC6C685007FDE26 /* PBXContainerItemProxy */;
+		};
+		693A363C1FC6CA3B007FDE26 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = DarwinCoreOSX;
+			targetProxy = 693A363B1FC6CA3B007FDE26 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		693A35E81FC6C5CC007FDE26 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				693A35E91FC6C5CC007FDE26 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		691EBE1E1FC66D95005FDCAF /* Debug */ = {
@@ -456,6 +774,46 @@
 			};
 			name = Release;
 		};
+		693A35EE1FC6C5CC007FDE26 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 745WQDK4L7;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
+				INFOPLIST_FILE = XProxyTest/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.yarshure.XProxyTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		693A35EF1FC6C5CC007FDE26 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 745WQDK4L7;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
+				INFOPLIST_FILE = XProxyTest/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.yarshure.XProxyTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -473,6 +831,15 @@
 			buildConfigurations = (
 				691EBE211FC66D95005FDCAF /* Debug */,
 				691EBE221FC66D95005FDCAF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		693A35ED1FC6C5CC007FDE26 /* Build configuration list for PBXNativeTarget "XProxyTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				693A35EE1FC6C5CC007FDE26 /* Debug */,
+				693A35EF1FC6C5CC007FDE26 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

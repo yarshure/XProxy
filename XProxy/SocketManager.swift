@@ -9,6 +9,7 @@
 import Foundation
 import DarwinCore
 class SocketManager {
+    static var shared = SocketManager()
     var clientTree:AVLTree = AVLTree<Int32,GCDTunnelConnection>()
     public var dispatchQueue:DispatchQueue// = dispatch_queue_create("com.yarshure.dispatch_queue", DISPATCH_QUEUE_SERIAL);
     var socketQueue:DispatchQueue //=
