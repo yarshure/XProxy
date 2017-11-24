@@ -570,13 +570,13 @@ class HTTPConnection: Connection {
         
     }
     
-     func client_send_to_socks(){
+    override func client_send_to_socks(){
         let st = (reqInfo.status == .Established) || (reqInfo.status == .Transferring)
         if st  {
             if bufArray.count > 0{
                 XProxy.log("\(cIDString) now sending data buffer count:\(bufArray.count)",level: .Debug)
                 
-                client_send_to_socks()
+                super.client_send_to_socks()
                 
             }else {
                 //if rTag == 0  {
@@ -591,7 +591,7 @@ class HTTPConnection: Connection {
     }
     
     
-    func client_socks_handler(_ event:SocketEvent){
+    override  func client_socks_handler(_ event:SocketEvent){
         switch event {
             
         case .event_ERROR:

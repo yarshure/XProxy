@@ -48,9 +48,41 @@ public class Connection: NSObject ,XconDelegate{
      - parameter socket: The connected socket.
      */
     public func didConnect(_ socket: Xcon){
-        
+        XProxy.log("didconnect", items: "", level: .Info)
+        client_socks_handler(.event_UP)
     }
 
+    func client_send_to_socks(){
+        //debugLog("client_send_to_socks")
+        assert(!reqInfo.socks_closed)
+        assert(reqInfo.socks_up)
+        let st = (reqInfo.status == .Established) || (reqInfo.status == .Transferring)
+        if  st && !bufArray.isEmpty{
+            //SKit.log("\(cIDString) sending buffer count \(bufArray.count)",level: .Debug)
+            var sendData:Data = bufArray.first!
+            for x in bufArray.dropFirst() {
+                sendData.append(x)
+            }
+            
+            
+            if tag == sendingTag {
+                return
+            }
+            guard let connector = connector  else {return }
+            //SKit.log("\(cIDString) writing to Host:\(h):\(p) tag:\(tag)   length \(d.length)",level: .Trace)
+            //NSLog("%@ will send data tag:%d", reqInfo.url,tag)
+            bufArray.removeAll()
+            bufArrayInfo[tag] = sendData.count
+            sendingTag = tag
+            
+            
+            connector.writeData(sendData, withTag: Int(tag))
+        }
+    }
+    
+    func client_socks_handler(_ event:SocketEvent){
+        
+    }
     public let info:SFIPConnectionInfo
     public var forceSend:Bool = false // client maybe close after send, proxy should sending the buffer
     public var closeSocketAfterRead:Bool = false // HTTP

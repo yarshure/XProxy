@@ -65,6 +65,6 @@ extension XProxy{
         if level != AxLoggerLevel.Debug {
             AxLogger.log(msg,level:level)
         }
-        
+        print(msg)
     }
 }
