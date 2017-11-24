@@ -8,7 +8,7 @@
 
 import Foundation
 import Xcon
-class TUNConnection: NSObject ,XconDelegate{
+public class Connection: NSObject ,XconDelegate{
     /**
      The socket did disconnect.
      
@@ -16,7 +16,7 @@ class TUNConnection: NSObject ,XconDelegate{
      
      - parameter socket: The socket which did disconnect.
      */
-    func didDisconnect(_ socket: Xcon,  error:Error?){
+    public func didDisconnect(_ socket: Xcon,  error:Error?){
         
     }
     
@@ -27,7 +27,7 @@ class TUNConnection: NSObject ,XconDelegate{
      - parameter withTag: The tag given when calling the `readData` method.
      - parameter from:    The socket where the data is read from.
      */
-    func didReadData(_ data: Data, withTag: Int, from: Xcon){
+    public func didReadData(_ data: Data, withTag: Int, from: Xcon){
         
     }
     
@@ -38,7 +38,7 @@ class TUNConnection: NSObject ,XconDelegate{
      - parameter withTag: The tag given when calling the `writeData` method.
      - parameter from:    The socket where the data is sent out.
      */
-    func didWriteData(_ data: Data?, withTag: Int, from: Xcon){
+    public func didWriteData(_ data: Data?, withTag: Int, from: Xcon){
         
     }
     
@@ -47,39 +47,39 @@ class TUNConnection: NSObject ,XconDelegate{
      
      - parameter socket: The connected socket.
      */
-    func didConnect(_ socket: Xcon){
+    public func didConnect(_ socket: Xcon){
         
     }
 
-    let info:SFIPConnectionInfo
-    var forceSend:Bool = false // client maybe close after send, proxy should sending the buffer
-    var closeSocketAfterRead:Bool = false // HTTP 
-    init(i:SFIPConnectionInfo) {
+    public let info:SFIPConnectionInfo
+    public var forceSend:Bool = false // client maybe close after send, proxy should sending the buffer
+    public var closeSocketAfterRead:Bool = false // HTTP
+    public init(i:SFIPConnectionInfo) {
         info = i
         reqInfo = SFRequestInfo.init(rID: SFConnectionID)
         
         SFConnectionID += 1
         super.init()
     }
-    var connector:Xcon?
-    var bufArray:[Data] = []
-    var bufArrayInfo:[Int64:Int] = [:]
-    var socks_recv_bufArray:Data = Data()
-    var socks_sendout_length:Int = 0
-    var connectorReading:Bool = false
-    var pendingConnection:Bool = true
+    public var connector:Xcon?
+    public var bufArray:[Data] = []
+    public var bufArrayInfo:[Int64:Int] = [:]
+    public var socks_recv_bufArray:Data = Data()
+    public var socks_sendout_length:Int = 0
+    public var connectorReading:Bool = false
+    public var pendingConnection:Bool = true
     
-    var tag:Int64 = 0
+    public var tag:Int64 = 0
     
-    var buf_used:Int = 0
-    var rTag:Int = 1 //recv tag?
+    public var buf_used:Int = 0
+    public var rTag:Int = 1 //recv tag?
     //0 use for handshake and kcp tun use
-    var sendingTag:Int64 = -1
+    public var sendingTag:Int64 = -1
     
-    var forceClose:Bool = false
-    var reqInfo:SFRequestInfo
+    public var forceClose:Bool = false
+    public var reqInfo:SFRequestInfo
     
-    func memoryWarning(_ level:DispatchSource.MemoryPressureEvent){
+    public func memoryWarning(_ level:DispatchSource.MemoryPressureEvent){
         
     }
 }

@@ -10,14 +10,14 @@ import Foundation
 import DarwinCore
 class SocketManager {
     static var shared = SocketManager()
-    var clientTree:AVLTree = AVLTree<Int32,GCDTunnelConnection>()
+    var clientTree:AVLTree = AVLTree<Int32,HTTPConnection>()
     public var dispatchQueue:DispatchQueue// = dispatch_queue_create("com.yarshure.dispatch_queue", DISPATCH_QUEUE_SERIAL);
     var socketQueue:DispatchQueue //=
     init() {
         dispatchQueue = DispatchQueue(label: "com.yarshure.dispatchqueue")
         socketQueue =  DispatchQueue(label:"com.yarshure.socketqueue")
     }
-    func saveTunnelConnectionInfo(_ c:GCDTunnelConnection){
+    func saveTunnelConnectionInfo(_ c:HTTPConnection){
         
     }
     public func startGCDServer(){
@@ -25,7 +25,7 @@ class SocketManager {
         
         if let server = GCDSocketServer.shared(){
             server.accept = { fd,addr,port in
-                let c = GCDTunnelConnection.init(sfd: fd, rip: addr!, rport: UInt16(port), dip: "127.0.0.1", dport: 10081)
+                let c = HTTPConnection.init(sfd: fd, rip: addr!, rport: UInt16(port), dip: "127.0.0.1", dport: 10081)
                 c.manager = self
                 self.clientTree.insert(key: fd, payload: c)
                 //c.connect()

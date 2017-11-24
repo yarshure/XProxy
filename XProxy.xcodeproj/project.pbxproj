@@ -11,10 +11,10 @@
 		693A35661FC679B5007FDE26 /* XProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693A35651FC679B5007FDE26 /* XProxy.swift */; };
 		693A35681FC67AC2007FDE26 /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693A35671FC67AC2007FDE26 /* SocketManager.swift */; };
 		693A356D1FC68038007FDE26 /* CocoaAsyncSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 693A356C1FC68038007FDE26 /* CocoaAsyncSocket.framework */; };
-		693A356F1FC68089007FDE26 /* GCDTunnelConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693A356E1FC68089007FDE26 /* GCDTunnelConnection.swift */; };
+		693A356F1FC68089007FDE26 /* HTTPConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693A356E1FC68089007FDE26 /* HTTPConnection.swift */; };
 		693A35711FC680B8007FDE26 /* AVLTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693A35701FC680B8007FDE26 /* AVLTree.swift */; };
 		693A35731FC68125007FDE26 /* AxLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 693A35721FC68125007FDE26 /* AxLogger.framework */; };
-		693A35751FC68300007FDE26 /* TUNConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693A35741FC68300007FDE26 /* TUNConnection.swift */; };
+		693A35751FC68300007FDE26 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693A35741FC68300007FDE26 /* Connection.swift */; };
 		693A357D1FC69657007FDE26 /* SFIPConnectionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693A357C1FC69657007FDE26 /* SFIPConnectionInfo.swift */; };
 		693A357F1FC6968B007FDE26 /* ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693A357E1FC6968B007FDE26 /* ext.swift */; };
 		693A35811FC6971D007FDE26 /* SFIPAddr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693A35801FC6971D007FDE26 /* SFIPAddr.swift */; };
@@ -181,10 +181,10 @@
 		693A35651FC679B5007FDE26 /* XProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XProxy.swift; sourceTree = "<group>"; };
 		693A35671FC67AC2007FDE26 /* SocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketManager.swift; sourceTree = "<group>"; };
 		693A356C1FC68038007FDE26 /* CocoaAsyncSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaAsyncSocket.framework; path = Carthage/Build/Mac/CocoaAsyncSocket.framework; sourceTree = "<group>"; };
-		693A356E1FC68089007FDE26 /* GCDTunnelConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDTunnelConnection.swift; sourceTree = "<group>"; };
+		693A356E1FC68089007FDE26 /* HTTPConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPConnection.swift; sourceTree = "<group>"; };
 		693A35701FC680B8007FDE26 /* AVLTree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVLTree.swift; sourceTree = "<group>"; };
 		693A35721FC68125007FDE26 /* AxLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AxLogger.framework; path = Carthage/Build/Mac/AxLogger.framework; sourceTree = "<group>"; };
-		693A35741FC68300007FDE26 /* TUNConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TUNConnection.swift; sourceTree = "<group>"; };
+		693A35741FC68300007FDE26 /* Connection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
 		693A357C1FC69657007FDE26 /* SFIPConnectionInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SFIPConnectionInfo.swift; path = ../../github/surf30/external/sfsocket/SFSocket/TCPStack/SFIPConnectionInfo.swift; sourceTree = "<group>"; };
 		693A357E1FC6968B007FDE26 /* ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ext.swift; sourceTree = "<group>"; };
 		693A35801FC6971D007FDE26 /* SFIPAddr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SFIPAddr.swift; path = ../../github/surf30/external/sfsocket/SFSocket/TCPStack/SFIPAddr.swift; sourceTree = "<group>"; };
@@ -279,8 +279,10 @@
 		691EBE1A1FC66D95005FDCAF /* XProxy */ = {
 			isa = PBXGroup;
 			children = (
+				693A35C11FC6B150007FDE26 /* XRuler.xcodeproj */,
+				693A35C71FC6B158007FDE26 /* Xcon.xcodeproj */,
 				691EBE1B1FC66D95005FDCAF /* XProxy.h */,
-				693A35741FC68300007FDE26 /* TUNConnection.swift */,
+				693A35741FC68300007FDE26 /* Connection.swift */,
 				693A357E1FC6968B007FDE26 /* ext.swift */,
 				693A357C1FC69657007FDE26 /* SFIPConnectionInfo.swift */,
 				693A35801FC6971D007FDE26 /* SFIPAddr.swift */,
@@ -288,9 +290,7 @@
 				693A35651FC679B5007FDE26 /* XProxy.swift */,
 				693A35BF1FC6AE93007FDE26 /* SFOpt.swift */,
 				693A35701FC680B8007FDE26 /* AVLTree.swift */,
-				693A35C71FC6B158007FDE26 /* Xcon.xcodeproj */,
-				693A35C11FC6B150007FDE26 /* XRuler.xcodeproj */,
-				693A356E1FC68089007FDE26 /* GCDTunnelConnection.swift */,
+				693A356E1FC68089007FDE26 /* HTTPConnection.swift */,
 				693A35671FC67AC2007FDE26 /* SocketManager.swift */,
 				691EBE1C1FC66D95005FDCAF /* Info.plist */,
 			);
@@ -548,8 +548,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				693A35751FC68300007FDE26 /* TUNConnection.swift in Sources */,
-				693A356F1FC68089007FDE26 /* GCDTunnelConnection.swift in Sources */,
+				693A35751FC68300007FDE26 /* Connection.swift in Sources */,
+				693A356F1FC68089007FDE26 /* HTTPConnection.swift in Sources */,
 				693A35681FC67AC2007FDE26 /* SocketManager.swift in Sources */,
 				693A357F1FC6968B007FDE26 /* ext.swift in Sources */,
 				693A35661FC679B5007FDE26 /* XProxy.swift in Sources */,

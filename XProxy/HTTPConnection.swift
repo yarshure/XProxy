@@ -10,7 +10,7 @@ import Foundation
 import Darwin
 import Xcon
 import XRuler
-class GCDTunnelConnection: TUNConnection {
+class HTTPConnection: Connection {
     var socketfd:Int32 = 0
     var headerData:Data = Data()
     var httpStat:HTTPConnectionState = .httpDefault

@@ -13,6 +13,12 @@ class ViewController: NSViewController {
     @IBAction func start(_ sender: Any) {
         XProxy.startGCDProxy()
     }
+    @IBAction func pause(_ sender: Any) {
+        XProxy.startGCDProxy()
+    }
+    @IBAction func restart(_ sender: Any) {
+        XProxy.startGCDProxy()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
