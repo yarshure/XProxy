@@ -10,6 +10,7 @@ import Foundation
 import Darwin
 import Xcon
 import XRuler
+import DarwinCore
 class HTTPConnection: Connection {
     var socketfd:Int32 = 0
     var headerData:Data = Data()
@@ -1387,9 +1388,17 @@ class HTTPConnection: Connection {
     }
     func client_socks_recv_handler_done(_ len:Int){
         print("client_socks_recv_handler_done")
+        //socketfd
+        //server_write_request
+        socks_recv_bufArray.withUnsafeRawPointer { (ptr)  in
+            GCDSocketServer.shared().server_write_request(socketfd, buffer: ptr, total: len)
+        }
+        
+        
     }
     func client_socks_send_handler_done(_ len:Int){
         print("client_socks_send_handler_done")
+        connector?.readDataWithTag(0)
     }
     func sendFakeCONNECTResponse(){
         print("sendFakeCONNECTResponse")
