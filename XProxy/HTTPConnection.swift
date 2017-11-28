@@ -1394,7 +1394,7 @@ class HTTPConnection: Connection {
             GCDSocketServer.shared().server_write_request(socketfd, buffer: ptr, total: len)
         }
         socks_recv_bufArray.removeAll()
-        
+        connector?.readDataWithTag(0)
     }
     func client_socks_send_handler_done(_ len:Int){
         print("client_socks_send_handler_done")
@@ -1441,6 +1441,9 @@ class HTTPConnection: Connection {
         return r
     }
     func forceCloseRemote(){
-        print("forceCloseRemote")
+        connector?.forceDisconnect(UInt32(self.reqInfo.reqID))
+    }
+    override public func didDisconnect(_ socket: Xcon,  error:Error?){
+            XProxy.log("dest disconnect", items: "", level: .Info)
     }
 }
