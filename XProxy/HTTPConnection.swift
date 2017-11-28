@@ -1393,7 +1393,7 @@ class HTTPConnection: Connection {
         socks_recv_bufArray.withUnsafeRawPointer { (ptr)  in
             GCDSocketServer.shared().server_write_request(socketfd, buffer: ptr, total: len)
         }
-        
+        socks_recv_bufArray.removeAll()
         
     }
     func client_socks_send_handler_done(_ len:Int){
@@ -1401,7 +1401,37 @@ class HTTPConnection: Connection {
         connector?.readDataWithTag(0)
     }
     func sendFakeCONNECTResponse(){
-        print("sendFakeCONNECTResponse")
+        var need = false
+        if reqInfo.mode == .HTTPS  {
+            need = true
+        }else {
+            if let head = reqInfo.reqHeader , head.method == .CONNECT {
+                reqInfo.mode = .HTTPS
+                need = true
+            }
+        }
+        
+        if need {
+            guard let _ = reqInfo.reqHeader else {return}
+            //SKit.log("\(cIDString) tel lwip  CONNECT head \(h.length) received and send fake replay \(SSL_CONNECTION_RESPONSE)",level: .Debug)
+            //client_socks_send_handler_done(h.length)
+            guard  let s = SSL_CONNECTION_RESPONSE.data(using: .utf8, allowLossyConversion: false) else {
+                return
+            }
+            if let header  = SFHTTPResponseHeader.init(data: s) {
+                reqInfo.respHeader = header
+            }else {
+                XProxy.log(" CONNECT Response parser error",level: .Error)
+            }
+            let newData = s
+            socks_recv_bufArray.append(newData)
+            
+            client_socks_recv_handler_done(s.count)
+        }
+        
+        
+        
+        
     }
     func client_socks_recv_send_out(){
         print("client_socks_recv_send_out")
