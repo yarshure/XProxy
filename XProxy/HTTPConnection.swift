@@ -40,7 +40,7 @@ class HTTPConnection: Connection {
     var cIDString:String {
         get {
             #if DEBUG
-                return "[GCDTunnelConnection-\(reqInfo.reqID)-\(info.tun.port)" + "]" //self.classSFName()
+                return "[HTTPConnection-\(reqInfo.reqID)-\(info.tun.port)" + "]" //self.classSFName()
             #else
                 //-\(info.tun.port)-\(pcb)
                 //return  "[" + objectClassString(self) + "-\(reqInfo.reqID)" + "]" //self.classSFName()
@@ -1444,6 +1444,6 @@ class HTTPConnection: Connection {
         connector?.forceDisconnect(UInt32(self.reqInfo.reqID))
     }
     override public func didDisconnect(_ socket: Xcon,  error:Error?){
-            XProxy.log("dest disconnect", items: "", level: .Info)
+            XProxy.log("dest disconnect \(self.socketfd)", items: "", level: .Info)
     }
 }

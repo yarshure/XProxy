@@ -170,6 +170,12 @@ extension AVLTree {
   fileprivate func updateHeightUpwards(node: Node?) {
     if let node = node {
      //bug here
+        //leftChild == parent ,exc_bad_access
+        if let p = node.parent {
+            if p.key == node.key {
+                return
+            }
+        }
       let lHeight = node.leftChild?.height ?? 0
       let rHeight = node.rightChild?.height ?? 0
       node.height = max(lHeight, rHeight) + 1

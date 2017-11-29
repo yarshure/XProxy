@@ -59,11 +59,9 @@
 		693A36251FC6C7AB007FDE26 /* IDZSwiftCommonCrypto.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 693A36231FC6C7A6007FDE26 /* IDZSwiftCommonCrypto.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		693A36271FC6C7C3007FDE26 /* Crypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 693A36261FC6C7BD007FDE26 /* Crypto.framework */; };
 		693A36281FC6C7C3007FDE26 /* Crypto.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 693A36261FC6C7BD007FDE26 /* Crypto.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		693A36381FC6CA2F007FDE26 /* DarwinCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 693A36351FC6CA19007FDE26 /* DarwinCore.framework */; };
-		693A36391FC6CA3B007FDE26 /* DarwinCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 693A36351FC6CA19007FDE26 /* DarwinCore.framework */; };
-		693A363A1FC6CA3B007FDE26 /* DarwinCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 693A36351FC6CA19007FDE26 /* DarwinCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		697FB3131FCBB60100653CA8 /* SFIPAddr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697FB3111FCBB60100653CA8 /* SFIPAddr.swift */; };
 		697FB3141FCBB60100653CA8 /* SFIPConnectionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697FB3121FCBB60100653CA8 /* SFIPConnectionInfo.swift */; };
+		69EF588C1FCE8661001EEC95 /* DarwinCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 69EF58891FCE8642001EEC95 /* DarwinCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,40 +107,33 @@
 			remoteGlobalIDString = 691EBE171FC66D95005FDCAF;
 			remoteInfo = XProxy;
 		};
-		693A36301FC6CA19007FDE26 /* PBXContainerItemProxy */ = {
+		69EF58841FCE8642001EEC95 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 693A36291FC6CA19007FDE26 /* DarwinCore.xcodeproj */;
+			containerPortal = 69EF587D1FCE8642001EEC95 /* DarwinCore.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 69FC1AC61DDBF25400EF8AAC;
 			remoteInfo = DarwinCore;
 		};
-		693A36321FC6CA19007FDE26 /* PBXContainerItemProxy */ = {
+		69EF58861FCE8642001EEC95 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 693A36291FC6CA19007FDE26 /* DarwinCore.xcodeproj */;
+			containerPortal = 69EF587D1FCE8642001EEC95 /* DarwinCore.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 69FC1AE21DDBF77300EF8AAC;
 			remoteInfo = DarwinCoreTest;
 		};
-		693A36341FC6CA19007FDE26 /* PBXContainerItemProxy */ = {
+		69EF58881FCE8642001EEC95 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 693A36291FC6CA19007FDE26 /* DarwinCore.xcodeproj */;
+			containerPortal = 69EF587D1FCE8642001EEC95 /* DarwinCore.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 69B954D81DDF7D3F006AF669;
 			remoteInfo = DarwinCoreOSX;
 		};
-		693A36361FC6CA19007FDE26 /* PBXContainerItemProxy */ = {
+		69EF588A1FCE8642001EEC95 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 693A36291FC6CA19007FDE26 /* DarwinCore.xcodeproj */;
+			containerPortal = 69EF587D1FCE8642001EEC95 /* DarwinCore.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 69784D8E1DE0AB4A007E32C2;
 			remoteInfo = macOSTest;
-		};
-		693A363B1FC6CA3B007FDE26 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 693A36291FC6CA19007FDE26 /* DarwinCore.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 69B954D71DDF7D3F006AF669;
-			remoteInfo = DarwinCoreOSX;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -153,8 +144,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				69EF588C1FCE8661001EEC95 /* DarwinCore.framework in Embed Frameworks */,
 				693A36221FC6C797007FDE26 /* XSocket.framework in Embed Frameworks */,
-				693A363A1FC6CA3B007FDE26 /* DarwinCore.framework in Embed Frameworks */,
 				693A35F51FC6C65C007FDE26 /* CocoaAsyncSocket.framework in Embed Frameworks */,
 				693A361F1FC6C75E007FDE26 /* Sodium.framework in Embed Frameworks */,
 				693A361B1FC6C755007FDE26 /* ObjectMapper.framework in Embed Frameworks */,
@@ -206,9 +197,9 @@
 		693A36201FC6C792007FDE26 /* XSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XSocket.framework; path = Carthage/Build/Mac/XSocket.framework; sourceTree = "<group>"; };
 		693A36231FC6C7A6007FDE26 /* IDZSwiftCommonCrypto.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IDZSwiftCommonCrypto.framework; path = Carthage/Build/Mac/IDZSwiftCommonCrypto.framework; sourceTree = "<group>"; };
 		693A36261FC6C7BD007FDE26 /* Crypto.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crypto.framework; path = Carthage/Build/Mac/Crypto.framework; sourceTree = "<group>"; };
-		693A36291FC6CA19007FDE26 /* DarwinCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DarwinCore.xcodeproj; path = Carthage/Checkouts/DarwinCore/DarwinCore.xcodeproj; sourceTree = "<group>"; };
 		697FB3111FCBB60100653CA8 /* SFIPAddr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SFIPAddr.swift; sourceTree = "<group>"; };
 		697FB3121FCBB60100653CA8 /* SFIPConnectionInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SFIPConnectionInfo.swift; sourceTree = "<group>"; };
+		69EF587D1FCE8642001EEC95 /* DarwinCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DarwinCore.xcodeproj; path = ../github/DarwinCore/DarwinCore.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -227,7 +218,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				693A36381FC6CA2F007FDE26 /* DarwinCore.framework in Frameworks */,
 				693A36091FC6C711007FDE26 /* SwiftyJSON.framework in Frameworks */,
 				693A36241FC6C7AB007FDE26 /* IDZSwiftCommonCrypto.framework in Frameworks */,
 				693A36041FC6C685007FDE26 /* XProxy.framework in Frameworks */,
@@ -245,7 +235,6 @@
 				693A36131FC6C739007FDE26 /* kcp.framework in Frameworks */,
 				693A35F81FC6C667007FDE26 /* Xcon.framework in Frameworks */,
 				693A35F01FC6C63C007FDE26 /* XProxy.framework in Frameworks */,
-				693A36391FC6CA3B007FDE26 /* DarwinCore.framework in Frameworks */,
 				693A35F11FC6C657007FDE26 /* AxLogger.framework in Frameworks */,
 				693A36161FC6C74D007FDE26 /* CommonCrypto.framework in Frameworks */,
 				693A361C1FC6C75A007FDE26 /* MMDB.framework in Frameworks */,
@@ -300,7 +289,7 @@
 		693A35691FC67F9A007FDE26 /* maclib */ = {
 			isa = PBXGroup;
 			children = (
-				693A36291FC6CA19007FDE26 /* DarwinCore.xcodeproj */,
+				69EF587D1FCE8642001EEC95 /* DarwinCore.xcodeproj */,
 				693A36261FC6C7BD007FDE26 /* Crypto.framework */,
 				693A36231FC6C7A6007FDE26 /* IDZSwiftCommonCrypto.framework */,
 				693A36201FC6C792007FDE26 /* XSocket.framework */,
@@ -353,13 +342,13 @@
 			path = XProxyTest;
 			sourceTree = "<group>";
 		};
-		693A362A1FC6CA19007FDE26 /* Products */ = {
+		69EF587E1FCE8642001EEC95 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				693A36311FC6CA19007FDE26 /* DarwinCore.framework */,
-				693A36331FC6CA19007FDE26 /* DarwinCoreTest.app */,
-				693A36351FC6CA19007FDE26 /* DarwinCore.framework */,
-				693A36371FC6CA19007FDE26 /* macOSTest.app */,
+				69EF58851FCE8642001EEC95 /* DarwinCore.framework */,
+				69EF58871FCE8642001EEC95 /* DarwinCoreTest.app */,
+				69EF58891FCE8642001EEC95 /* DarwinCore.framework */,
+				69EF588B1FCE8642001EEC95 /* macOSTest.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -411,7 +400,6 @@
 				693A35FB1FC6C667007FDE26 /* PBXTargetDependency */,
 				693A35FF1FC6C66B007FDE26 /* PBXTargetDependency */,
 				693A36071FC6C685007FDE26 /* PBXTargetDependency */,
-				693A363C1FC6CA3B007FDE26 /* PBXTargetDependency */,
 			);
 			name = XProxyTest;
 			productName = XProxyTest;
@@ -457,8 +445,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 693A362A1FC6CA19007FDE26 /* Products */;
-					ProjectRef = 693A36291FC6CA19007FDE26 /* DarwinCore.xcodeproj */;
+					ProductGroup = 69EF587E1FCE8642001EEC95 /* Products */;
+					ProjectRef = 69EF587D1FCE8642001EEC95 /* DarwinCore.xcodeproj */;
 				},
 				{
 					ProductGroup = 693A35C81FC6B158007FDE26 /* Products */;
@@ -499,32 +487,32 @@
 			remoteRef = 693A35CE1FC6B158007FDE26 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		693A36311FC6CA19007FDE26 /* DarwinCore.framework */ = {
+		69EF58851FCE8642001EEC95 /* DarwinCore.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = DarwinCore.framework;
-			remoteRef = 693A36301FC6CA19007FDE26 /* PBXContainerItemProxy */;
+			remoteRef = 69EF58841FCE8642001EEC95 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		693A36331FC6CA19007FDE26 /* DarwinCoreTest.app */ = {
+		69EF58871FCE8642001EEC95 /* DarwinCoreTest.app */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.application;
 			path = DarwinCoreTest.app;
-			remoteRef = 693A36321FC6CA19007FDE26 /* PBXContainerItemProxy */;
+			remoteRef = 69EF58861FCE8642001EEC95 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		693A36351FC6CA19007FDE26 /* DarwinCore.framework */ = {
+		69EF58891FCE8642001EEC95 /* DarwinCore.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = DarwinCore.framework;
-			remoteRef = 693A36341FC6CA19007FDE26 /* PBXContainerItemProxy */;
+			remoteRef = 69EF58881FCE8642001EEC95 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		693A36371FC6CA19007FDE26 /* macOSTest.app */ = {
+		69EF588B1FCE8642001EEC95 /* macOSTest.app */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.application;
 			path = macOSTest.app;
-			remoteRef = 693A36361FC6CA19007FDE26 /* PBXContainerItemProxy */;
+			remoteRef = 69EF588A1FCE8642001EEC95 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -592,11 +580,6 @@
 			isa = PBXTargetDependency;
 			target = 691EBE171FC66D95005FDCAF /* XProxy */;
 			targetProxy = 693A36061FC6C685007FDE26 /* PBXContainerItemProxy */;
-		};
-		693A363C1FC6CA3B007FDE26 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = DarwinCoreOSX;
-			targetProxy = 693A363B1FC6CA3B007FDE26 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

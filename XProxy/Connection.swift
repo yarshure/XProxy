@@ -60,6 +60,7 @@ public class Connection: NSObject ,XconDelegate{
         if  st && !bufArray.isEmpty{
             //SKit.log("\(cIDString) sending buffer count \(bufArray.count)",level: .Debug)
             var sendData:Data = bufArray.first!
+            //bug here,fixme
             for x in bufArray.dropFirst() {
                 sendData.append(x)
             }
