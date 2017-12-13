@@ -17,14 +17,16 @@ class HTTPConnection: Connection {
     var httpStat:HTTPConnectionState = .httpDefault
     var requestIndex:UInt = 0
     var reqHeaderQueue:[SFHTTPRequestHeader] = []
-     weak var manager:SocketManager?
+    weak var manager:SocketManager?
     
     var recvHeaderData:Data = Data()
     
     var currentBodyLength:UInt = 0
     var totalRecvLength:UInt = 0
     var currentBobyReadLength:UInt = 0
-    
+    deinit {
+        XProxy.log("\(reqInfo.reqID) deinit", items: "", level: .Info)
+    }
     init(sfd:Int32,rip:String,rport:UInt16,dip:String,dport:UInt16) {
         //this info is for mac iden process info
         let remote_addr  = IPAddr(i: inet_addr(rip),p: rport)
@@ -44,8 +46,9 @@ class HTTPConnection: Connection {
             #else
                 //-\(info.tun.port)-\(pcb)
                 //return  "[" + objectClassString(self) + "-\(reqInfo.reqID)" + "]" //self.classSFName()
+                return "\(reqInfo.reqID)"
             #endif
-            return ""
+            
         }
     }
     func updateReq(_ req:SFRequestInfo){
@@ -1434,7 +1437,8 @@ class HTTPConnection: Connection {
         
     }
     func client_socks_recv_send_out(){
-        print("client_socks_recv_send_out")
+        
+        XProxy.log("client_socks_recv_send_out", level: .Info)
     }
     func checkBufferHaveData(_ buffer:Data,data:Data) -> Range<Data.Index>? {
         let r = buffer.range(of: data , options: Data.SearchOptions.init(rawValue: 0), in: Range(0 ..< buffer.count))
@@ -1443,7 +1447,8 @@ class HTTPConnection: Connection {
     func forceCloseRemote(){
         connector?.forceDisconnect(UInt32(self.reqInfo.reqID))
     }
+                         
     override public func didDisconnect(_ socket: Xcon,  error:Error?){
-            XProxy.log("dest disconnect \(self.socketfd)", items: "", level: .Info)
+            XProxy.log("dest didDisconnect \(self.socketfd)", items: "", level: .Info)
     }
 }

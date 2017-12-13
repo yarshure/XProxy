@@ -44,8 +44,8 @@ public class XProxy{
         
         return true
     }
-    static public func startGCDProxy(){
-        SocketManager.shared.startGCDServer()
+    static public func startGCDProxy(port:Int32){
+        SocketManager.shared.startGCDServer(port: port)
     }
     static public func stopGCDProxy(){
         
@@ -55,12 +55,23 @@ public class XProxy{
     static public func reloadProxy(){
     }
     
-    
-    
+    static public func state() -> String {
+        return SocketManager.shared.st.description
+    }
+    static func saveTunnelConnectionInfo(_ c:HTTPConnection){
+        print("Request \(c.requestIndex) should save info")
+    }
 }
 
 extension XProxy{
     static func log(_ msg:String,items: Any...,level:AxLoggerLevel , category:String="default",file:String=#file,line:Int=#line,ud:[String:String]=[:],tags:[String]=[],time:Date=Date()){
+        
+        if level != AxLoggerLevel.Debug {
+            AxLogger.log(msg,level:level)
+        }
+        print(msg)
+    }
+    static func log(_ msg:String,level:AxLoggerLevel , category:String="default",file:String=#file,line:Int=#line,ud:[String:String]=[:],tags:[String]=[],time:Date=Date()){
         
         if level != AxLoggerLevel.Debug {
             AxLogger.log(msg,level:level)

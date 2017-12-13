@@ -10,18 +10,19 @@ import Cocoa
 import XProxy
 class ViewController: NSViewController {
 
+    @IBOutlet weak var stateLabel: NSTextField!
     @IBAction func start(_ sender: Any) {
-        XProxy.startGCDProxy()
+        XProxy.startGCDProxy(port: 10081)
     }
     @IBAction func pause(_ sender: Any) {
-        XProxy.startGCDProxy()
+        XProxy.startGCDProxy(port: 10081)
     }
     @IBAction func restart(_ sender: Any) {
-        XProxy.startGCDProxy()
+        XProxy.startGCDProxy(port: 10081)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        stateLabel.stringValue = XProxy.state()
         // Do any additional setup after loading the view.
     }
 
