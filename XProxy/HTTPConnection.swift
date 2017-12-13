@@ -1201,48 +1201,43 @@ class HTTPConnection: Connection {
         //http 需要做dns 解析
         //ip 呢？
         
-        reqInfo.ruleStartTime = Date() as Date
+        reqInfo.ruleStartTime = Date() 
         var j:SFRuleResult
         XProxy.log("\(cIDString) Find Rule For  DEST:   " ,items:  dest ,level:  .Debug)
         
-        if let r = SFSettingModule.setting.findRuleResult(dest){
-            j = r
-            reqInfo.rule = r.result
-            findProxy(j,cache: false)
+        
+        if let ruler  = SFSettingModule.setting.findRuleByString(dest,useragent:useragent) {
+            j = ruler
+            
+            if !j.ipAddr.isEmpty {
+                reqInfo.remoteIPaddress = j.ipAddr
+            }
+            reqInfo.rule = ruler.result
+            findProxy(j,cache: true)
             
         }else {
-            
-            if let ruler  = SFSettingModule.setting.findRuleByString(dest,useragent:useragent) {
-                j = ruler
-                
-                if !j.ipAddr.isEmpty {
-                    reqInfo.remoteIPaddress = j.ipAddr
-                }
-                reqInfo.rule = ruler.result
-                findProxy(j,cache: true)
-                
+            if !reqInfo.remoteIPaddress.isEmpty {
+                findIPRule(reqInfo.remoteIPaddress)
             }else {
-                if !reqInfo.remoteIPaddress.isEmpty {
-                    findIPRule(reqInfo.remoteIPaddress)
+                if SFSettingModule.setting.ipRuleEnable {
+                    reqInfo.waitingRule = true
+                    XProxy.log("async send dns  For  DEST:   " ,items: dest ,level:  .Debug)
+                    //findIPaddress()
+                    
+                    findIPaddressSys(reqInfo.host)
                 }else {
-                    if SFSettingModule.setting.ipRuleEnable {
-                        reqInfo.waitingRule = true
-                        XProxy.log("async send dns  For  DEST:   " ,items: dest ,level:  .Debug)
-                        //findIPaddress()
-                        
-                        findIPaddressSys(reqInfo.host)
-                    }else {
-                        XProxy.log("\(cIDString) ipRuleEnable disable ,use final rule", level: .Debug)
-                        reqInfo.waitingRule = true
-                        self.findIPRule("")
-                        
-                    }
+                    XProxy.log("\(cIDString) ipRuleEnable disable ,use final rule", level: .Debug)
+                    reqInfo.waitingRule = true
+                    self.findIPRule("")
                     
                 }
                 
             }
             
         }
+        
+            
+        
         
         return !reqInfo.waitingRule
         
@@ -1384,13 +1379,14 @@ class HTTPConnection: Connection {
         connector = c
     }
     func byebyeRequest(){
-        print("byebyeRequest")
+         XProxy.log("\(#function)", level: .Info)
     }
     func client_free_socks(){
-        print("client_free_socks")
+         XProxy.log("\(#function)", level: .Info)
     }
     func client_socks_recv_handler_done(_ len:Int){
-        print("client_socks_recv_handler_done")
+        
+        XProxy.log("\(#function)", level: .Info)
         //socketfd
         //server_write_request
         socks_recv_bufArray.withUnsafeRawPointer { (ptr)  in
@@ -1400,7 +1396,8 @@ class HTTPConnection: Connection {
         connector?.readDataWithTag(0)
     }
     func client_socks_send_handler_done(_ len:Int){
-        print("client_socks_send_handler_done")
+         XProxy.log("\(#function)", level: .Info)
+        
         connector?.readDataWithTag(0)
     }
     func sendFakeCONNECTResponse(){
