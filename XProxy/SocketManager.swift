@@ -84,7 +84,7 @@ class SocketManager {
                 //server.server_write_request(fd, buffer: "wello come\n", total: 11);
             }
             //let q = DispatchQueue.init(label: "dispatch queue")
-            server.start(port, queue: self.dispatchQueue)
+        server.start(port, dispatchQueue: self.dispatchQueue, socketQueue: self.socketQueue)
         st = .Running
     }
     func stopServer(){

@@ -112,7 +112,7 @@ class HTTPConnection: Connection {
             headerData.count = 0
             
             
-            XProxy.log("\(cIDString) req \(reqHeader.method)   \(reqHeader.Url) http://\(reqHeader.Host)\(reqHeader.genPath())\n)",level: .Debug)
+            XProxy.log("\(cIDString) METHOD:\(reqHeader.method) URL:\(reqHeader.Url) http://\(reqHeader.Host)\(reqHeader.genPath())\n)",level: .Debug)
             
             forceSend = reqHeader.forceSend()
             
