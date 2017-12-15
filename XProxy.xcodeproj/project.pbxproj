@@ -25,7 +25,7 @@
 		697FB3131FCBB60100653CA8 /* SFIPAddr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697FB3111FCBB60100653CA8 /* SFIPAddr.swift */; };
 		697FB3141FCBB60100653CA8 /* SFIPConnectionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697FB3121FCBB60100653CA8 /* SFIPConnectionInfo.swift */; };
 		69987DAD1FD932A700B41FD6 /* XArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69987DAC1FD932A700B41FD6 /* XArray.swift */; };
-		69C7DC471FE25CD400FB7FA2 /* XProxyiOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 69C7DC451FE25CD400FB7FA2 /* XProxyiOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		69C7DC471FE25CD400FB7FA2 /* XProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 69C7DC451FE25CD400FB7FA2 /* XProxy.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		69C7DC4D1FE26FA100FB7FA2 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693A35741FC68300007FDE26 /* Connection.swift */; };
 		69C7DC4E1FE26FA400FB7FA2 /* ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693A357E1FC6968B007FDE26 /* ext.swift */; };
 		69C7DC4F1FE26FA700FB7FA2 /* SFIPAddr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697FB3111FCBB60100653CA8 /* SFIPAddr.swift */; };
@@ -86,7 +86,7 @@
 		697FB3121FCBB60100653CA8 /* SFIPConnectionInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SFIPConnectionInfo.swift; sourceTree = "<group>"; };
 		69987DAC1FD932A700B41FD6 /* XArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XArray.swift; sourceTree = "<group>"; };
 		69C7DC431FE25CD400FB7FA2 /* XProxy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = XProxy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		69C7DC451FE25CD400FB7FA2 /* XProxyiOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XProxyiOS.h; sourceTree = "<group>"; };
+		69C7DC451FE25CD400FB7FA2 /* XProxy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XProxy.h; sourceTree = "<group>"; };
 		69C7DC461FE25CD400FB7FA2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		69C7DC4B1FE25D0600FB7FA2 /* mac.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = mac.xcconfig; sourceTree = "<group>"; };
 		69C7DC4C1FE25D6500FB7FA2 /* iOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = iOS.xcconfig; sourceTree = "<group>"; };
@@ -183,7 +183,7 @@
 		69C7DC441FE25CD400FB7FA2 /* XProxyiOS */ = {
 			isa = PBXGroup;
 			children = (
-				69C7DC451FE25CD400FB7FA2 /* XProxyiOS.h */,
+				69C7DC451FE25CD400FB7FA2 /* XProxy.h */,
 				69C7DC4C1FE25D6500FB7FA2 /* iOS.xcconfig */,
 				69C7DC461FE25CD400FB7FA2 /* Info.plist */,
 			);
@@ -205,7 +205,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				69C7DC471FE25CD400FB7FA2 /* XProxyiOS.h in Headers */,
+				69C7DC471FE25CD400FB7FA2 /* XProxy.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -658,7 +658,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = XProxyiOS/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yarshure.XProxy;
 				PRODUCT_MODULE_NAME = XProxy;
@@ -683,7 +683,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = XProxyiOS/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yarshure.XProxy;
 				PRODUCT_MODULE_NAME = XProxy;

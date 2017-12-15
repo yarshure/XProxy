@@ -11,6 +11,8 @@
 		</dict>
 		<key>XProxyTest.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<true/>
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
@@ -23,6 +25,11 @@
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>693A35DF1FC6C5CC007FDE26</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>69C7DC421FE25CD400FB7FA2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
