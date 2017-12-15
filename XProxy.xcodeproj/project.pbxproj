@@ -85,7 +85,7 @@
 		697FB3111FCBB60100653CA8 /* SFIPAddr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SFIPAddr.swift; sourceTree = "<group>"; };
 		697FB3121FCBB60100653CA8 /* SFIPConnectionInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SFIPConnectionInfo.swift; sourceTree = "<group>"; };
 		69987DAC1FD932A700B41FD6 /* XArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XArray.swift; sourceTree = "<group>"; };
-		69C7DC431FE25CD400FB7FA2 /* XProxyiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = XProxyiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		69C7DC431FE25CD400FB7FA2 /* XProxy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = XProxy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		69C7DC451FE25CD400FB7FA2 /* XProxyiOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XProxyiOS.h; sourceTree = "<group>"; };
 		69C7DC461FE25CD400FB7FA2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		69C7DC4B1FE25D0600FB7FA2 /* mac.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = mac.xcconfig; sourceTree = "<group>"; };
@@ -134,7 +134,7 @@
 			children = (
 				691EBE181FC66D95005FDCAF /* XProxy.framework */,
 				693A35E01FC6C5CC007FDE26 /* XProxyTest.app */,
-				69C7DC431FE25CD400FB7FA2 /* XProxyiOS.framework */,
+				69C7DC431FE25CD400FB7FA2 /* XProxy.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -265,7 +265,7 @@
 			);
 			name = XProxyiOS;
 			productName = XProxyiOS;
-			productReference = 69C7DC431FE25CD400FB7FA2 /* XProxyiOS.framework */;
+			productReference = 69C7DC431FE25CD400FB7FA2 /* XProxy.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -660,8 +660,9 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.yarshure.XProxyiOS;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.yarshure.XProxy;
+				PRODUCT_MODULE_NAME = XProxy;
+				PRODUCT_NAME = XProxy;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
@@ -684,8 +685,9 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.yarshure.XProxyiOS;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.yarshure.XProxy;
+				PRODUCT_MODULE_NAME = XProxy;
+				PRODUCT_NAME = XProxy;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
