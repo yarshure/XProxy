@@ -179,7 +179,7 @@ extension SFRequestInfo {
     func checkReadFinish(_ data:Data) ->(Bool,Int){
         let  len:Int = data.count
         guard let header = respHeader else {return (false,0)}
-        var BodyLength  = header.contentLength
+        let BodyLength  = header.contentLength
         // let headLength = header.length
         
         if self.app.hasSuffix("WeChat"){

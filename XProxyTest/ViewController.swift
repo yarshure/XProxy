@@ -8,20 +8,27 @@
 
 import Cocoa
 import XProxy
+import XRuler
 class ViewController: NSViewController {
 
+    @IBOutlet weak var stateLabel: NSTextField!
     @IBAction func start(_ sender: Any) {
-        XProxy.startGCDProxy()
+        XProxy.startGCDProxy(port: 10081)
     }
     @IBAction func pause(_ sender: Any) {
-        XProxy.startGCDProxy()
+        XProxy.startGCDProxy(port: 10081)
     }
     @IBAction func restart(_ sender: Any) {
-        XProxy.startGCDProxy()
+        XProxy.startGCDProxy(port: 10081)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        XRuler.groupIdentifier = "1111"
+        SFSettingModule.setting.config("/xx")
+        if let x = SFSettingModule.setting.findRuleByString("secure-appldnld.apple.com", useragent: ""){
+            print(x.result.type)
+        }
+        stateLabel.stringValue = XProxy.state()
         // Do any additional setup after loading the view.
     }
 

@@ -17,14 +17,16 @@ class HTTPConnection: Connection {
     var httpStat:HTTPConnectionState = .httpDefault
     var requestIndex:UInt = 0
     var reqHeaderQueue:[SFHTTPRequestHeader] = []
-     weak var manager:SocketManager?
+    weak var manager:SocketManager?
     
     var recvHeaderData:Data = Data()
     
     var currentBodyLength:UInt = 0
     var totalRecvLength:UInt = 0
     var currentBobyReadLength:UInt = 0
-    
+    deinit {
+        XProxy.log("\(reqInfo.reqID) deinit", items: "", level: .Info)
+    }
     init(sfd:Int32,rip:String,rport:UInt16,dip:String,dport:UInt16) {
         //this info is for mac iden process info
         let remote_addr  = IPAddr(i: inet_addr(rip),p: rport)
@@ -44,8 +46,9 @@ class HTTPConnection: Connection {
             #else
                 //-\(info.tun.port)-\(pcb)
                 //return  "[" + objectClassString(self) + "-\(reqInfo.reqID)" + "]" //self.classSFName()
+                return "\(reqInfo.reqID)"
             #endif
-            return ""
+            
         }
     }
     func updateReq(_ req:SFRequestInfo){
@@ -109,7 +112,7 @@ class HTTPConnection: Connection {
             headerData.count = 0
             
             
-            XProxy.log("\(cIDString) req \(reqHeader.method)   \(reqHeader.Url) http://\(reqHeader.Host)\(reqHeader.genPath())\n)",level: .Debug)
+            XProxy.log("\(cIDString) METHOD:\(reqHeader.method) URL:\(reqHeader.Url) http://\(reqHeader.Host)\(reqHeader.genPath())\n)",level: .Debug)
             
             forceSend = reqHeader.forceSend()
             
@@ -1198,48 +1201,43 @@ class HTTPConnection: Connection {
         //http 需要做dns 解析
         //ip 呢？
         
-        reqInfo.ruleStartTime = Date() as Date
+        reqInfo.ruleStartTime = Date() 
         var j:SFRuleResult
         XProxy.log("\(cIDString) Find Rule For  DEST:   " ,items:  dest ,level:  .Debug)
         
-        if let r = SFSettingModule.setting.findRuleResult(dest){
-            j = r
-            reqInfo.rule = r.result
-            findProxy(j,cache: false)
+        
+        if let ruler  = SFSettingModule.setting.findRuleByString(dest,useragent:useragent) {
+            j = ruler
+            
+            if !j.ipAddr.isEmpty {
+                reqInfo.remoteIPaddress = j.ipAddr
+            }
+            reqInfo.rule = ruler.result
+            findProxy(j,cache: true)
             
         }else {
-            
-            if let ruler  = SFSettingModule.setting.findRuleByString(dest,useragent:useragent) {
-                j = ruler
-                
-                if !j.ipAddr.isEmpty {
-                    reqInfo.remoteIPaddress = j.ipAddr
-                }
-                reqInfo.rule = ruler.result
-                findProxy(j,cache: true)
-                
+            if !reqInfo.remoteIPaddress.isEmpty {
+                findIPRule(reqInfo.remoteIPaddress)
             }else {
-                if !reqInfo.remoteIPaddress.isEmpty {
-                    findIPRule(reqInfo.remoteIPaddress)
+                if SFSettingModule.setting.ipRuleEnable {
+                    reqInfo.waitingRule = true
+                    XProxy.log("async send dns  For  DEST:   " ,items: dest ,level:  .Debug)
+                    //findIPaddress()
+                    
+                    findIPaddressSys(reqInfo.host)
                 }else {
-                    if SFSettingModule.setting.ipRuleEnable {
-                        reqInfo.waitingRule = true
-                        XProxy.log("async send dns  For  DEST:   " ,items: dest ,level:  .Debug)
-                        //findIPaddress()
-                        
-                        findIPaddressSys(reqInfo.host)
-                    }else {
-                        XProxy.log("\(cIDString) ipRuleEnable disable ,use final rule", level: .Debug)
-                        reqInfo.waitingRule = true
-                        self.findIPRule("")
-                        
-                    }
+                    XProxy.log("\(cIDString) ipRuleEnable disable ,use final rule", level: .Debug)
+                    reqInfo.waitingRule = true
+                    self.findIPRule("")
                     
                 }
                 
             }
             
         }
+        
+            
+        
         
         return !reqInfo.waitingRule
         
@@ -1381,13 +1379,14 @@ class HTTPConnection: Connection {
         connector = c
     }
     func byebyeRequest(){
-        print("byebyeRequest")
+         XProxy.log("\(#function)", level: .Info)
     }
     func client_free_socks(){
-        print("client_free_socks")
+         XProxy.log("\(#function)", level: .Info)
     }
     func client_socks_recv_handler_done(_ len:Int){
-        print("client_socks_recv_handler_done")
+        
+        XProxy.log("\(#function)", level: .Info)
         //socketfd
         //server_write_request
         socks_recv_bufArray.withUnsafeRawPointer { (ptr)  in
@@ -1397,7 +1396,8 @@ class HTTPConnection: Connection {
         connector?.readDataWithTag(0)
     }
     func client_socks_send_handler_done(_ len:Int){
-        print("client_socks_send_handler_done")
+         XProxy.log("\(#function)", level: .Info)
+        
         connector?.readDataWithTag(0)
     }
     func sendFakeCONNECTResponse(){
@@ -1434,7 +1434,8 @@ class HTTPConnection: Connection {
         
     }
     func client_socks_recv_send_out(){
-        print("client_socks_recv_send_out")
+        
+        XProxy.log("client_socks_recv_send_out", level: .Info)
     }
     func checkBufferHaveData(_ buffer:Data,data:Data) -> Range<Data.Index>? {
         let r = buffer.range(of: data , options: Data.SearchOptions.init(rawValue: 0), in: Range(0 ..< buffer.count))
@@ -1443,7 +1444,8 @@ class HTTPConnection: Connection {
     func forceCloseRemote(){
         connector?.forceDisconnect(UInt32(self.reqInfo.reqID))
     }
+                         
     override public func didDisconnect(_ socket: Xcon,  error:Error?){
-            XProxy.log("dest disconnect \(self.socketfd)", items: "", level: .Info)
+            XProxy.log("dest didDisconnect \(self.socketfd)", items: "", level: .Info)
     }
 }

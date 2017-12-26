@@ -17,7 +17,7 @@ public class Connection: NSObject ,XconDelegate{
      - parameter socket: The socket which did disconnect.
      */
     public func didDisconnect(_ socket: Xcon,  error:Error?){
-        
+        XProxy.log("didconnect", items: "", level: .Info)
     }
     
     /**
