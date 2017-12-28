@@ -25,7 +25,7 @@ class HTTPConnection: Connection {
     var totalRecvLength:UInt = 0
     var currentBobyReadLength:UInt = 0
     deinit {
-        XProxy.log("\(reqInfo.reqID) deinit", items: "", level: .Info)
+        XProxy.log("HTTPConnection-\(reqInfo.reqID) deinit", items: "", level: .Info)
     }
     init(sfd:Int32,rip:String,rport:UInt16,dip:String,dport:UInt16) {
         //this info is for mac iden process info
@@ -1120,43 +1120,16 @@ class HTTPConnection: Connection {
             }else {
                 //findProxy()
                 
-                
+                //guard let p = SFSettingModule.setting.proxyByName(reqInfo.rule.proxyName) else { return}
+                //self.reqInfo.proxy = p
                 setUpConnector(host, port: UInt16(port))
                 
             }
         }
         
-        //twitter 10 内加载不成功
-        connection(10)
+       
     }
-    func connection(_ timeout:TimeInterval) {
-        
-        if reqInfo.rule.policy != .Reject {
-            
-            
-            reqInfo.sTime = Date() as Date
-            if  let s = connector {
-                //fixme
-               // s.delegate = self
-                if let manager = manager {
-                    s.queue = manager.dispatchQueue
-                    //s.socketQueue = manager.socketQueue
-                    //s.start()
-                }else {
-                    XProxy.log("TCP Manager error", level: .Error)
-                    byebyeRequest()
-                }
-                
-            }else {
-                byebyeRequest()
-            }
-            
-            
-            //NSLog("################# %@ start ", reqInfo.url)
-        }
-        
-        
-    }
+
     func searchCache(_ domain:String) ->String {
         
         //var destIP:String

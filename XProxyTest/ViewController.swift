@@ -9,6 +9,7 @@
 import Cocoa
 import XProxy
 import XRuler
+import Xcon
 class ViewController: NSViewController {
 
     @IBOutlet weak var stateLabel: NSTextField!
@@ -23,8 +24,18 @@ class ViewController: NSViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        XRuler.groupIdentifier = "1111"
-        SFSettingModule.setting.config("/xx")
+        Xcon.debugEnable = true
+        XRuler.groupIdentifier = "745WQDK4L7.com.yarshure.Surf"
+        var url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: XRuler.groupIdentifier)!
+         url.appendPathComponent("abigt.conf")
+        SFSettingModule.setting.config(url.path)
+        
+        let x = "http,192.168.11.131,8000,,"
+        if let p = SFProxy.createProxyWithLine(line: x, pname: "CN2"){
+            
+             _  = ProxyGroupSettings.share.addProxy(p)
+        }
+        print(ProxyGroupSettings.share.proxys)
         if let x = SFSettingModule.setting.findRuleByString("secure-appldnld.apple.com", useragent: ""){
             print(x.result.type)
         }

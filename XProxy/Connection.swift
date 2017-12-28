@@ -57,9 +57,9 @@ public class Connection: NSObject ,XconDelegate{
         assert(!reqInfo.socks_closed)
         assert(reqInfo.socks_up)
         let st = (reqInfo.status == .Established) || (reqInfo.status == .Transferring)
-        if  st && !bufArray.isEmpty{
+        if  let f = bufArray.first, st {
             //SKit.log("\(cIDString) sending buffer count \(bufArray.count)",level: .Debug)
-            var sendData:Data = bufArray.first!
+            var sendData:Data = f
             //bug here,fixme
             for x in bufArray.dropFirst() {
                 sendData.append(x)
