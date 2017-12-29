@@ -8,7 +8,7 @@
 
 import Foundation
 import Xcon
-public class Connection: NSObject ,XconDelegate{
+open  class Connection: NSObject ,XconDelegate{
     /**
      The socket did disconnect.
      
