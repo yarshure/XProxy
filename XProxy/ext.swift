@@ -107,7 +107,7 @@ public enum SFConnectionCompleteReason :Int{
     }
 }
 extension SFHTTPRequestHeader {
-    func checkRewrite() ->Bool{
+    public func checkRewrite() ->Bool{
         //rewrite
 //        if  let r =  SFSettingModule.setting.rule{
 //            if let ruler = r.rewriteRule(self.Url){
@@ -136,7 +136,7 @@ extension SFHTTPRequestHeader {
     }
 }
 extension SFRequestInfo {
-    func findProxy(_ r:SFRuleResult,cache:Bool) {
+    public func findProxy(_ r:SFRuleResult,cache:Bool) {
         
         rule = r.result
         rule.timming = self.ruleTiming
@@ -176,7 +176,7 @@ extension SFRequestInfo {
         }
         
     }
-    func checkReadFinish(_ data:Data) ->(Bool,Int){
+    public func checkReadFinish(_ data:Data) ->(Bool,Int){
         let  len:Int = data.count
         guard let header = respHeader else {return (false,0)}
         let BodyLength  = header.contentLength
@@ -242,7 +242,7 @@ extension SFRequestInfo {
         
     }
     
-    func shouldClose() ->Bool {
+    public func shouldClose() ->Bool {
         
         if mode == .TCP {
             if idleTimeing > XProxy.TCP_MEMORYWARNING_TIMEOUT{

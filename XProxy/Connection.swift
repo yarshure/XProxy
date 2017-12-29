@@ -16,7 +16,7 @@ open  class Connection: NSObject ,XconDelegate{
      
      - parameter socket: The socket which did disconnect.
      */
-    public func didDisconnect(_ socket: Xcon,  error:Error?){
+    open func didDisconnect(_ socket: Xcon,  error:Error?){
         XProxy.log("didconnect", items: "", level: .Info)
     }
     
@@ -27,7 +27,7 @@ open  class Connection: NSObject ,XconDelegate{
      - parameter withTag: The tag given when calling the `readData` method.
      - parameter from:    The socket where the data is read from.
      */
-    public func didReadData(_ data: Data, withTag: Int, from: Xcon){
+    open func didReadData(_ data: Data, withTag: Int, from: Xcon){
         
     }
     
@@ -38,7 +38,7 @@ open  class Connection: NSObject ,XconDelegate{
      - parameter withTag: The tag given when calling the `writeData` method.
      - parameter from:    The socket where the data is sent out.
      */
-    public func didWriteData(_ data: Data?, withTag: Int, from: Xcon){
+    open func didWriteData(_ data: Data?, withTag: Int, from: Xcon){
         
     }
     
@@ -47,12 +47,12 @@ open  class Connection: NSObject ,XconDelegate{
      
      - parameter socket: The connected socket.
      */
-    public func didConnect(_ socket: Xcon){
+    open func didConnect(_ socket: Xcon){
         XProxy.log("didconnect", items: "", level: .Info)
         client_socks_handler(.event_UP)
     }
 
-    func client_send_to_socks(){
+    open func client_send_to_socks(){
         //debugLog("client_send_to_socks")
         assert(!reqInfo.socks_closed)
         assert(reqInfo.socks_up)
@@ -82,7 +82,7 @@ open  class Connection: NSObject ,XconDelegate{
         }
     }
     
-    func client_socks_handler(_ event:SocketEvent){
+    open func  client_socks_handler(_ event:SocketEvent){
         
     }
     public let info:SFIPConnectionInfo
@@ -113,7 +113,7 @@ open  class Connection: NSObject ,XconDelegate{
     public var forceClose:Bool = false
     public var reqInfo:SFRequestInfo
     
-    public func memoryWarning(_ level:DispatchSource.MemoryPressureEvent){
-        
+    open  func memoryWarning(_ level:DispatchSource.MemoryPressureEvent){
+        XProxy.log("memoryWarning ...", level: .Error)
     }
 }

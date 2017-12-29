@@ -16,7 +16,7 @@ public struct IPAddr {
         ip = i
         port = p
     }
-    func ipString() ->String{
+    public func ipString() ->String{
         let a = (ip & 0xFF)
         let b = (ip >> 8 & 0xFF)
         let c = (ip >> 16 & 0xFF)

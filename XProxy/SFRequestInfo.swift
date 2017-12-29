@@ -54,10 +54,10 @@ public class SFRequestInfo {
     public var dbID:UInt = 0
     //var pcb_closed = false 减少不必要的状态机
     // set client not closed
-    var client_closed = false // 0 pcb alive ,1 dead
+    public var client_closed = false // 0 pcb alive ,1 dead
     // set SOCKS not up, not closed
-    var socks_up = false
-    var socks_closed = false
+    public var socks_up = false
+    public var socks_closed = false
 
     #if LOGGER
     public var sendData:Data = Data()
