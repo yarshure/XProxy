@@ -73,7 +73,8 @@ public class Connection: NSObject ,XconDelegate{
             //SKit.log("\(cIDString) writing to Host:\(h):\(p) tag:\(tag)   length \(d.length)",level: .Trace)
             //NSLog("%@ will send data tag:%d", reqInfo.url,tag)
             bufArray.removeAll()
-            bufArrayInfo[tag] = sendData.count
+            //MARK: fixme
+            //bufArrayInfo[tag] = sendData.count
             sendingTag = tag
             
             

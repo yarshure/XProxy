@@ -61,6 +61,7 @@ public class XProxy{
     static func saveTunnelConnectionInfo(_ c:HTTPConnection){
         print("Request \(c.requestIndex) should save info")
     }
+    static public var debugEanble = false
 }
 
 extension XProxy{
@@ -69,13 +70,19 @@ extension XProxy{
         if level != AxLoggerLevel.Debug {
             AxLogger.log(msg,level:level)
         }
-        print(msg)
+        if debugEanble {
+            print(msg)
+        }
+        
     }
     static func log(_ msg:String,level:AxLoggerLevel , category:String="default",file:String=#file,line:Int=#line,ud:[String:String]=[:],tags:[String]=[],time:Date=Date()){
         
         if level != AxLoggerLevel.Debug {
             AxLogger.log(msg,level:level)
         }
-        print(msg)
+        if debugEanble {
+            print(msg)
+        }
+        
     }
 }

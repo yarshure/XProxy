@@ -1,4 +1,4 @@
-git "git@bitbucket.org:yarshure/xcon.git" "6905ea26becc83a54a7d8b54861db3d6a0097ef6"
+git "git@bitbucket.org:yarshure/xcon.git" "366ae52cf6b236306956f7a6f6e389ecea922390"
 github "Hearst-DD/ObjectMapper" "0c116f44b5d052892146bcb94ad6c690b3dec40d"
 github "iosdevzone/IDZSwiftCommonCrypto" "0.10.0"
 github "networkextension/AxLogger" "af51fad13e249d9dd38b2f15e807e2f4dd0e480d"
