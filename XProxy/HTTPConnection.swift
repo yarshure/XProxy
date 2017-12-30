@@ -921,7 +921,12 @@ class HTTPConnection: Connection {
                             }
                             
                         }else {
-                            c.readDataWithTag(rTag)
+                            if rTag < 0{
+                                XProxy.log("\(cIDString)  read \(rTag)",level:.Info)
+                                c.readDataWithTag(rTag)
+                                rTag = 0
+                            }
+                           
                         }
                         
                     }
@@ -1362,18 +1367,42 @@ class HTTPConnection: Connection {
         XProxy.log("\(#function)", level: .Info)
         //socketfd
         //server_write_request
-        socks_recv_bufArray.withUnsafeRawPointer { (ptr)  in
-            GCDSocketServer.shared().server_write_request(socketfd, buffer: ptr, total: len)
+        let writeCount = socks_recv_bufArray.count
+        XProxy.log("write result:\(writeCount):\(rTag)", level: .Info)
+        GCDSocketServer.shared().server_write_request(socketfd, data: socks_recv_bufArray) {[weak self] fin,fd,count in
+            if fin {
+                XProxy.log("write result:\(writeCount):\(count)", level: .Info)
+                if let s = self{
+                    if count == writeCount {
+                        XProxy.log("\(s.cIDString)  read \(s.rTag)",level:.Info)
+                        if s.rTag != 0 {
+                            s.connector?.readDataWithTag(s.rTag)
+                        }
+                        
+                    }else {
+                        fatalError("write %count")
+                    }
+                    
+                }
+            }else {
+                fatalError("socket error")
+            }
+            
+            
+            
+        
         }
         socks_recv_bufArray.removeAll()
-        connector?.readDataWithTag(0)
+        
+       
     }
     func client_socks_send_handler_done(_ len:Int){
          XProxy.log("\(#function)", level: .Info)
         
-        connector?.readDataWithTag(0)
+        
     }
     func sendFakeCONNECTResponse(){
+        XProxy.log("sendFakeCONNECTResponse",level: .Error)
         var need = false
         if reqInfo.mode == .HTTPS  {
             need = true
@@ -1398,7 +1427,8 @@ class HTTPConnection: Connection {
             }
             let newData = s
             socks_recv_bufArray.append(newData)
-            
+            //bug here
+            //第一次写
             client_socks_recv_handler_done(s.count)
         }
         

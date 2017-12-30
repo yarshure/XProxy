@@ -44,7 +44,7 @@ class SocketManager {
         switch st {
         case .Stoped:
             //suport stoped?
-            print(st.description + "don't support ")
+            print(st.description + " don't support")
         case .Running:
             return
         default:

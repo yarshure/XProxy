@@ -8,6 +8,7 @@
 
 import Foundation
 import AxLogger
+import os.log
 public class XProxy{
     static let socketReadTimeout = 15.0
     static let AsyncSocketReadTimeOut = 3.0*200// 3.0*200
@@ -70,8 +71,10 @@ extension XProxy{
         if level != AxLoggerLevel.Debug {
             AxLogger.log(msg,level:level)
         }
-        if debugEanble {
-            print(msg)
+        if #available(OSXApplicationExtension 10.12, *) {
+            os_log("Sender: %@", log: .default, type: .debug, msg)
+        } else {
+            // Fallback on earlier versions
         }
         
     }
@@ -80,8 +83,10 @@ extension XProxy{
         if level != AxLoggerLevel.Debug {
             AxLogger.log(msg,level:level)
         }
-        if debugEanble {
-            print(msg)
+        if #available(OSXApplicationExtension 10.12, *) {
+            os_log("Xcon: %@", log: .default, type: .debug, msg)
+        } else {
+            // Fallback on earlier versions
         }
         
     }

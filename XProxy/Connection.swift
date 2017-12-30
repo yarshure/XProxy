@@ -106,7 +106,7 @@ open  class Connection: NSObject ,XconDelegate{
     public var tag:Int64 = 0
     
     public var buf_used:Int = 0
-    public var rTag:Int = 1 //recv tag?
+    public var rTag:Int = -1 //recv tag?
     //0 use for handshake and kcp tun use
     public var sendingTag:Int64 = -1
     

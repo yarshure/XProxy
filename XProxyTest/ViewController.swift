@@ -25,6 +25,7 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         Xcon.debugEnable = true
+        XProxy.debugEanble = true
         XRuler.groupIdentifier = "745WQDK4L7.com.yarshure.Surf"
         var url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: XRuler.groupIdentifier)!
          url.appendPathComponent("abigt.conf")
