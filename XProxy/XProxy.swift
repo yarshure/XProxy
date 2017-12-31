@@ -72,7 +72,7 @@ extension XProxy{
             AxLogger.log(msg,level:level)
         }
         if #available(OSXApplicationExtension 10.12, *) {
-            os_log("Sender: %@", log: .default, type: .debug, msg)
+            os_log("XProxy: %@", log: .default, type: .debug, msg)
         } else {
             // Fallback on earlier versions
         }
@@ -84,7 +84,7 @@ extension XProxy{
             AxLogger.log(msg,level:level)
         }
         if #available(OSXApplicationExtension 10.12, *) {
-            os_log("Xcon: %@", log: .default, type: .debug, msg)
+            os_log("XProxy: %@", log: .default, type: .debug, msg)
         } else {
             // Fallback on earlier versions
         }

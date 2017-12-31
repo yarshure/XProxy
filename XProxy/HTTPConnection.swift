@@ -922,9 +922,10 @@ class HTTPConnection: Connection {
                             
                         }else {
                             if rTag < 0{
+                                rTag = 0
                                 XProxy.log("\(cIDString)  read \(rTag)",level:.Info)
                                 c.readDataWithTag(rTag)
-                                rTag = 0
+                                
                             }
                            
                         }
@@ -1373,15 +1374,18 @@ class HTTPConnection: Connection {
             if fin {
                 XProxy.log("write result:\(writeCount):\(count)", level: .Info)
                 if let s = self{
-                    if count == writeCount {
+                    if fin {
                         XProxy.log("\(s.cIDString)  read \(s.rTag)",level:.Info)
-                        if s.rTag != 0 {
+                        if s.rTag > 0 {
                             s.connector?.readDataWithTag(s.rTag)
                         }
-                        
                     }else {
                         fatalError("write %count")
                     }
+//                    if count == writeCount {
+//                        
+//                        
+//                    }
                     
                 }
             }else {
