@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		691EBE1D1FC66D95005FDCAF /* XProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 691EBE1B1FC66D95005FDCAF /* XProxy.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		69348EE91FF94B48007C841C /* HTTPProxyServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69348EE81FF94B48007C841C /* HTTPProxyServer.swift */; };
+		69348EEA1FF94B49007C841C /* HTTPProxyServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69348EE81FF94B48007C841C /* HTTPProxyServer.swift */; };
+		69348EEC1FF95207007C841C /* HConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69348EEB1FF95207007C841C /* HConnection.swift */; };
+		69348EED1FF95207007C841C /* HConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69348EEB1FF95207007C841C /* HConnection.swift */; };
 		693A35661FC679B5007FDE26 /* XProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693A35651FC679B5007FDE26 /* XProxy.swift */; };
 		693A35681FC67AC2007FDE26 /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693A35671FC67AC2007FDE26 /* SocketManager.swift */; };
 		693A356F1FC68089007FDE26 /* HTTPConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693A356E1FC68089007FDE26 /* HTTPConnection.swift */; };
@@ -67,6 +71,8 @@
 		691EBE181FC66D95005FDCAF /* XProxy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = XProxy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		691EBE1B1FC66D95005FDCAF /* XProxy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XProxy.h; sourceTree = "<group>"; };
 		691EBE1C1FC66D95005FDCAF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		69348EE81FF94B48007C841C /* HTTPProxyServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPProxyServer.swift; sourceTree = "<group>"; };
+		69348EEB1FF95207007C841C /* HConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HConnection.swift; sourceTree = "<group>"; };
 		693A35651FC679B5007FDE26 /* XProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XProxy.swift; sourceTree = "<group>"; };
 		693A35671FC67AC2007FDE26 /* SocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketManager.swift; sourceTree = "<group>"; };
 		693A356E1FC68089007FDE26 /* HTTPConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPConnection.swift; sourceTree = "<group>"; };
@@ -154,7 +160,9 @@
 				693A35701FC680B8007FDE26 /* AVLTree.swift */,
 				69987DAC1FD932A700B41FD6 /* XArray.swift */,
 				693A356E1FC68089007FDE26 /* HTTPConnection.swift */,
+				69348EEB1FF95207007C841C /* HConnection.swift */,
 				693A35671FC67AC2007FDE26 /* SocketManager.swift */,
+				69348EE81FF94B48007C841C /* HTTPProxyServer.swift */,
 				691EBE1C1FC66D95005FDCAF /* Info.plist */,
 			);
 			path = XProxy;
@@ -294,7 +302,7 @@
 					};
 					69C7DC421FE25CD400FB7FA2 = {
 						CreatedOnToolsVersion = 9.2;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -366,6 +374,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				693A35751FC68300007FDE26 /* Connection.swift in Sources */,
+				69348EE91FF94B48007C841C /* HTTPProxyServer.swift in Sources */,
 				693A356F1FC68089007FDE26 /* HTTPConnection.swift in Sources */,
 				693A35681FC67AC2007FDE26 /* SocketManager.swift in Sources */,
 				697FB3141FCBB60100653CA8 /* SFIPConnectionInfo.swift in Sources */,
@@ -373,6 +382,7 @@
 				693A35661FC679B5007FDE26 /* XProxy.swift in Sources */,
 				693A35831FC697CC007FDE26 /* SFRequestInfo.swift in Sources */,
 				693A35711FC680B8007FDE26 /* AVLTree.swift in Sources */,
+				69348EEC1FF95207007C841C /* HConnection.swift in Sources */,
 				693A35C01FC6AE93007FDE26 /* SFOpt.swift in Sources */,
 				697FB3131FCBB60100653CA8 /* SFIPAddr.swift in Sources */,
 				69987DAD1FD932A700B41FD6 /* XArray.swift in Sources */,
@@ -393,6 +403,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				69C7DC4D1FE26FA100FB7FA2 /* Connection.swift in Sources */,
+				69348EEA1FF94B49007C841C /* HTTPProxyServer.swift in Sources */,
 				69C7DC521FE26FB000FB7FA2 /* XProxy.swift in Sources */,
 				69C7DC501FE26FAA00FB7FA2 /* SFIPConnectionInfo.swift in Sources */,
 				69C7DC541FE26FB800FB7FA2 /* AVLTree.swift in Sources */,
@@ -400,6 +411,7 @@
 				69C7DC4E1FE26FA400FB7FA2 /* ext.swift in Sources */,
 				69C7DC4F1FE26FA700FB7FA2 /* SFIPAddr.swift in Sources */,
 				69C7DC511FE26FAD00FB7FA2 /* SFRequestInfo.swift in Sources */,
+				69348EED1FF95207007C841C /* HConnection.swift in Sources */,
 				69C7DC551FE26FBB00FB7FA2 /* XArray.swift in Sources */,
 				69C7DC531FE26FB300FB7FA2 /* SFOpt.swift in Sources */,
 				69C7DC561FE26FBE00FB7FA2 /* HTTPConnection.swift in Sources */,
@@ -655,9 +667,9 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 745WQDK4L7;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -668,6 +680,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.yarshure.XProxy;
 				PRODUCT_MODULE_NAME = XProxy;
 				PRODUCT_NAME = XProxy;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
@@ -681,9 +694,9 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 745WQDK4L7;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -694,6 +707,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.yarshure.XProxy;
 				PRODUCT_MODULE_NAME = XProxy;
 				PRODUCT_NAME = XProxy;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;

@@ -1,9 +1,9 @@
 //
-//  File.swift
-//  SFSocket
+//  HConnection.swift
+//  XProxy
 //
-//  Created by yarshure on 2017/8/21.
-//  Copyright © 2017年 Kong XiangBo. All rights reserved.
+//  Created by yarshure on 2018/1/1.
+//  Copyright © 2018年 yarshure. All rights reserved.
 //
 
 import Foundation
@@ -11,13 +11,14 @@ import Darwin
 import Xcon
 import XRuler
 import DarwinCore
-class HTTPConnection: Connection {
+class HConnection: Connection {
+    var insocket:GCDSocket
     var socketfd:Int32 = 0
     var headerData:Data = Data()
     var httpStat:HTTPConnectionState = .httpDefault
     var requestIndex:UInt = 0
     var reqHeaderQueue:[SFHTTPRequestHeader] = []
-    weak var manager:SocketManager?
+    weak var manager:HTTPProxyServer?
     
     var recvHeaderData:Data = Data()
     
@@ -25,10 +26,11 @@ class HTTPConnection: Connection {
     var totalRecvLength:UInt = 0
     var currentBobyReadLength:UInt = 0
     deinit {
-        XProxy.log("HTTPConnection-\(reqInfo.reqID) deinit", items: "", level: .Info)
+        XProxy.log("HConnection-\(reqInfo.reqID) deinit", items: "", level: .Info)
     }
-    init(sfd:Int32,rip:String,rport:UInt16,dip:String,dport:UInt16) {
+    init(s:GCDSocket, sfd:Int32,rip:String,rport:UInt16,dip:String,dport:UInt16) {
         //this info is for mac iden process info
+        self.insocket = s
         let remote_addr  = IPAddr(i: inet_addr(rip),p: rport)
         let local_addr  = IPAddr(i: inet_addr(dip), p: dport)
         let info:SFIPConnectionInfo = SFIPConnectionInfo.init(t: local_addr , r:remote_addr )
@@ -38,6 +40,20 @@ class HTTPConnection: Connection {
         super.init(i:info)
         self.reqInfo.mode  = .HTTP
         httpStat = .httpReqHeader
+    }
+    func start(){
+        insocket.read(completionHandler: { (d, e) in
+            if let e = e {
+                print(e.localizedDescription)
+            }else {
+                guard let d = d else {
+                    self.insocket.closeReadWithError(nil)
+                    return
+                }
+                //self.write(socket: socket, data: d)
+                self.incommingData(d, len: d.count)
+            }
+        })
     }
     var cIDString:String {
         get {
@@ -350,7 +366,6 @@ class HTTPConnection: Connection {
             //存在一个request
             if let header = reqInfo.reqHeader {
                 if header.method == .CONNECT {
-                    //thread #361, queue = 'com.yarshure.dispatchqueue', stop reason = Fatal error: Can't form Range with upperBound < lowerBound
                     bufArray.append(d)
                     break
                 }else {
@@ -385,7 +400,7 @@ class HTTPConnection: Connection {
         
         return nil
     }
-
+    
     func reqsonseBodyLeft(_ req:SFRequestInfo) -> Int {
         guard let header = req.respHeader else {return -1}
         return header.bodyLeftLength
@@ -855,7 +870,7 @@ class HTTPConnection: Connection {
             XProxy.log("\(cIDString) not find send packet", level: .Debug)
         }
         
-       
+        
         
         tag += 1
         
@@ -891,7 +906,7 @@ class HTTPConnection: Connection {
                 XProxy.log("\(cIDString) buffer have data need write to lwip,recv waiting",level: .Debug)
                 //client_tcp_output()
                 //NSLog("%@ client_socks_recv_send_out", cIDString)
-                 client_socks_recv_send_out()
+                client_socks_recv_send_out()
             }else {
                 if reqInfo.status !=  .RecvWaiting {
                     
@@ -928,7 +943,7 @@ class HTTPConnection: Connection {
                                 c.readDataWithTag(rTag)
                                 
                             }
-                           
+                            
                         }
                         
                     }
@@ -1064,7 +1079,7 @@ class HTTPConnection: Connection {
         }
         
     }
-
+    
     func httpArgu() ->Bool{
         guard let _ = reqInfo.reqHeader else {
             //fatalError()
@@ -1076,7 +1091,7 @@ class HTTPConnection: Connection {
         }
         return false
     }
-
+    
     func findProxy(_ r:SFRuleResult,cache:Bool) {
         
         XProxy.log("\(cIDString) Rule Result ",items: r.result.proxyName,level: .Debug)
@@ -1134,9 +1149,9 @@ class HTTPConnection: Connection {
             }
         }
         
-       
+        
     }
-
+    
     func searchCache(_ domain:String) ->String {
         
         //var destIP:String
@@ -1181,7 +1196,7 @@ class HTTPConnection: Connection {
         //http 需要做dns 解析
         //ip 呢？
         
-        reqInfo.ruleStartTime = Date() 
+        reqInfo.ruleStartTime = Date()
         var j:SFRuleResult
         XProxy.log("\(cIDString) Find Rule For  DEST:   " ,items:  dest ,level:  .Debug)
         
@@ -1216,7 +1231,7 @@ class HTTPConnection: Connection {
             
         }
         
-            
+        
         
         
         return !reqInfo.waitingRule
@@ -1349,7 +1364,7 @@ class HTTPConnection: Connection {
         }else {
             byebyeRequest()
         }
-
+        
     }
     func setUpConnector(_ host:String,port:UInt16){
         let q = manager!.dispatchQueue
@@ -1359,10 +1374,10 @@ class HTTPConnection: Connection {
         connector = c
     }
     func byebyeRequest(){
-         XProxy.log("\(#function)", level: .Info)
+        XProxy.log("\(#function)", level: .Info)
     }
     func client_free_socks(){
-         XProxy.log("\(#function)", level: .Info)
+        XProxy.log("\(#function)", level: .Info)
     }
     func client_socks_recv_handler_done(_ len:Int){
         
@@ -1371,38 +1386,52 @@ class HTTPConnection: Connection {
         //server_write_request
         let writeCount = socks_recv_bufArray.count
         XProxy.log("write result:\(writeCount):\(rTag)", level: .Info)
-        GCDSocketServer.shared().server_write_request(socketfd, data: socks_recv_bufArray) {[weak self] fin,fd,count in
-            if fin {
-                XProxy.log("write result:\(writeCount):\(count)", level: .Info)
-                if let s = self{
-                    if fin {
-                        XProxy.log("\(s.cIDString)  read \(s.rTag)",level:.Info)
-                        if s.rTag > 0 {
-                            s.connector?.readDataWithTag(s.rTag)
-                        }
-                    }else {
-                        fatalError("write %count")
-                    }
-//                    if count == writeCount {
-//                        
-//                        
+//        GCDSocketServer.shared().server_write_request(socketfd, data: socks_recv_bufArray) {[weak self] fin,fd,count in
+//            if fin {
+//                XProxy.log("write result:\(writeCount):\(count)", level: .Info)
+//                if let s = self{
+//                    if fin {
+//                        XProxy.log("\(s.cIDString)  read \(s.rTag)",level:.Info)
+//                        if s.rTag > 0 {
+//                            s.connector?.readDataWithTag(s.rTag)
+//                        }
+//                    }else {
+//                        fatalError("write %count")
 //                    }
+//                    //                    if count == writeCount {
+//                    //
+//                    //
+//                    //                    }
+//
+//                }
+//            }else {
+//                fatalError("socket error")
+//            }
+//
+//
+//
+//
+//        }
+        //逻辑有些绕
+        insocket.write(socks_recv_bufArray) {[weak self] (e) in
+            if let e = e {
+                print(e)
+            }else {
+                if let s = self {
+                    s.start()
+                    s.connector?.readDataWithTag(s.rTag)
                     
                 }
-            }else {
-                fatalError("socket error")
+                
+                
             }
-            
-            
-            
-        
         }
         socks_recv_bufArray.removeAll()
         
-       
+        
     }
     func client_socks_send_handler_done(_ len:Int){
-         XProxy.log("\(#function)", level: .Info)
+        XProxy.log("\(#function)", level: .Info)
         
         
     }
@@ -1452,8 +1481,8 @@ class HTTPConnection: Connection {
     func forceCloseRemote(){
         connector?.forceDisconnect(UInt32(self.reqInfo.reqID))
     }
-                         
+    
     override public func didDisconnect(_ socket: Xcon,  error:Error?){
-            XProxy.log("dest didDisconnect \(self.socketfd)", items: "", level: .Info)
+        XProxy.log("dest didDisconnect \(self.socketfd)", items: "", level: .Info)
     }
 }
