@@ -1329,7 +1329,7 @@ class HConnection: Connection {
         XProxy.log("async request dns back \(self.reqInfo.host)",items: ip,level:.Trace)
         let r  = SFSettingModule.setting.findIPRuler(ip)
         
-        let result:SFRuleResult = SFRuleResult.init(request:self.reqInfo.host ,r: r)
+        var result:SFRuleResult = SFRuleResult.init(request:self.reqInfo.host ,r: r)
         result.ipAddr = ip
         result.result.ipAddress = ip
         if reqInfo.remoteIPaddress != ip {

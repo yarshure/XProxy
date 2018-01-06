@@ -1314,7 +1314,7 @@ class HTTPConnection: Connection {
         XProxy.log("async request dns back \(self.reqInfo.host)",items: ip,level:.Trace)
         let r  = SFSettingModule.setting.findIPRuler(ip)
         
-        let result:SFRuleResult = SFRuleResult.init(request:self.reqInfo.host ,r: r)
+        var result:SFRuleResult = SFRuleResult.init(request:self.reqInfo.host ,r: r)
         result.ipAddr = ip
         result.result.ipAddress = ip
         if reqInfo.remoteIPaddress != ip {
@@ -1359,46 +1359,34 @@ class HTTPConnection: Connection {
         connector = c
     }
     func byebyeRequest(){
-         XProxy.log("\(#function)", level: .Info)
+         XProxy.log("\(#function) todo", level: .Info)
     }
     func client_free_socks(){
-         XProxy.log("\(#function)", level: .Info)
+         XProxy.log("\(#function) todo", level: .Info)
     }
     func client_socks_recv_handler_done(_ len:Int){
         
-        XProxy.log("\(#function)", level: .Info)
-        //socketfd
-        //server_write_request
-        let writeCount = socks_recv_bufArray.count
-        XProxy.log("write result:\(writeCount):\(rTag)", level: .Info)
         GCDSocketServer.shared().server_write_request(socketfd, data: socks_recv_bufArray) {[weak self] fin,fd,count in
             if fin {
-                XProxy.log("write result:\(writeCount):\(count)", level: .Info)
+               
                 if let s = self{
                     if fin {
-                        XProxy.log("\(s.cIDString)  read \(s.rTag)",level:.Info)
+                        
                         if s.rTag > 0 {
                             s.connector?.readDataWithTag(s.rTag)
                         }
                     }else {
                         fatalError("write %count")
                     }
-//                    if count == writeCount {
-//                        
-//                        
-//                    }
+
                     
                 }
             }else {
                 fatalError("socket error")
             }
-            
-            
-            
         
         }
         socks_recv_bufArray.removeAll()
-        
        
     }
     func client_socks_send_handler_done(_ len:Int){
@@ -1407,7 +1395,7 @@ class HTTPConnection: Connection {
         
     }
     func sendFakeCONNECTResponse(){
-        XProxy.log("sendFakeCONNECTResponse",level: .Error)
+        XProxy.log("sendFakeCONNECTResponse",level: .Trace)
         var need = false
         if reqInfo.mode == .HTTPS  {
             need = true

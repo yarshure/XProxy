@@ -1,34 +1,25 @@
 //
 //  ViewController.swift
-//  XProxyTest
+//  iOSTest
 //
-//  Created by yarshure on 2017/11/23.
-//  Copyright © 2017年 yarshure. All rights reserved.
+//  Created by yarshure on 2018/1/2.
+//  Copyright © 2018年 yarshure. All rights reserved.
 //
 
-import Cocoa
+import UIKit
+
+import Xcon
 import XProxy
 import XRuler
-import Xcon
-class ViewController: NSViewController {
+class ViewController: UIViewController {
 
-    @IBOutlet weak var stateLabel: NSTextField!
-    @IBAction func start(_ sender: Any) {
-        XProxy.startGCDProxy(port: 10081)
-    }
-    @IBAction func pause(_ sender: Any) {
-        XProxy.startGCDProxy(port: 10081)
-    }
-    @IBAction func restart(_ sender: Any) {
-        XProxy.startGCDProxy(port: 10081)
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
         Xcon.debugEnable = true
         XProxy.debugEanble = true
-        XRuler.groupIdentifier = "745WQDK4L7.com.yarshure.Surf"
+        XRuler.groupIdentifier = "group.com.yarshure.Surf"
         var url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: XRuler.groupIdentifier)!
-         url.appendPathComponent("abigt.conf")
+        url.appendPathComponent("abigt.conf")
         SFSettingModule.setting.config(url.path)
         
         
@@ -38,8 +29,7 @@ class ViewController: NSViewController {
         if let x = SFSettingModule.setting.findRuleByString("secure-appldnld.apple.com", useragent: ""){
             print(x.result.type)
         }
-        stateLabel.stringValue = XProxy.state()
-        // Do any additional setup after loading the view.
+        // Do any additional setup after loading the view, typically from a nib.
     }
 
     func testHTTP(){
@@ -54,11 +44,9 @@ class ViewController: NSViewController {
             _  = ProxyGroupSettings.share.addProxy(p)
         }
     }
-    
-    override var representedObject: Any? {
-        didSet {
-        // Update the view, if already loaded.
-        }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
 
 
