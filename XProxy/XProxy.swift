@@ -45,24 +45,44 @@ public class XProxy{
         
         return true
     }
-    static public func startGCDProxy(port:Int32){
-        SocketManager.shared.startGCDServer(port: port)
-    }
-    static public func stopGCDProxy(){
-        
-    }
-    static public func reloadRule(_ path:String){
-    }
-    static public func reloadProxy(){
-    }
     
-    static public func state() -> String {
-        return SocketManager.shared.st.description
-    }
+    
+  
     static func saveTunnelConnectionInfo(_ c:HTTPConnection){
         print("Request \(c.requestIndex) should save info")
     }
     static public var debugEanble = false
+    
+    //ins
+    public init(){
+        
+    }
+    var manager:SocketManager?
+    public func startGCDProxy(port:Int32,dispatchQueue:DispatchQueue?,socketQueue:DispatchQueue?,socketComplete:socketCompleteCallBack?){
+        if manager == nil {
+            
+            manager = SocketManager.init(dispatch: dispatchQueue, socket: socketQueue)
+        }
+        manager!.startGCDServer(port: port, socketComplete: socketComplete)
+    }
+    public func stopGCDProxy(){
+        guard let m = manager else {return}
+        m.stopServer()
+        manager = nil
+    }
+    
+    public func pauseContinueServer(){
+        //network changeing need call this func
+        guard let m = manager else {return}
+        m.pauseServer()
+    }
+ 
+    public func state() -> String {
+        guard let m = manager else {
+            return "no socket manager"
+        }
+        return m.st.description
+    }
 }
 
 extension XProxy{
@@ -74,7 +94,7 @@ extension XProxy{
         if #available(OSXApplicationExtension 10.12, *) {
             os_log("XProxy: %@", log: .default, type: .debug, msg)
         } else {
-            // Fallback on earlier versions
+            print(msg)
         }
         
     }
@@ -86,7 +106,7 @@ extension XProxy{
         if #available(OSXApplicationExtension 10.12, *) {
             os_log("XProxy: %@", log: .default, type: .debug, msg)
         } else {
-            // Fallback on earlier versions
+            print(msg)
         }
         
     }

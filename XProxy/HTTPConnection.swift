@@ -530,7 +530,7 @@ class HTTPConnection: Connection {
             if let respHeader = reqInfo.respHeader {
                 XProxy.log("\(cIDString) recv buffer too bigger mode:\(respHeader.mode) \(recvHeaderData.count)",level: .Debug)
             }else {
-                XProxy.log("\(cIDString) recv buffer too bigger length:\(recvHeaderData.length) will clear cache",level: .Error)
+                XProxy.log("\(cIDString) recv buffer too bigger length:\(recvHeaderData.count) will clear cache",level: .Error)
             }
             
             recvHeaderData.replaceSubrange(Range(0 ..< recvHeaderData.endIndex), with: Data())
@@ -653,8 +653,8 @@ class HTTPConnection: Connection {
         guard let _ = reqInfo.reqHeader else {return}
         let  currentReq:SFRequestInfo = reqInfo
         
-        //XProxy.log("\(cIDString) time:\(reqInfo.transferTiming) tag:\(tag):\(rTag) receive Data length:\(data):\(data.length) flow:\(currentReq.traffice.tx):\(currentReq.traffice.rx) ",level: .Debug)
-        XProxy.log("\(cIDString) time:\(reqInfo.transferTiming) tag:\(tag):\(rTag) receive Data length:\(data.length):\(data.length) flow:\(currentReq.traffice.tx):\(currentReq.traffice.rx) ",level: .Debug)
+       
+        XProxy.log("\(cIDString) time:\(reqInfo.transferTiming) tag:\(tag):\(rTag) receive Data length:\(data.count) flow:\(currentReq.traffice.tx):\(currentReq.traffice.rx) ",level: .Debug)
         //critLock.lockBeforeDate( NSDate( timeIntervalSinceNow: 0.05))
         rTag += 1
         //NSLog("%@,%d didReadData", cIDString,tag)
@@ -956,7 +956,7 @@ class HTTPConnection: Connection {
     func checkStatus() {
         //
         if socks_recv_bufArray.count > 1024*50{
-            XProxy.log("\(cIDString) recv queue too long \(socks_recv_bufArray.length)  ",level: .Warning)
+            XProxy.log("\(cIDString) recv queue too long \(socks_recv_bufArray.count)  ",level: .Warning)
             client_socks_recv_send_out()
             return
         }
@@ -1026,7 +1026,7 @@ class HTTPConnection: Connection {
                     
                 } else {
                     if reqInfo.idleTimeing > SFOpt.HTTPVeryTimeout {
-                        XProxy.log("\(cIDString) \(reqInfo.host)  timeout , will close recv:\(socks_recv_bufArray.length) send: \(bufArray.count) 7",level: .Warning)
+                        XProxy.log("\(cIDString) \(reqInfo.host)  timeout , will close recv:\(socks_recv_bufArray.count) send: \(bufArray.count) 7",level: .Warning)
                         if socks_recv_bufArray.count > 0 {
                             //bug here
                             client_socks_recv_handler_done(socks_recv_bufArray.count)
@@ -1058,8 +1058,8 @@ class HTTPConnection: Connection {
             }
         }else {
             
-            XProxy.log("\(reqInfo.host) recv memoryWarning  header queue:\(reqHeaderQueue.count) index:\(requestIndex) http recv header buffer :\(recvHeaderData.length)",level: .Warning)
-            XProxy.log("\(cIDString) \(reqInfo.host)   will close recv:\(socks_recv_bufArray.length) send: \(bufArray.count)",level: .Warning)
+            XProxy.log("\(reqInfo.host) recv memoryWarning  header queue:\(reqHeaderQueue.count) index:\(requestIndex) http recv header buffer :\(recvHeaderData.count)",level: .Warning)
+            XProxy.log("\(cIDString) \(reqInfo.host)   will close recv:\(socks_recv_bufArray.count) send: \(bufArray.count)",level: .Warning)
             client_free_socks()
         }
         

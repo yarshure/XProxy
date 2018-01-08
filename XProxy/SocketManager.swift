@@ -8,8 +8,9 @@
 
 import Foundation
 import DarwinCore
+public typealias socketCompleteCallBack = (SFRequestInfo) -> Swift.Void
 class SocketManager {
-    static var shared = SocketManager()
+    //static var shared = SocketManager()
     public enum State: CustomStringConvertible{
         case Stoped
         case Running
@@ -30,16 +31,31 @@ class SocketManager {
     }
     public var st:State = .Stoped
     var clientTree:AVLTree = AVLTree<Int32,HTTPConnection>()
-    public var dispatchQueue:DispatchQueue// = dispatch_queue_create("com.yarshure.dispatch_queue", DISPATCH_QUEUE_SERIAL);
-    var socketQueue:DispatchQueue //=
-    init() {
-        dispatchQueue = DispatchQueue(label: "com.yarshure.dispatchqueue")
-        socketQueue =  DispatchQueue(label:"com.yarshure.socketqueue")
+    var dispatchQueue:DispatchQueue
+    
+    var socketQueue:DispatchQueue
+    var callBack:socketCompleteCallBack?
+    init(dispatch:DispatchQueue?,socket:DispatchQueue?) {
+        if let dispatch = dispatch {
+            self.dispatchQueue = dispatch
+        }else {
+            self.dispatchQueue = DispatchQueue.init(label: "com.yarshure.proxy.dispatch")
+        }
+        if let socket = socket {
+            self.socketQueue = socket
+        }else {
+            self.socketQueue = DispatchQueue.init(label: "com.yarshure.proxy.socket")
+        }
+        
+        
     }
     func saveTunnelConnectionInfo(_ c:HTTPConnection){
-        XProxy.saveTunnelConnectionInfo(c)
+        guard let call = callBack else {return}
+        call(c.reqInfo)
+       
     }
-    public func startGCDServer(port:Int32){
+    public func startGCDServer(port:Int32,socketComplete:socketCompleteCallBack?){
+        self.callBack = socketComplete
         let server = GCDSocketServer.shared()
         switch st {
         case .Stoped:
@@ -81,7 +97,7 @@ class SocketManager {
                     c.incommingData(data,len:data.count)
                     
                 }
-                //server.server_write_request(fd, buffer: "wello come\n", total: 11);
+                
             }
             //let q = DispatchQueue.init(label: "dispatch queue")
         server.start(port, dispatchQueue: self.dispatchQueue, socketQueue: self.socketQueue)

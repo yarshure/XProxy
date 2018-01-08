@@ -10,21 +10,30 @@ import Cocoa
 import XProxy
 import XRuler
 import Xcon
+import XSocket
 class ViewController: NSViewController {
 
+    //test
+    // curl -O  -x http://127.0.0.1:10081  https://images.apple.com/media/cn/iphone-x/2017/01df5b43-28e4-4848-bf20-490c34a926a7/films/feature/iphone-x-feature-cn-20170912_1280x720h.mp4
+    let proxyServer = XProxy()
     @IBOutlet weak var stateLabel: NSTextField!
     @IBAction func start(_ sender: Any) {
-        XProxy.startGCDProxy(port: 10081)
+        
+        proxyServer.startGCDProxy(port: 10081, dispatchQueue: nil, socketQueue: nil){ info in
+            print(info)
+            
+        }
     }
     @IBAction func pause(_ sender: Any) {
-        XProxy.startGCDProxy(port: 10081)
+        proxyServer.pauseContinueServer()
     }
     @IBAction func restart(_ sender: Any) {
-        XProxy.startGCDProxy(port: 10081)
+        proxyServer.pauseContinueServer()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         Xcon.debugEnable = true
+        //XSocket.debugEnable = true
         XProxy.debugEanble = true
         XRuler.groupIdentifier = "745WQDK4L7.com.yarshure.Surf"
         var url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: XRuler.groupIdentifier)!
@@ -38,7 +47,7 @@ class ViewController: NSViewController {
         if let x = SFSettingModule.setting.findRuleByString("secure-appldnld.apple.com", useragent: ""){
             print(x.result.type)
         }
-        stateLabel.stringValue = XProxy.state()
+        stateLabel.stringValue = proxyServer.state()
         // Do any additional setup after loading the view.
     }
 
