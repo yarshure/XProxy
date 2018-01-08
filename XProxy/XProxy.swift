@@ -10,6 +10,7 @@ import Foundation
 import AxLogger
 import os.log
 public class XProxy{
+    public static var debugEnable = false
     static let socketReadTimeout = 15.0
     static let AsyncSocketReadTimeOut = 3.0*200// 3.0*200
     static let AsyncSocketWriteTimeOut = 15.0
@@ -86,16 +87,30 @@ public class XProxy{
 }
 
 extension XProxy{
+    
     static func log(_ msg:String,items: Any...,level:AxLoggerLevel , category:String="default",file:String=#file,line:Int=#line,ud:[String:String]=[:],tags:[String]=[],time:Date=Date()){
         
         if level != AxLoggerLevel.Debug {
             AxLogger.log(msg,level:level)
         }
-        if #available(OSXApplicationExtension 10.12, *) {
-            os_log("XProxy: %@", log: .default, type: .debug, msg)
-        } else {
-            print(msg)
+        if debugEanble {
+            #if os(iOS)
+                if #available(iOSApplicationExtension 10.0, *) {
+                    os_log("Xcon: %@", log: .default, type: .debug, msg)
+                } else {
+                    print(msg)
+                    // Fallback on earlier versions
+                }
+            #elseif os(OSX)
+                if #available(OSXApplicationExtension 10.12, *) {
+                    os_log("Xcon: %@", log: .default, type: .debug, msg)
+                } else {
+                    print(msg)
+                    // Fallback on earlier versions
+                }
+            #endif
         }
+        
         
     }
     static func log(_ msg:String,level:AxLoggerLevel , category:String="default",file:String=#file,line:Int=#line,ud:[String:String]=[:],tags:[String]=[],time:Date=Date()){
@@ -103,11 +118,26 @@ extension XProxy{
         if level != AxLoggerLevel.Debug {
             AxLogger.log(msg,level:level)
         }
-        if #available(OSXApplicationExtension 10.12, *) {
-            os_log("XProxy: %@", log: .default, type: .debug, msg)
-        } else {
-            print(msg)
+        if debugEanble {
+            #if os(iOS)
+                if #available(iOSApplicationExtension 10.0, *) {
+                    os_log("Xcon: %@", log: .default, type: .debug, msg)
+                } else {
+                    print(msg)
+                    // Fallback on earlier versions
+                }
+            #elseif os(OSX)
+                if #available(OSXApplicationExtension 10.12, *) {
+                    os_log("Xcon: %@", log: .default, type: .debug, msg)
+                } else {
+                    print(msg)
+                    // Fallback on earlier versions
+                    
+            
+            }
+            #endif
         }
+        
         
     }
 }
