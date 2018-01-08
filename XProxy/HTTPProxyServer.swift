@@ -40,6 +40,7 @@ class HTTPProxyServer {
     }
     func saveTunnelConnectionInfo(_ c:HConnection){
         //XProxy.saveTunnelConnectionInfo(c)
+        //SocketManager.saveTunnelConnectionInfo(self)
         XProxy.log("shoud save info", level: .Error)
     }
     public func startGCDServer(port:Int32){

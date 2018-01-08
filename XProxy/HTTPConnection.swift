@@ -183,7 +183,7 @@ class HTTPConnection: Connection {
             if let resp = reqInfo.respHeader {
                 if resp.finished {
                     reqInfo.status = .Complete
-                    manager!.saveTunnelConnectionInfo(self) //write db
+                    manager!.saveConnection(self.reqInfo) //write db
                     XProxy.log("\(cIDString) pipeline create SFRequestInfo",level: .Debug)
                     let req   = SFRequestInfo.init(rID: reqInfo.reqID, sID:requestIndex )
                     let header = reqHeaderQueue.remove(at: 0)
@@ -210,7 +210,7 @@ class HTTPConnection: Connection {
             if let _ = reqInfo.respHeader {
                 if reqInfo.respReadFinish  {
                     reqInfo.status = .Complete
-                    manager!.saveTunnelConnectionInfo(self) //write db
+                    manager!.saveConnection(self.reqInfo) //write db
                     XProxy.log("\(cIDString) HTTP keep-alive create SFRequestInfo",level: .Warning)
                     let req   = SFRequestInfo.init(rID: reqInfo.reqID, sID:requestIndex )
                     if recvHeaderData.count != 0 {
@@ -222,7 +222,7 @@ class HTTPConnection: Connection {
                 }else {
                     XProxy.log("\(cIDString) \(reqInfo.url) read finishd? ",level: .Info)
                     reqInfo.status = .Complete
-                    manager!.saveTunnelConnectionInfo(self) //write db
+                    manager!.saveConnection(self.reqInfo) //write db
                     XProxy.log("\(cIDString) HTTP keep-alive create SFRequestInfo",level: .Warning)
                     let req   = SFRequestInfo.init(rID: reqInfo.reqID, sID:requestIndex )
                     if recvHeaderData.count != 0 {
@@ -723,7 +723,7 @@ class HTTPConnection: Connection {
         
         //write record
         if let m = manager {
-            m.saveTunnelConnectionInfo(self)
+           manager!.saveConnection(self.reqInfo)
             
         }
         //create new header data
@@ -1438,6 +1438,8 @@ class HTTPConnection: Connection {
         return r
     }
     func forceCloseRemote(){
+        reqInfo.status = .Complete
+        manager?.saveConnection(self.reqInfo)
         connector?.forceDisconnect(UInt32(self.reqInfo.reqID))
     }
                          

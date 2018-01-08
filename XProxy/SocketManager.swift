@@ -49,9 +49,9 @@ class SocketManager {
         
         
     }
-    func saveTunnelConnectionInfo(_ c:HTTPConnection){
+    func saveConnection(_ info:SFRequestInfo){
         guard let call = callBack else {return}
-        call(c.reqInfo)
+        call(info)
        
     }
     public func startGCDServer(port:Int32,socketComplete:socketCompleteCallBack?){
