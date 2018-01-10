@@ -22,8 +22,6 @@ class ViewController: UIViewController {
         url.appendPathComponent("abigt.conf")
         SFSettingModule.setting.config(url.path)
         
-        
-        
         testHTTP()
         print(ProxyGroupSettings.share.proxys)
         if let x = SFSettingModule.setting.findRuleByString("secure-appldnld.apple.com", useragent: ""){

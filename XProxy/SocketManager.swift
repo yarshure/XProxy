@@ -9,6 +9,7 @@
 import Foundation
 import DarwinCore
 public typealias socketCompleteCallBack = (SFRequestInfo) -> Swift.Void
+import XRuler
 class SocketManager {
     //static var shared = SocketManager()
     public enum State: CustomStringConvertible{
@@ -70,8 +71,6 @@ class SocketManager {
             return
         }
         
-        
-        
             server.accept = { fd,addr,port in
                 let c = HTTPConnection.init(sfd: fd, rip: addr, rport: UInt16(port), dip: "127.0.0.1", dport: 10081)
                 c.manager = self
@@ -97,14 +96,25 @@ class SocketManager {
                     c.incommingData(data,len:data.count)
                     
                 }
-                
+                //report
+                self.networkReport(count: data.count, tx: true)
             }
             //let q = DispatchQueue.init(label: "dispatch queue")
         server.start(port, dispatchQueue: self.dispatchQueue, socketQueue: self.socketQueue)
+        SFVPNStatistics.shared.startReporting()
         st = .Running
+    }
+    func networkReport(count:Int,tx:Bool){
+        if tx {
+             SFVPNStatistics.shared.currentTraffice.addTx(x: count)
+        }else {
+            SFVPNStatistics.shared.currentTraffice.addRx(x: count)
+        }
+       
     }
     func stopServer(){
         XProxy.log("currently not support", level: .Info)
+        SFVPNStatistics.shared.cancelReporting()
         st = .Stoped
     }
     func pauseServer(){

@@ -703,27 +703,21 @@ class HTTPConnection: Connection {
                 
             }
         }
-        //        if socks_recv_bufArray.count == 0 {
-        //            socks_recv_bufArray  = data
-        //        }else {
-        //            socks_recv_bufArray.append(data)
-        //        }
+      
         data.enumerateBytes { (ptr:UnsafeBufferPointer<UInt8>,index: Data.Index, flag:inout Bool) in
             socks_recv_bufArray.append(ptr)
         }
         
         client_socks_recv_handler_done(data.count)
         
-        
-        
-        //prcessData("didReadData")
+        manager!.networkReport(count: data.count, tx: false)
         
     }
     func processLocationEvent(_ location:String){
         
         //write record
         if let m = manager {
-           manager!.saveConnection(self.reqInfo)
+           m.saveConnection(self.reqInfo)
             
         }
         //create new header data
@@ -1378,7 +1372,6 @@ class HTTPConnection: Connection {
                     }else {
                         fatalError("write %count")
                     }
-
                     
                 }
             }else {
