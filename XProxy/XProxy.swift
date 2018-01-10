@@ -84,6 +84,12 @@ public class XProxy{
         }
         return m.st.description
     }
+    public func runningRequests() ->[SFRequestInfo]{
+        guard let m = manager else {
+            return []
+        }
+        return m.requsts()
+    }
 }
 
 extension XProxy{

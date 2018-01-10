@@ -121,4 +121,13 @@ class SocketManager {
         GCDSocketServer.shared().pauseRestart()
         st = .Pause
     }
+    func requsts() ->[SFRequestInfo] {
+        var infos:[SFRequestInfo] = []
+        if let connections = clientTree.toPayPloadArray(){
+            for x in connections  {
+                infos.append(x.reqInfo)
+            }
+        }
+        return infos
+     }
 }
