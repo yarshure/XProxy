@@ -382,15 +382,19 @@ extension TreeNode: CustomDebugStringConvertible {
 extension TreeNode{
     public func toPayPloadArray() ->[Payload] {
         var results:[Payload] = []
-        if let parent = parent {
-            results += parent.toPayPloadArray()
+        if let parent = parent,let payload = parent.payload {
+            
+            results.append(payload)
         }
+        
         if let left = leftChild {
              results += left.toPayPloadArray()
         }
+        
         if let right = rightChild {
              results += right.toPayPloadArray()
         }
+     
         return results
     }
 }

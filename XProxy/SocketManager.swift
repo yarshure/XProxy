@@ -122,6 +122,7 @@ class SocketManager {
         st = .Pause
     }
     func requsts() ->[SFRequestInfo] {
+        print(clientTree.debugDescription)
         var infos:[SFRequestInfo] = []
         if let connections = clientTree.toPayPloadArray(){
             for x in connections  {
