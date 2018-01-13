@@ -50,10 +50,27 @@ class SocketManager {
         
         
     }
-    func saveConnection(_ info:SFRequestInfo){
+    func saveConnection(_ info:SFRequestInfo,fdClose:Int32 = 0){
         guard let call = callBack else {return}
         call(info)
+        if fdClose != 0 {
+            self.closeConnection(fd: fdClose, remote: true)
+        }
        
+    }
+    func closeConnection(fd:Int32,remote:Bool = false){
+        //self.clientTree.delete(key: fd)
+        if let c = self.clientTree.search(input: fd){
+            XProxy.log("\(fd):found connection \(c.reqInfo.reqID)", level: .Trace)
+            if !remote {
+                c.forceCloseRemote()
+            }
+            
+            self.clientTree.delete(key: fd)
+        }else {
+            XProxy.log("\(fd):not found connection", level: .Error)
+            
+        }
     }
     public func startGCDServer(port:Int32,socketComplete:socketCompleteCallBack?){
         self.callBack = socketComplete
@@ -71,26 +88,18 @@ class SocketManager {
             return
         }
         
-            server.accept = { fd,addr,port in
+            server.accept = { [unowned self]  fd,addr,port in
                 let c = HTTPConnection.init(sfd: fd, rip: addr, rport: UInt16(port), dip: "127.0.0.1", dport: 10081)
                 c.manager = self
                 self.clientTree.insert(key: fd, payload: c)
                 //c.connect()
                 print("welcome \(fd) \(String(describing: addr)):\(port)")
             }
-            server.colse = { fd in
+            server.colse = {[unowned self] fd in
+                self.closeConnection(fd:fd)
                 
-                //self.clientTree.delete(key: fd)
-                if let c = self.clientTree.search(input: fd){
-                    print("\(fd):found connection \(c.reqInfo.reqID),cleaning...")
-                    c.forceCloseRemote()
-                    self.clientTree.delete(key: fd)
-                }else {
-                    print("bye:\(fd) close,don't found client")
-                }
             }
-            server.incoming  = { fd ,data in
-                print("\(fd) incoming \(String(describing: data))")
+            server.incoming  = { [unowned self] fd ,data in
                 
                 if let c = self.clientTree.search(input: fd){
                     c.incommingData(data,len:data.count)

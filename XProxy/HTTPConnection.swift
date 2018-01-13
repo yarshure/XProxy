@@ -697,7 +697,8 @@ class HTTPConnection: Connection {
                     }else {
                         XProxy.log("\(cIDString)  location:\(location) http->https don't support",level: .Debug)
                     }
-                    
+                    self.forceClose = true
+                    //MARK: todo set flag
                 }
                 
                 
@@ -776,8 +777,8 @@ class HTTPConnection: Connection {
                 req.localIPaddress = ""
                 req.interfaceCell = reqInfo.interfaceCell
                 let now =  Date()
-                req.sTime = now as Date
-                req.estTime = Date.init(timeIntervalSince1970: 0) as Date
+                req.sTime = now
+                req.estTime = Date.init(timeIntervalSince1970: 0)
                 req.traffice.rx = 0
                 req.traffice.tx = 0
                 
@@ -785,15 +786,15 @@ class HTTPConnection: Connection {
                 req.url = request.location
                 
                 req.waitingRule = false
-                req.ruleStartTime = now as Date
+                req.ruleStartTime = now
                 
                 req.proxy = reqInfo.proxy
                 req.rule = reqInfo.rule
                 
                 
                 
-                req.inComingTime = now as Date
-                req.activeTime = now as Date
+                req.inComingTime = now
+                req.activeTime = now 
                 //req.pcb_closed = false
                 
                 if request.hostChanged {
@@ -836,10 +837,10 @@ class HTTPConnection: Connection {
         let currentReq:SFRequestInfo = reqInfo
         
         currentReq.status = .Transferring
-        //debugLog("\(cIDString) didWriteDataWithTag")
-        currentReq.activeTime = Date() as Date
+       
+        currentReq.activeTime = Date()
         
-        //let d = bufArray.removeFirst()
+        
         let x = Int64(withTag)
         if let len = bufArrayInfo[x] {
             client_socks_send_handler_done(len)
@@ -1365,10 +1366,14 @@ class HTTPConnection: Connection {
                
                 if let s = self{
                     if fin {
-                        
-                        if s.rTag > 0 {
-                            s.connector?.readDataWithTag(s.rTag)
+                        if s.bufArray.isEmpty && s.forceClose {
+                            s.forceCloseRemote()
+                        }else {
+                            if s.rTag > 0 {
+                                s.connector?.readDataWithTag(s.rTag)
+                            }
                         }
+                        
                     }else {
                         fatalError("write %count")
                     }
@@ -1433,10 +1438,21 @@ class HTTPConnection: Connection {
     func forceCloseRemote(){
         reqInfo.status = .Complete
         manager?.saveConnection(self.reqInfo)
-        connector?.forceDisconnect(UInt32(self.reqInfo.reqID))
+        if connector != nil  {
+            connector?.forceDisconnect(UInt32(self.reqInfo.reqID))
+        }else {
+            
+        }
+        
     }
                          
     override public func didDisconnect(_ socket: Xcon,  error:Error?){
-            XProxy.log("dest didDisconnect \(self.socketfd)", items: "", level: .Info)
+        
+        XProxy.log("dest didDisconnect \(self.socketfd)", items: "", level: .Info)
+        if reqInfo.status != .Complete {
+            reqInfo.status = .Complete
+            manager?.saveConnection(self.reqInfo,fdClose:self.socketfd)
+        }
+        
     }
 }
