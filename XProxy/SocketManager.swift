@@ -54,6 +54,8 @@ class SocketManager {
         guard let call = callBack else {return}
         call(info)
         if fdClose != 0 {
+            //close it , and delete connection
+            close(fdClose);//
             self.closeConnection(fd: fdClose, remote: true)
         }
        
@@ -68,7 +70,7 @@ class SocketManager {
             
             self.clientTree.delete(key: fd)
         }else {
-            XProxy.log("\(fd):not found connection", level: .Error)
+            XProxy.log("\(fd):not found connection, shutdown?", level: .Error)
             
         }
     }
@@ -129,6 +131,16 @@ class SocketManager {
     func pauseServer(){
         GCDSocketServer.shared().pauseRestart()
         st = .Pause
+    }
+    // Close add current from Cell to WI-FI, cell socket not error
+    //  WI-FI to cell , socket recv/send will error,auto disconnect
+    func networkChange(){
+        if let connections = clientTree.toPayPloadArray(){
+            for c in connections  {
+                close(c.socketfd)//close this socket
+                c.forceCloseRemote()
+            }
+        }
     }
     func requsts() ->[SFRequestInfo] {
         print(clientTree.debugDescription)

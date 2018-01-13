@@ -78,18 +78,6 @@ class HTTPProxyServer {
             return
         }
         
-        
-        
-//        server.accept = { fd,addr,port in
-//            let c = HTTPConnection.init(sfd: fd, rip: addr, rport: UInt16(port), dip: "127.0.0.1", dport: 10081)
-//            c.manager = self
-//            self.clientTree.insert(key: fd, payload: c)
-//            //c.connect()
-//            print("welcome \(fd) \(String(describing: addr)):\(port)")
-//        }
-       
-       
-    
         st = .Running
     }
     func stopServer(){
@@ -100,4 +88,5 @@ class HTTPProxyServer {
         //GCDSocketServer.shared().pauseRestart()
         st = .Pause
     }
+    
 }

@@ -90,6 +90,10 @@ public class XProxy{
         }
         return m.requsts()
     }
+    public func cellToWill() {
+        guard let m = manager else { return }
+        m.networkChange()
+    }
 }
 
 extension XProxy{
