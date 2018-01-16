@@ -48,7 +48,7 @@ class TestViewController: NSViewController {
         
         
         
-        testHTTP()
+        testHTTPKCP()
         print(ProxyGroupSettings.share.proxys)
         if let x = SFSettingModule.setting.findRuleByString("secure-appldnld.apple.com", useragent: ""){
             print(x.result.type)
@@ -57,18 +57,7 @@ class TestViewController: NSViewController {
         // Do any additional setup after loading the view.
     }
 
-    func testHTTP(){
-        let x = "http,192.168.11.131,8000,,"
-        if let p = SFProxy.createProxyWithLine(line: x, pname: "CN2"){
-            
-            _  = ProxyGroupSettings.share.addProxy(p)
-        }
-    }
-    func testSS(){
-        if let p = SFProxy.create(name: "11", type: .SS, address: "35.197.117.170", port: "53784", passwd: "aHR0cHM6Ly9yYXcuZ2l0aHVidXN", method: "aes-256-cfb", tls: false) {
-            _  = ProxyGroupSettings.share.addProxy(p)
-        }
-    }
+   
     
     override var representedObject: Any? {
         didSet {

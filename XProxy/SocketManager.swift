@@ -95,7 +95,8 @@ class SocketManager {
                 c.manager = self
                 self.clientTree.insert(key: fd, payload: c)
                 //c.connect()
-                print("welcome \(fd) \(String(describing: addr)):\(port)")
+                XProxy.log("welcome \(fd) \(String(describing: addr)):\(port)", level: .Notify)
+                
             }
             server.colse = {[unowned self] fd in
                 self.closeConnection(fd:fd)

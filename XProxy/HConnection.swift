@@ -1362,7 +1362,7 @@ class HConnection: Connection {
     }
     func setUpConnector(_ host:String,port:UInt16){
         let q = manager!.dispatchQueue
-        guard let c = Xcon.socketFromProxy(reqInfo.proxy, targetHost: host, Port: port, sID: reqInfo.reqID, delegate: self, queue: q) else {
+        guard let c = Xcon.socketFromProxy(reqInfo.proxy, targetHost: host, Port: port, delegate: self, queue: q, sessionID: UInt32(reqInfo.reqID)) else {
             fatalError("")
         }
         connector = c
