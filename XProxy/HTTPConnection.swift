@@ -638,7 +638,7 @@ class HTTPConnection: Connection {
             reqInfo.status = .Complete
             //reqInfo.socks_up = false
             reqInfo.socks_closed = true
-            reqInfo.eTime = Date() as Date
+            reqInfo.eTime = Date() 
             // 这个时候buf 里可能有没发完的data
             client_free_socks()
             
@@ -1189,10 +1189,13 @@ class HTTPConnection: Connection {
             }
             reqInfo.rule = ruler.result
             findProxy(j,cache: true)
-            
+            reqInfo.waitingRule = false
+            return reqInfo.waitingRule
         }else {
             if !reqInfo.remoteIPaddress.isEmpty {
                 findIPRule(reqInfo.remoteIPaddress)
+                reqInfo.waitingRule = false
+                return reqInfo.waitingRule
             }else {
                 if SFSettingModule.setting.ipRuleEnable {
                     reqInfo.waitingRule = true
@@ -1208,13 +1211,13 @@ class HTTPConnection: Connection {
                 }
                 
             }
-            
+            return reqInfo.waitingRule
         }
         
             
         
         
-        return !reqInfo.waitingRule
+        
         
         
     }
@@ -1331,13 +1334,7 @@ class HTTPConnection: Connection {
             
             
             if genPolicy(domainName,useragent:agent) {
-                if reqInfo.rule.policy == .Reject {
-                    byebyeRequest()
-                }else {
-                    XProxy.log("\(cIDString) Not Reject Will Send Req",level: .Debug)
-                    //setUpConnector()
-                }
-                
+                XProxy.log("\(cIDString) policy finished ... todo connection...",level: .Debug)
             }else {
                 XProxy.log("\(cIDString) \(reqInfo.host) Waiting Rule",level: .Debug)
             }
