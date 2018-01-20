@@ -8,7 +8,7 @@
 
 import Foundation
 import Xcon
-open  class Connection: NSObject ,XconDelegate{
+open  class Connection :XconDelegate{
     /**
      The socket did disconnect.
      
@@ -93,7 +93,7 @@ open  class Connection: NSObject ,XconDelegate{
         reqInfo = SFRequestInfo.init(rID: SFConnectionID)
         
         SFConnectionID += 1
-        super.init()
+        
     }
     public var connector:Xcon?
     public var bufArray:[Data] = []

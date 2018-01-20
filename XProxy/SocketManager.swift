@@ -144,7 +144,7 @@ class SocketManager {
         }
     }
     func requsts() ->[SFRequestInfo] {
-        print(clientTree.debugDescription)
+     
         var infos:[SFRequestInfo] = []
         if let connections = clientTree.toPayPloadArray(){
             for x in connections  {
