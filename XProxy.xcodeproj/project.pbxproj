@@ -26,6 +26,8 @@
 		693A35EA1FC6C5CC007FDE26 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 693A35E81FC6C5CC007FDE26 /* Main.storyboard */; };
 		693A36041FC6C685007FDE26 /* XProxy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 691EBE181FC66D95005FDCAF /* XProxy.framework */; };
 		693A36051FC6C685007FDE26 /* XProxy.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 691EBE181FC66D95005FDCAF /* XProxy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6952118020142FF70038E62B /* TLSextension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6952117F20142FF60038E62B /* TLSextension.swift */; };
+		69521182201430000038E62B /* XTLSAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69521181201430000038E62B /* XTLSAdapter.swift */; };
 		69593FDA1FFBA06800CB8ADF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69593FD91FFBA06800CB8ADF /* AppDelegate.swift */; };
 		69593FDC1FFBA06800CB8ADF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69593FDB1FFBA06800CB8ADF /* ViewController.swift */; };
 		69593FDF1FFBA06900CB8ADF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69593FDD1FFBA06900CB8ADF /* Main.storyboard */; };
@@ -115,6 +117,8 @@
 		693A35E91FC6C5CC007FDE26 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		693A35EB1FC6C5CC007FDE26 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		693A35EC1FC6C5CC007FDE26 /* XProxyTest.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = XProxyTest.entitlements; sourceTree = "<group>"; };
+		6952117F20142FF60038E62B /* TLSextension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLSextension.swift; sourceTree = "<group>"; };
+		69521181201430000038E62B /* XTLSAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XTLSAdapter.swift; sourceTree = "<group>"; };
 		69593FD71FFBA06800CB8ADF /* iOSTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		69593FD91FFBA06800CB8ADF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		69593FDB1FFBA06800CB8ADF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -199,6 +203,8 @@
 				691EBE1B1FC66D95005FDCAF /* XProxy.h */,
 				69C7DC4B1FE25D0600FB7FA2 /* mac.xcconfig */,
 				693A35741FC68300007FDE26 /* Connection.swift */,
+				69521181201430000038E62B /* XTLSAdapter.swift */,
+				6952117F20142FF60038E62B /* TLSextension.swift */,
 				693A357E1FC6968B007FDE26 /* ext.swift */,
 				697FB3111FCBB60100653CA8 /* SFIPAddr.swift */,
 				697FB3121FCBB60100653CA8 /* SFIPConnectionInfo.swift */,
@@ -498,6 +504,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				693A35751FC68300007FDE26 /* Connection.swift in Sources */,
+				6952118020142FF70038E62B /* TLSextension.swift in Sources */,
 				69348EE91FF94B48007C841C /* HTTPProxyServer.swift in Sources */,
 				693A356F1FC68089007FDE26 /* HTTPConnection.swift in Sources */,
 				693A35681FC67AC2007FDE26 /* SocketManager.swift in Sources */,
@@ -507,6 +514,7 @@
 				693A35831FC697CC007FDE26 /* SFRequestInfo.swift in Sources */,
 				693A35711FC680B8007FDE26 /* AVLTree.swift in Sources */,
 				69348EEC1FF95207007C841C /* HConnection.swift in Sources */,
+				69521182201430000038E62B /* XTLSAdapter.swift in Sources */,
 				693A35C01FC6AE93007FDE26 /* SFOpt.swift in Sources */,
 				697FB3131FCBB60100653CA8 /* SFIPAddr.swift in Sources */,
 				69987DAD1FD932A700B41FD6 /* XArray.swift in Sources */,

@@ -8,7 +8,7 @@
 
 import Foundation
 import Xcon
-open  class Connection :XconDelegate{
+open  class Connection :TLSSocketProvider,XconDelegate{
     /**
      The socket did disconnect.
      
@@ -95,6 +95,9 @@ open  class Connection :XconDelegate{
         SFConnectionID += 1
         
     }
+    
+    
+    
     public var connector:Xcon?
     public var bufArray:[Data] = []
     public var bufArrayInfo:[Int64:Int] = [:]

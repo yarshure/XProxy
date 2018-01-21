@@ -53,7 +53,8 @@ class HTTPProxyServer {
             if let so = socket {
                 let c = HConnection.init(s:so ,sfd: so.sfd, rip: so.remote, rport: UInt16(so.port), dip: "127.0.0.1", dport: 10081)
                 //c.manager = self
-                self.clientTree.insert(key: c.hashValue, payload: c)
+                //fixme
+                //self.clientTree.insert(key: c.hashValue, payload: c)
                 //c.connect()
                 //print("welcome \(fd) \(String(describing: addr)):\(port)")
                 

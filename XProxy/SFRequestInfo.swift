@@ -12,6 +12,8 @@ import XRuler
 import SwiftyJSON
 let KEEP_APPLE_TCP = true
 public class SFRequestInfo {
+    //mitm config will add to XRuler
+    public var mitm:Bool = false
     
     public var mode:SFConnectionMode = .TCP //tcp http https
     public var url:String = ""
