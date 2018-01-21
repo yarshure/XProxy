@@ -8,13 +8,20 @@
 
 import Foundation
 import Security
+class SSecurtXconHelper {
+    static let helper = SSecurtXconHelper()
+    var list:[UInt32:TLSSocketProvider] = [:]
+    func add(_ key:UInt32,value:TLSSocketProvider){
+        list[key] = value
+    }
+}
 
 open class TLSSocketProvider {
     var tlsReadBuffer:Data = Data()
     var tlsAdapter:XTLSAdapter?
     //write cipher data to remote
     func write(_ data:Data){
-        
+        XProxy.log("should write \(data as NSData)", level: .Info)
     }
     init() {
         
@@ -35,7 +42,7 @@ class XTLSAdapter {
     var handShanked:Bool = false
     var dispatchQueue:DispatchQueue
     weak var provider:TLSSocketProvider!
-    let tlsqueue = DispatchQueue(label:"tls.handshake.queue")
+    //let tlsqueue = DispatchQueue(label:"tls.handshake.queue")
     func check(_ status:OSStatus) {
         if status != 0{
             if let str =  SecCopyErrorMessageString(status, nil) {
@@ -81,22 +88,28 @@ class XTLSAdapter {
         let status = SSLSetCertificate(ctx, certRefs as CFArray)
         check(status)
     }
-    func handShake(){
-        tlsqueue.async {
-            var status: OSStatus
-            repeat {
-                status = SSLHandshake(self.ctx);
-                var state:SSLSessionState = SSLSessionState.init(rawValue: 0)!
-                SSLGetSessionState(self.ctx, &state)
-                XProxy.log("SSLHandshake...state:" + state.description, level: .Info)
-            }while(status == errSSLWouldBlock)
-            self.handShanked = true
-            self.dispatchQueue.async {[unowned self] in
-                self.provider.didSecure()
-            }
-            
-            XProxy.log("SSLHandshake...Finished ", level: .Info)
+    
+    func handShake() ->Bool{
+        if handShanked {
+            return true
         }
+        var status: OSStatus
+        status = SSLHandshake(self.ctx);
+        var state:SSLSessionState = SSLSessionState.init(rawValue: 0)!
+        SSLGetSessionState(self.ctx, &state)
+        XProxy.log("SSLHandshake...state:" + state.description, level: .Info)
+        if status == errSSLWouldBlock {
+            XProxy.log("SSLHandshake... waiting for next call ", level: .Info)
+            return false
+        }else {
+            self.handShanked = true
+            
+            //self.provider.didSecure()
+            XProxy.log("SSLHandshake...Finished ", level: .Info)
+            return true
+        }
+        
+        
         
     }
     //SSLWrite(_ context: SSLContext, _ data: UnsafeRawPointer?, _ dataLength: Int, _ processed: UnsafeMutablePointer<Int>) -> OSStatus
@@ -134,11 +147,7 @@ class XTLSAdapter {
     func readFunc() ->SSLReadFunc {
         return { c,data,len in
             let socketfd:TLSSocketProvider  = c.assumingMemoryBound(to: TLSSocketProvider.self).pointee
-            
-            
-            
             let bytesRequested = len.pointee
-            
             // Read the data from the socket...
             if socketfd.tlsReadBuffer.isEmpty {
                 //无数据

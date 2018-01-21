@@ -91,8 +91,10 @@ open  class Connection :TLSSocketProvider,XconDelegate{
     public var closeSocketAfterRead:Bool = false // HTTP
     public init(i:SFIPConnectionInfo) {
         info = i
-        reqInfo = SFRequestInfo.init(rID: SFConnectionID)
         
+        reqInfo = SFRequestInfo.init(rID: SFConnectionID)
+        super.init()
+        SSecurtXconHelper.helper.add(UInt32(reqInfo.reqID),value: self)
         SFConnectionID += 1
         
     }
@@ -111,13 +113,13 @@ open  class Connection :TLSSocketProvider,XconDelegate{
         }
         tlsAdapter?.setCert([result])
         
-        self.tlsAdapter?.handShake()
+        _ = self.tlsAdapter?.handShake()
         
     }
     public func tlsInput(_ data:Data){
-        tlsAdapter!.tlsqueue.suspend()
+        
         self.tlsReadBuffer.append(data)
-        tlsAdapter!.tlsqueue.resume()
+        _ = tlsAdapter!.handShake()
     }
     
     public var connector:Xcon?
