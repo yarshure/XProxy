@@ -92,6 +92,7 @@ class HTTPConnection: Connection {
     }
     
     func processBufer(_ d:Data,req:SFRequestInfo,enqueue:Bool) -> Bool {
+        
         let len = d.count
         let r = d.range(of:hData, options: Data.SearchOptions.init(rawValue: 0), in: Range(0 ..< len))
         if let r = r {
@@ -100,7 +101,7 @@ class HTTPConnection: Connection {
             headerData.append( d.subdata(in: Range(0 ..< r.lowerBound)))
             XProxy.log("\(cIDString) header-- \(headerData as Data)", level: .Debug)
             //MARK: - todo fixme
-            guard let reqHeader   = SFHTTPRequestHeader(data: headerData as Data) else {
+            guard let reqHeader   = SFHTTPRequestHeader(data: headerData) else {
                 XProxy.log("\(cIDString) parser header error \(headerData)",level: .Error)
                 return false
             }
@@ -108,6 +109,9 @@ class HTTPConnection: Connection {
             // host rewrite
             if reqHeader.checkRewrite() {
                 XProxy.log("rewrite \(reqHeader.Host) to \(reqHeader.Host)",level: .Debug)
+            }
+            if reqHeader.checkMitm(){
+                prepareTLSServer(manager!.dispatchQueue)
             }
             headerData.count = 0
             
@@ -273,6 +277,11 @@ class HTTPConnection: Connection {
             #endif
         }
         
+        if reqInfo.mitm {
+            
+            tlsInput(d)
+            return
+        }
         
         switch httpStat {
         case .httpDefault:
@@ -1345,7 +1354,7 @@ class HTTPConnection: Connection {
     }
     func setUpConnector(_ host:String,port:UInt16){
         let q = manager!.dispatchQueue
-        guard let c = Xcon.socketFromProxy(reqInfo.proxy, targetHost: host, Port: port, delegate: self, queue: q, sessionID: UInt32(reqInfo.reqID)) else {
+        guard let c = Xcon.socketFromProxy(reqInfo.proxy, targetHost: host, Port: port, delegate: self, queue: q, enableTLS:reqInfo.mitm, sessionID: UInt32(reqInfo.reqID)) else {
             fatalError("")
         }
         connector = c

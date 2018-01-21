@@ -8,6 +8,7 @@
 
 import Foundation
 import Xcon
+import XRuler
 open  class Connection :TLSSocketProvider,XconDelegate{
     /**
      The socket did disconnect.
@@ -96,7 +97,28 @@ open  class Connection :TLSSocketProvider,XconDelegate{
         
     }
     
-    
+    public func prepareTLSServer(_ dispatchQueue:DispatchQueue){
+        reqInfo.mitm = true
+        
+        tlsAdapter = XTLSAdapter.init(side: .serverSide, type: .streamType, provider: self, queue:dispatchQueue)
+        var result:[String : Any]
+        do {
+           result =  try SFSettingModule.setting.mitmRootCA()
+        }catch let e {
+            XProxy.log("get root ca failure:\(e.localizedDescription)", level: .Error)
+            reqInfo.mitm = false
+            return
+        }
+        tlsAdapter?.setCert([result])
+        
+        self.tlsAdapter?.handShake()
+        
+    }
+    public func tlsInput(_ data:Data){
+        tlsAdapter!.tlsqueue.suspend()
+        self.tlsReadBuffer.append(data)
+        tlsAdapter!.tlsqueue.resume()
+    }
     
     public var connector:Xcon?
     public var bufArray:[Data] = []

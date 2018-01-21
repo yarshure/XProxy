@@ -107,6 +107,9 @@ public enum SFConnectionCompleteReason :Int{
     }
 }
 extension SFHTTPRequestHeader {
+    public func checkMitm() ->Bool {
+        return SFSettingModule.setting.checkRemoteMitm(Host)
+    }
     public func checkRewrite() ->Bool{
         //rewrite
 //        if  let r =  SFSettingModule.setting.rule{

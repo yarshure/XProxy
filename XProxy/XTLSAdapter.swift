@@ -29,14 +29,21 @@ class XTLSAdapter {
     var ctx:SSLContext!
     var certState:SSLClientCertificateState!
     var negCipher:SSLCipherSuite!
+    
     var negVersion:SSLProtocol!
     let handShakeTag:Int = -3000
     var handShanked:Bool = false
     var dispatchQueue:DispatchQueue
     weak var provider:TLSSocketProvider!
+    let tlsqueue = DispatchQueue(label:"tls.handshake.queue")
     func check(_ status:OSStatus) {
         if status != 0{
-            print("\(status)")
+            if let str =  SecCopyErrorMessageString(status, nil) {
+                XProxy.log("\(status):" +  (str as String),level: .Info)
+                
+            }
+            
+            
         }
     }
     init(side:SSLProtocolSide,type:SSLConnectionType,provider:TLSSocketProvider,queue:DispatchQueue) {
@@ -70,20 +77,27 @@ class XTLSAdapter {
     func setCerts(_ certs:[Data]){
         //0:SecIdentityRef, SecCertificateRefs
     }
+    func setCert(_ certRefs:Array<Any>){
+        let status = SSLSetCertificate(ctx, certRefs as CFArray)
+        check(status)
+    }
     func handShake(){
-        var status: OSStatus
-        repeat {
-            status = SSLHandshake(self.ctx);
-            var state:SSLSessionState = SSLSessionState.init(rawValue: 0)!
-            SSLGetSessionState(self.ctx, &state)
-            XProxy.log("SSLHandshake...state:" + state.description, level: .Info)
-        }while(status == errSSLWouldBlock)
-        self.handShanked = true
-        dispatchQueue.async {[unowned self] in
-            self.provider.didSecure()
+        tlsqueue.async {
+            var status: OSStatus
+            repeat {
+                status = SSLHandshake(self.ctx);
+                var state:SSLSessionState = SSLSessionState.init(rawValue: 0)!
+                SSLGetSessionState(self.ctx, &state)
+                XProxy.log("SSLHandshake...state:" + state.description, level: .Info)
+            }while(status == errSSLWouldBlock)
+            self.handShanked = true
+            self.dispatchQueue.async {[unowned self] in
+                self.provider.didSecure()
+            }
+            
+            XProxy.log("SSLHandshake...Finished ", level: .Info)
         }
         
-        XProxy.log("SSLHandshake...Finished ", level: .Info)
     }
     //SSLWrite(_ context: SSLContext, _ data: UnsafeRawPointer?, _ dataLength: Int, _ processed: UnsafeMutablePointer<Int>) -> OSStatus
 
