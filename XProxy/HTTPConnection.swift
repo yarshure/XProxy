@@ -1109,7 +1109,7 @@ class HTTPConnection: Connection {
         XProxy.log(cIDString + " "  + message + " now setUpConnector",level: .Debug)
         
         if reqInfo.rule.policy == .Reject {
-            byebyeRequest()
+            sendDrop()
             return
         }else {
             if reqInfo.rule.policy == .Direct {
@@ -1348,7 +1348,7 @@ class HTTPConnection: Connection {
                 XProxy.log("\(cIDString) \(reqInfo.host) Waiting Rule",level: .Debug)
             }
         }else {
-            byebyeRequest()
+            sendDrop()
         }
 
     }
@@ -1360,7 +1360,15 @@ class HTTPConnection: Connection {
         connector = c
     }
     func byebyeRequest(){
-         XProxy.log("\(#function) todo", level: .Info)
+        forceCloseRemote()
+         XProxy.log("\(#function) forceCloseRemote", level: .Info)
+    }
+    func sendDrop(){
+        
+       let drop =  http503.data(using: .utf8)!
+       reqInfo.respHeader =  SFHTTPResponseHeader.init(data: drop)
+        socks_recv_bufArray.append(drop)
+        client_socks_recv_handler_done(drop.count)
     }
     func client_free_socks(){
          XProxy.log("\(#function) todo", level: .Info)

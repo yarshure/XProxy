@@ -151,7 +151,13 @@ class XTLSAdapter {
         let status = SSLSetCertificate(ctx, certs as CFArray)
         check(status,funcName:"SSLSetCertificate")
     }
-    
+    func showState() ->SSLSessionState  {
+        var state:SSLSessionState = SSLSessionState.init(rawValue: 0)!
+        SSLGetSessionState(self.ctx, &state)
+        XProxy.log("SSLHandshake...state:" + state.description, level: .Info)
+        return state
+        
+    }
     func handShake() ->Bool{
         if handShanked {
             return true
@@ -164,8 +170,12 @@ class XTLSAdapter {
             XProxy.log("SSLHandshake... waiting for next call ", level: .Info)
             return false
         }else {
-            self.handShanked = true
             
+            if showState() == .connected {
+                self.handShanked = true
+            }else {
+                
+            }
             //self.provider.didSecure()
             XProxy.log("SSLHandshake...Finished ", level: .Info)
             return true
