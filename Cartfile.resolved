@@ -1,4 +1,4 @@
-git "git@bitbucket.org:yarshure/xcon.git" "d9051bcc90b0577afdbaddb8bdf3c7966749e049"
+git "git@bitbucket.org:yarshure/xcon.git" "b593bcc24b8147c138210c0f6515d86287cef665"
 github "Hearst-DD/ObjectMapper" "0c116f44b5d052892146bcb94ad6c690b3dec40d"
 github "SwiftyJSON/SwiftyJSON" "4.0.0"
 github "iosdevzone/IDZSwiftCommonCrypto" "0.10.0"

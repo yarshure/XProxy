@@ -14,6 +14,14 @@ class SSecurtXconHelper {
     func add(_ key:UInt32,value:TLSSocketProvider){
         list[key] = value
     }
+    func getProvider(_ key:UInt32) ->TLSSocketProvider{
+        if let x = list[key]{
+            return x
+        }else {
+            fatalError()
+        }
+        
+    }
 }
 
 open class TLSSocketProvider {
@@ -43,10 +51,10 @@ class XTLSAdapter {
     var dispatchQueue:DispatchQueue
     weak var provider:TLSSocketProvider!
     //let tlsqueue = DispatchQueue(label:"tls.handshake.queue")
-    func check(_ status:OSStatus) {
+    func check(_ status:OSStatus,funcName:String =  "") {
         if status != 0{
             if let str =  SecCopyErrorMessageString(status, nil) {
-                XProxy.log("\(status):" +  (str as String),level: .Info)
+                XProxy.log(funcName + " status: \(status):" +  (str as String),level: .Info)
                 
             }
             
@@ -66,27 +74,82 @@ class XTLSAdapter {
     func config(_ side:SSLProtocolSide){
         var status: OSStatus
         status = SSLSetIOFuncs(ctx, readFunc(), writeFunc())
-        check(status)
+        check(status,funcName: "SSLSetIOFuncs")
         
-        let ptr = Unmanaged.passRetained(provider)
+        //let ptr = Unmanaged.passRetained(provider)
        
-        let connection = UnsafeRawPointer.init(ptr.toOpaque())
-        status = SSLSetConnection(ctx, connection)
-        check(status)
+        //let connection = UnsafeRawPointer.init(ptr.toOpaque())
+        var fd = UInt32((provider as! Connection).reqInfo.reqID)
+        
+        status = SSLSetConnection(ctx, &fd)
+        check(status,funcName: "SSLSetConnection")
         if side == .clientSide {
             status = SSLSetSessionOption(ctx, SSLSessionOption.breakOnClientAuth, true)
-            check(status)
+            check(status,funcName:"SSLSetSessionOption")
         }
+//        status = SSLSetProtocolVersionMin(ctx, SSLProtocol.tlsProtocol1)
+//        check(status,funcName:"SSLSetProtocolVersionMin" )
+//        status = SSLSetProtocolVersionMax(ctx, SSLProtocol.tlsProtocol12)
+//        check(status,funcName: "SSLSetProtocolVersionMax")
+        
+        var numEnabled:Int = 0
+        status = SSLGetNumberEnabledCiphers(ctx, &numEnabled)
+        print("SSLGetNumberEnabledCiphers count \(numEnabled)")
+        check(status,funcName: "SSLGetNumberEnabledCiphers")
+        
+       
+    
+//        var numSupported:Int = 200
+//        var supported:UnsafeMutablePointer<SSLCipherSuite> = UnsafeMutablePointer<SSLCipherSuite>.allocate(capacity: numEnabled)
+//        
+//        defer {
+//            supported.deallocate(capacity: 200)
+//        }
+//        
+//        status = SSLGetSupportedCiphers(ctx,supported , &numSupported)
+//        print("SSLGetSupportedCiphers count \(numSupported)")
+//        check(status,funcName: "SSLGetSupportedCiphers")
+        
+        
+        
+        let enabled:UnsafeMutablePointer<SSLCipherSuite> = UnsafeMutablePointer<SSLCipherSuite>.allocate(capacity: 1)
+        //var enableTemp =
+        //var toEnable:Int = 0
+        enabled.pointee = TLS_RSA_WITH_AES_256_GCM_SHA384
+       //enabled.initialize(from: supported, count: numSupported)
+//        for x in 0..<numSupported {
+//            //if supported.pointee !=
+//            enabled.pointee = supported.pointee
+//            supported = supported.successor()
+//
+//        }
+        status = SSLSetEnabledCiphers(ctx, enabled, 1)
+        check(status,funcName: "SSLSetEnabledCiphers")
+
     }
     func setPeer( _ host:String){
-        SSLSetPeerDomainName(ctx, host, host.count)
+        let status = SSLSetPeerDomainName(ctx, host, host.count)
+        check(status,funcName: "SSLSetPeerDomainName")
     }
     func setCerts(_ certs:[Data]){
         //0:SecIdentityRef, SecCertificateRefs
     }
     func setCert(_ certRefs:Array<Any>){
-        let status = SSLSetCertificate(ctx, certRefs as CFArray)
-        check(status)
+        guard let tmp = certRefs.first else {
+            return
+        }
+        let certDict = tmp as! [String:AnyObject]
+        let secIdentityRef  = certDict[kSecImportItemKeyID as String]
+        //    -- Cert chain...
+        var certs = [secIdentityRef]
+        var ccerts: Array<SecCertificate> = (certDict as AnyObject).value(forKey: kSecImportItemCertChain as String) as! Array<SecCertificate>
+        for i in 1 ..< ccerts.count {
+            
+            certs += [ccerts[i] as AnyObject]
+        }
+        
+        let status = SSLSetCertificate(ctx, certs as CFArray)
+        check(status,funcName:"SSLSetCertificate")
     }
     
     func handShake() ->Bool{
@@ -95,9 +158,8 @@ class XTLSAdapter {
         }
         var status: OSStatus
         status = SSLHandshake(self.ctx);
-        var state:SSLSessionState = SSLSessionState.init(rawValue: 0)!
-        SSLGetSessionState(self.ctx, &state)
-        XProxy.log("SSLHandshake...state:" + state.description, level: .Info)
+        check(status,funcName:"SSLHandshake")
+        
         if status == errSSLWouldBlock {
             XProxy.log("SSLHandshake... waiting for next call ", level: .Info)
             return false
@@ -146,7 +208,11 @@ class XTLSAdapter {
     //SSLConnectionRef, UnsafeRawPointer, UnsafeMutablePointer<Int>
     func readFunc() ->SSLReadFunc {
         return { c,data,len in
-            let socketfd:TLSSocketProvider  = c.assumingMemoryBound(to: TLSSocketProvider.self).pointee
+            //let socketfd:TLSSocketProvider  = c.assumingMemoryBound(to: TLSSocketProvider.self).pointee
+            
+            let sid:UInt32 = c.assumingMemoryBound(to: UInt32.self).pointee
+            let socketfd = SSecurtXconHelper.helper.getProvider(0)
+            
             let bytesRequested = len.pointee
             // Read the data from the socket...
             if socketfd.tlsReadBuffer.isEmpty {
@@ -165,7 +231,7 @@ class XTLSAdapter {
                 }
                 memcpy(data, (socketfd.tlsReadBuffer as NSData).bytes,toRead)
                 socketfd.tlsReadBuffer.removeSubrange( 0..<toRead)
-                
+                XProxy.log("tls read \(toRead) left:\(socketfd.tlsReadBuffer.count)", level: .Info)
                 len.initialize(to: toRead)
                 if bytesRequested > toRead {
                     
@@ -183,8 +249,8 @@ class XTLSAdapter {
     func writeFunc() ->SSLWriteFunc {
         return { c,data,len in
            
-            let socketfd:TLSSocketProvider = c.assumingMemoryBound(to: TLSSocketProvider.self).pointee
-           
+            let sid:UInt32 = c.assumingMemoryBound(to: UInt32.self).pointee
+            let socketfd = SSecurtXconHelper.helper.getProvider(0)
             var buffer:Data = Data.init(count: len.pointee)
             _ = buffer.withUnsafeMutableBytes { ptr  in
                 memcpy(ptr, data, len.pointee)
