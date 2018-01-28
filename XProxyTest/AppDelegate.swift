@@ -13,7 +13,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 
     func test(){
-         var clientTree:AVLTree = AVLTree<Int32,String>()
+        let clientTree:AVLTree = AVLTree<Int32,String>()
         clientTree.insert(key: 1, payload: "abc")
         clientTree.insert(key: 2, payload: "bcd")
         clientTree.insert(key: 3, payload: "3")

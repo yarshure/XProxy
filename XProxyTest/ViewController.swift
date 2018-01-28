@@ -28,7 +28,7 @@ class TestViewController: NSViewController {
     @IBAction func reqs(_ sender: Any) {
         
         let proxyInfos = proxyServer.runningRequests()
-        
+        print(proxyInfos)
     }
     @IBAction func pause(_ sender: Any) {
         proxyServer.pauseContinueServer()
@@ -42,9 +42,10 @@ class TestViewController: NSViewController {
         //XSocket.debugEnable = true
         XProxy.debugEanble = true
         XRuler.groupIdentifier = "745WQDK4L7.com.yarshure.Surf"
-        var url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: XRuler.groupIdentifier)!
-         url.appendPathComponent("abigt.conf")
-        SFSettingModule.setting.config(url.path)
+        let p = Bundle.main.path(forResource: "Test.conf", ofType: nil)!
+        //var url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: XRuler.groupIdentifier)!
+        // url.appendPathComponent("abigt.conf")
+        SFSettingModule.setting.config(p)
         
         
         

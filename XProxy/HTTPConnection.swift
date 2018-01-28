@@ -270,6 +270,7 @@ class HTTPConnection: Connection {
         
         //XProxy.log("\(cIDString) incoming data len \(d as NSData) \(len)",level: .Debug) // \(d)
         XProxy.log("\(cIDString) bufArray length: \(bufArray.count)",level: .Trace)
+        
         if d.count > 0 {
             
             #if LOGGER
@@ -370,7 +371,7 @@ class HTTPConnection: Connection {
             }
             
         }
-        
+        reqInfo.updateSendTraffic(len)
         processData("incoming data")
         
     }
@@ -680,14 +681,14 @@ class HTTPConnection: Connection {
         if reqInfo.status == .Complete {
             XProxy.log(cIDString + "didReadData done Complete 000 " + reqInfo.url,level: .Debug)
         }
-        
+        currentReq.updaterecvTraffic(data.count)
         if reqInfo.mode == .HTTPS{
-            //currentReq.updateSpeed(UInt(data.length),stat: true)
-            currentReq.updaterecvTraffic(data.count)
-        }else {
-            //currentReq.updateSpeed(UInt(data.length),stat: false)
             
-            currentReq.updaterecvTraffic(data.count)
+            
+        }else {
+           
+            
+            
             
             //5K
             //XProxy.log("\(cIDString) http recv data length:\(data.length)",level: .Debug)
@@ -849,18 +850,8 @@ class HTTPConnection: Connection {
        
         currentReq.activeTime = Date()
         
-        
-        let x = Int64(withTag)
-        if let len = bufArrayInfo[x] {
-            client_socks_send_handler_done(len)
-            bufArrayInfo.removeValue(forKey: x)
-            reqInfo.updateSendTraffic(len)
-        }else {
-            XProxy.log("\(cIDString) not find send packet", level: .Debug)
-        }
-        
-       
-        
+        //tag not equal bug
+        //Data maybe nil
         tag += 1
         
         
@@ -1401,11 +1392,7 @@ class HTTPConnection: Connection {
         socks_recv_bufArray.removeAll()
        
     }
-    func client_socks_send_handler_done(_ len:Int){
-         XProxy.log("\(#function)", level: .Info)
-        
-        
-    }
+  
     func sendFakeCONNECTResponse(){
         XProxy.log("sendFakeCONNECTResponse",level: .Trace)
         var need = false

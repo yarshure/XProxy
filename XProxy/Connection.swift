@@ -10,6 +10,24 @@ import Foundation
 import Xcon
 import XRuler
 open  class Connection :TLSSocketProvider,XconDelegate{
+    public func didConnect(_ socket: Xcon, cert: SecTrust?) {
+        if let tls = tlsAdapter,let sec = cert {
+            
+            
+            var result:[String : Any]
+            do {
+                result =  try SFSettingModule.setting.mitmRootCA()
+            }catch let e {
+                XProxy.log("get root ca failure:\(e.localizedDescription)", level: .Error)
+                reqInfo.mitm = false
+                return
+            }
+            tls.setCerts(sec, caRefs: result)
+        }
+        XProxy.log("didconnect with SecTrust", items: "", level: .Info)
+        client_socks_handler(.event_UP)
+    }
+    
     /**
      The socket did disconnect.
      
@@ -94,7 +112,7 @@ open  class Connection :TLSSocketProvider,XconDelegate{
         
         reqInfo = SFRequestInfo.init(rID: SFConnectionID)
         super.init()
-        SSecurtXconHelper.helper.add(UInt32(reqInfo.reqID),value: self)
+       
         SFConnectionID += 1
         
     }
@@ -103,17 +121,9 @@ open  class Connection :TLSSocketProvider,XconDelegate{
         reqInfo.mitm = true
         
         tlsAdapter = XTLSAdapter.init(side: .serverSide, type: .streamType, provider: self, queue:dispatchQueue)
-        var result:[String : Any]
-        do {
-           result =  try SFSettingModule.setting.mitmRootCA()
-        }catch let e {
-            XProxy.log("get root ca failure:\(e.localizedDescription)", level: .Error)
-            reqInfo.mitm = false
-            return
-        }
-        tlsAdapter?.setCert([result])
         
-        _ = self.tlsAdapter?.handShake()
+        
+       
         
     }
     public func tlsInput(_ data:Data){

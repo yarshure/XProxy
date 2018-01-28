@@ -8,21 +8,8 @@
 
 import Foundation
 import Security
-class SSecurtXconHelper {
-    static let helper = SSecurtXconHelper()
-    var list:[UInt32:TLSSocketProvider] = [:]
-    func add(_ key:UInt32,value:TLSSocketProvider){
-        list[key] = value
-    }
-    func getProvider(_ key:UInt32) ->TLSSocketProvider{
-        if let x = list[key]{
-            return x
-        }else {
-            fatalError()
-        }
-        
-    }
-}
+import DarwinCore
+
 
 open class TLSSocketProvider {
     var tlsReadBuffer:Data = Data()
@@ -76,12 +63,7 @@ class XTLSAdapter {
         status = SSLSetIOFuncs(ctx, readFunc(), writeFunc())
         check(status,funcName: "SSLSetIOFuncs")
         
-        //let ptr = Unmanaged.passRetained(provider)
-       
-        //let connection = UnsafeRawPointer.init(ptr.toOpaque())
-        var fd = UInt32((provider as! Connection).reqInfo.reqID)
-        
-        status = SSLSetConnection(ctx, &fd)
+        status = SSLSetConnection(ctx, Unmanaged.passUnretained(provider).toOpaque())
         check(status,funcName: "SSLSetConnection")
         if side == .clientSide {
             status = SSLSetSessionOption(ctx, SSLSessionOption.breakOnClientAuth, true)
@@ -127,30 +109,43 @@ class XTLSAdapter {
         check(status,funcName: "SSLSetEnabledCiphers")
 
     }
+ 
     func setPeer( _ host:String){
         let status = SSLSetPeerDomainName(ctx, host, host.count)
         check(status,funcName: "SSLSetPeerDomainName")
     }
-    func setCerts(_ certs:[Data]){
+    func setCerts(_ certs:SecTrust,caRefs:[String:Any]){
         //0:SecIdentityRef, SecCertificateRefs
-    }
-    func setCert(_ certRefs:Array<Any>){
-        guard let tmp = certRefs.first else {
-            return
-        }
-        let certDict = tmp as! [String:AnyObject]
+        let originCert:SecCertificate? = SecTrustGetCertificateAtIndex(certs, 0)
+        let serverCerts =  TLSToolCommon().logCertificateData(for: certs)
+        print(serverCerts)
+        let myOIDs : NSDictionary = SecCertificateCopyValues(originCert!, nil, nil)!
+        
+        
+        var publicKey:SecKey?
+        SecCertificateCopyPublicKey(originCert!, &publicKey)
+        let certDict = caRefs as [String:AnyObject]
         let secIdentityRef  = certDict[kSecImportItemKeyID as String]
         //    -- Cert chain...
-        var certs = [secIdentityRef]
-        var ccerts: Array<SecCertificate> = (certDict as AnyObject).value(forKey: kSecImportItemCertChain as String) as! Array<SecCertificate>
-        for i in 1 ..< ccerts.count {
-            
-            certs += [ccerts[i] as AnyObject]
+        var p12Certs = [secIdentityRef]
+        if let o = originCert {
+            p12Certs.append(o)
         }
+        var caCertificate:SecCertificate?
+        var ccerts: Array<SecCertificate> = (certDict as AnyObject).value(forKey: kSecImportItemCertChain as String) as! Array<SecCertificate>
+        for i in 0 ..< ccerts.count {
+            if i == 0 {
+                caCertificate = ccerts[i]
+            }
+            p12Certs += [ccerts[i] as AnyObject]
+        }
+        var caPublicKey:SecKey?
+        SecCertificateCopyPublicKey(caCertificate!, &caPublicKey)
         
-        let status = SSLSetCertificate(ctx, certs as CFArray)
+        let status = SSLSetCertificate(ctx, p12Certs as CFArray)
         check(status,funcName:"SSLSetCertificate")
     }
+    
     func showState() ->SSLSessionState  {
         var state:SSLSessionState = SSLSessionState.init(rawValue: 0)!
         SSLGetSessionState(self.ctx, &state)
@@ -220,8 +215,8 @@ class XTLSAdapter {
         return { c,data,len in
             //let socketfd:TLSSocketProvider  = c.assumingMemoryBound(to: TLSSocketProvider.self).pointee
             
-            let sid:UInt32 = c.assumingMemoryBound(to: UInt32.self).pointee
-            let socketfd = SSecurtXconHelper.helper.getProvider(0)
+            let unmanaged:Unmanaged<TLSSocketProvider>  =   Unmanaged.fromOpaque(c)
+            let socketfd:TLSSocketProvider = unmanaged.takeUnretainedValue()
             
             let bytesRequested = len.pointee
             // Read the data from the socket...
@@ -259,8 +254,8 @@ class XTLSAdapter {
     func writeFunc() ->SSLWriteFunc {
         return { c,data,len in
            
-            let sid:UInt32 = c.assumingMemoryBound(to: UInt32.self).pointee
-            let socketfd = SSecurtXconHelper.helper.getProvider(0)
+            let unmanaged:Unmanaged<TLSSocketProvider>  =   Unmanaged.fromOpaque(c)
+            let socketfd:TLSSocketProvider = unmanaged.takeUnretainedValue()
             var buffer:Data = Data.init(count: len.pointee)
             _ = buffer.withUnsafeMutableBytes { ptr  in
                 memcpy(ptr, data, len.pointee)

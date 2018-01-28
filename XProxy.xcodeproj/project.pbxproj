@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6903CDDA2016242900642B68 /* Test.conf in Resources */ = {isa = PBXBuildFile; fileRef = 6903CDD92016242900642B68 /* Test.conf */; };
 		691EBE1D1FC66D95005FDCAF /* XProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 691EBE1B1FC66D95005FDCAF /* XProxy.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		69348EE91FF94B48007C841C /* HTTPProxyServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69348EE81FF94B48007C841C /* HTTPProxyServer.swift */; };
 		69348EEA1FF94B49007C841C /* HTTPProxyServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69348EE81FF94B48007C841C /* HTTPProxyServer.swift */; };
@@ -96,6 +97,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6903CDD92016242900642B68 /* Test.conf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Test.conf; path = ../../Documents/Surge/Test.conf; sourceTree = "<group>"; };
 		691EBE181FC66D95005FDCAF /* XProxy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = XProxy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		691EBE1B1FC66D95005FDCAF /* XProxy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XProxy.h; sourceTree = "<group>"; };
 		691EBE1C1FC66D95005FDCAF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -229,6 +231,7 @@
 		693A35E11FC6C5CC007FDE26 /* XProxyTest */ = {
 			isa = PBXGroup;
 			children = (
+				6903CDD92016242900642B68 /* Test.conf */,
 				693A35E21FC6C5CC007FDE26 /* AppDelegate.swift */,
 				693A35E41FC6C5CC007FDE26 /* ViewController.swift */,
 				693A35E61FC6C5CC007FDE26 /* Assets.xcassets */,
@@ -442,6 +445,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6903CDDA2016242900642B68 /* Test.conf in Resources */,
 				693A35E71FC6C5CC007FDE26 /* Assets.xcassets in Resources */,
 				693A35EA1FC6C5CC007FDE26 /* Main.storyboard in Resources */,
 			);
