@@ -865,13 +865,7 @@ class HTTPConnection: Connection {
         assert(!reqInfo.socks_closed)
         assert(reqInfo.socks_up)
         
-        //        if let _ = reqInfo.respHeader{
-        //            if reqInfo.respReadFinish {
-        //                XProxy.log("\(cIDString) respReadFinish ,wait next read", level: .Warning)
-        //                return
-        //            }
-        //        }
-        //
+     
         if reqInfo.status != .Complete  {
             
             guard let c = connector else {

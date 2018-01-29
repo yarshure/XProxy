@@ -40,10 +40,13 @@ class XTLSAdapter {
     //let tlsqueue = DispatchQueue(label:"tls.handshake.queue")
     func check(_ status:OSStatus,funcName:String =  "") {
         if status != 0{
+            #if os(macOS)
             if let str =  SecCopyErrorMessageString(status, nil) {
                 XProxy.log(funcName + " status: \(status):" +  (str as String),level: .Info)
                 
             }
+            #else
+            #endif
             
             
         }
@@ -119,11 +122,11 @@ class XTLSAdapter {
         let originCert:SecCertificate? = SecTrustGetCertificateAtIndex(certs, 0)
         let serverCerts =  TLSToolCommon().logCertificateData(for: certs)
         print(serverCerts)
-        let myOIDs : NSDictionary = SecCertificateCopyValues(originCert!, nil, nil)!
+        let myOIDs : NSDictionary = copyOID(certificate: originCert!)
         
         
-        var publicKey:SecKey?
-        SecCertificateCopyPublicKey(originCert!, &publicKey)
+        var publicKey:SecKey?  = copyPublicKey(caCertificate: originCert!)
+     
         let certDict = caRefs as [String:AnyObject]
         let secIdentityRef  = certDict[kSecImportItemKeyID as String]
         //    -- Cert chain...
@@ -139,9 +142,7 @@ class XTLSAdapter {
             }
             p12Certs += [ccerts[i] as AnyObject]
         }
-        var caPublicKey:SecKey?
-        SecCertificateCopyPublicKey(caCertificate!, &caPublicKey)
-        
+        let carpublicKey = copyPublicKey(caCertificate: caCertificate!)
         let status = SSLSetCertificate(ctx, p12Certs as CFArray)
         check(status,funcName:"SSLSetCertificate")
     }
