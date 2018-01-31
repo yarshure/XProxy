@@ -148,7 +148,9 @@ class SocketManager {
         var infos:[SFRequestInfo] = []
         if let connections = clientTree.toPayPloadArray(){
             for x in connections  {
-                infos.append(x.reqInfo)
+                if !x.reqInfo.url.isEmpty {
+                    infos.append(x.reqInfo)
+                }
             }
         }
         return infos
