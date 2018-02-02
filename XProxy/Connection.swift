@@ -68,6 +68,20 @@ open  class Connection :TLSSocketProvider,XconDelegate{
      */
     open func didConnect(_ socket: Xcon){
         XProxy.log("didconnect", items: "", level: .Info)
+        
+        if let r = socket.remote {
+            
+            reqInfo.remoteIPaddress = r.hostname
+        }
+        if let l = socket.local {
+            reqInfo.localIPaddress = l.hostname
+            if l.hostname == SFNetworkInterfaceManager.WiFiIPAddress {
+                reqInfo.interfaceCell = 0
+            }else {
+                reqInfo.interfaceCell = 1
+            }
+        }
+        
         client_socks_handler(.event_UP)
     }
 
