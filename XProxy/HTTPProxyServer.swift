@@ -44,7 +44,7 @@ class HTTPProxyServer {
         XProxy.log("shoud save info", level: .Error)
     }
     public func startGCDServer(port:Int32){
-        guard let server = SocketServer.init(port, dispatchQueue: self.dispatchQueue, socketQueue: self.socketQueue) else {
+        guard let server = SocketServer.init(port, dispatchQueue: self.dispatchQueue, socketQueue: self.socketQueue,share:false) else {
             fatalError()
         }
         

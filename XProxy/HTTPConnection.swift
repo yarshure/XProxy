@@ -1360,7 +1360,7 @@ class HTTPConnection: Connection {
     }
     func client_socks_recv_handler_done(_ len:Int){
         
-        GCDSocketServer.shared().server_write_request(socketfd, data: socks_recv_bufArray) {[weak self] fin,fd,count in
+        manager!.server.server_write_request(socketfd, data: socks_recv_bufArray) {[weak self] fin,fd,count in
             if fin {
                
                 if let s = self{

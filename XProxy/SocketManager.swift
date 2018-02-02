@@ -36,6 +36,7 @@ class SocketManager {
     
     var socketQueue:DispatchQueue
     var callBack:socketCompleteCallBack?
+    let server = GCDSocketServer()
     init(dispatch:DispatchQueue?,socket:DispatchQueue?) {
         if let dispatch = dispatch {
             self.dispatchQueue = dispatch
@@ -74,9 +75,9 @@ class SocketManager {
             
         }
     }
-    public func startGCDServer(port:Int32,socketComplete:socketCompleteCallBack?){
+    public func startGCDServer(port:Int32,socketComplete:socketCompleteCallBack?,share:Bool){
         self.callBack = socketComplete
-        let server = GCDSocketServer.shared()
+        
         switch st {
         case .Stoped:
             //suport stoped?
@@ -112,7 +113,7 @@ class SocketManager {
                 self.networkReport(count: data.count, tx: true)
             }
             //let q = DispatchQueue.init(label: "dispatch queue")
-        server.start(port, dispatchQueue: self.dispatchQueue, socketQueue: self.socketQueue)
+        server.start(port, dispatchQueue: self.dispatchQueue, socketQueue: self.socketQueue, share: share)
         SFVPNStatistics.shared.startReporting()
         st = .Running
     }
@@ -130,7 +131,7 @@ class SocketManager {
         st = .Stoped
     }
     func pauseServer(){
-        GCDSocketServer.shared().pauseRestart()
+        server.pauseRestart()
         st = .Pause
     }
     // Close add current from Cell to WI-FI, cell socket not error

@@ -59,12 +59,12 @@ public class XProxy{
         
     }
     var manager:SocketManager?
-    public func startGCDProxy(port:Int32,dispatchQueue:DispatchQueue?,socketQueue:DispatchQueue?,socketComplete:socketCompleteCallBack?){
+    public func startGCDProxy(port:Int32,share:Bool=false,dispatchQueue:DispatchQueue?,socketQueue:DispatchQueue?,socketComplete:socketCompleteCallBack?){
         if manager == nil {
             
             manager = SocketManager.init(dispatch: dispatchQueue, socket: socketQueue)
         }
-        manager!.startGCDServer(port: port, socketComplete: socketComplete)
+        manager!.startGCDServer(port: port, socketComplete: socketComplete,share: share)
     }
     public func stopGCDProxy(){
         guard let m = manager else {return}
