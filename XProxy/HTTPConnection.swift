@@ -1379,7 +1379,11 @@ class HTTPConnection: Connection {
                     
                 }
             }else {
-                fatalError("socket error")
+                //write failure
+                if let s = self {
+                    s.forceCloseRemote()
+                }
+                
             }
         
         }

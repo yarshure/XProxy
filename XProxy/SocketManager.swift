@@ -41,12 +41,14 @@ class SocketManager {
         if let dispatch = dispatch {
             self.dispatchQueue = dispatch
         }else {
-            self.dispatchQueue = DispatchQueue.init(label: "com.yarshure.proxy.dispatch")
+            //self.dispatchQueue = DispatchQueue.global()
+             self.dispatchQueue  = DispatchQueue.init(label: "com.yarshure.proxy.dispatch")
         }
         if let socket = socket {
             self.socketQueue = socket
         }else {
-            self.socketQueue = DispatchQueue.init(label: "com.yarshure.proxy.socket")
+            //self.socketQueue = DispatchQueue.global()
+            self.socketQueue =  DispatchQueue.init(label: "com.yarshure.proxy.socket")
         }
         
         
