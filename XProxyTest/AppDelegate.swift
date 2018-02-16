@@ -18,7 +18,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         clientTree.insert(key: 2, payload: "bcd")
         clientTree.insert(key: 3, payload: "3")
         print(clientTree.debugDescription)
-        print(clientTree.toPayPloadArray())
+        
     }
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {

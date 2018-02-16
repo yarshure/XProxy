@@ -1352,6 +1352,7 @@ class HTTPConnection: Connection {
         
        let drop =  http503.data(using: .utf8)!
        reqInfo.respHeader =  SFHTTPResponseHeader.init(data: drop)
+        reqInfo.updaterecvTraffic(drop.count)
         socks_recv_bufArray.append(drop)
         client_socks_recv_handler_done(drop.count)
     }

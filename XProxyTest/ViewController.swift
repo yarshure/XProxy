@@ -38,14 +38,14 @@ class TestViewController: NSViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        Xcon.debugEnable = true
+        //Xcon.debugEnable = true
         //XSocket.debugEnable = true
         XProxy.debugEanble = true
         XRuler.groupIdentifier = "745WQDK4L7.com.yarshure.Surf"
-        let p = Bundle.main.path(forResource: "Test.conf", ofType: nil)!
-        //var url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: XRuler.groupIdentifier)!
-        // url.appendPathComponent("abigt.conf")
-        SFSettingModule.setting.config(p)
+        //let p = Bundle.main.path(forResource: "Test.conf", ofType: nil)!
+        var url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: XRuler.groupIdentifier)!
+         url.appendPathComponent("abigt.conf")
+        SFSettingModule.setting.config(url.path)
         
         
         
