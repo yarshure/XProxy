@@ -714,14 +714,16 @@ class HTTPConnection: Connection {
                 
             }
         }
-      
-        data.enumerateBytes { (ptr:UnsafeBufferPointer<UInt8>,index: Data.Index, flag:inout Bool) in
+        manager!.networkReport(count: data.count, tx: false)
+        autoreleasepool {
+            data.enumerateBytes { (ptr:UnsafeBufferPointer<UInt8>,index: Data.Index, flag:inout Bool) in
             socks_recv_bufArray.append(ptr)
+            }
+            client_socks_recv_handler_done(data.count)
         }
         
-        client_socks_recv_handler_done(data.count)
         
-        manager!.networkReport(count: data.count, tx: false)
+        
         
     }
     func processLocationEvent(_ location:String){
