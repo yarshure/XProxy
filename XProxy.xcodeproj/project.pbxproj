@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6903CDDA2016242900642B68 /* Test.conf in Resources */ = {isa = PBXBuildFile; fileRef = 6903CDD92016242900642B68 /* Test.conf */; };
 		691EBE1D1FC66D95005FDCAF /* XProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 691EBE1B1FC66D95005FDCAF /* XProxy.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		69348EE91FF94B48007C841C /* HTTPProxyServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69348EE81FF94B48007C841C /* HTTPProxyServer.swift */; };
 		69348EEA1FF94B49007C841C /* HTTPProxyServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69348EE81FF94B48007C841C /* HTTPProxyServer.swift */; };
@@ -41,6 +40,7 @@
 		697FB3131FCBB60100653CA8 /* SFIPAddr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697FB3111FCBB60100653CA8 /* SFIPAddr.swift */; };
 		697FB3141FCBB60100653CA8 /* SFIPConnectionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697FB3121FCBB60100653CA8 /* SFIPConnectionInfo.swift */; };
 		69987DAD1FD932A700B41FD6 /* XArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69987DAC1FD932A700B41FD6 /* XArray.swift */; };
+		69B45BBE21ECCADE00F53B4E /* KCP.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 69B45BB721ECCA8C00F53B4E /* KCP.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		69C1772F200E2914004BDB3A /* env.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C1772E200E2914004BDB3A /* env.swift */; };
 		69C17730200E2914004BDB3A /* env.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C1772E200E2914004BDB3A /* env.swift */; };
 		69C7DC471FE25CD400FB7FA2 /* XProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 69C7DC451FE25CD400FB7FA2 /* XProxy.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -72,6 +72,62 @@
 			remoteGlobalIDString = 69C7DC421FE25CD400FB7FA2;
 			remoteInfo = XProxyiOS;
 		};
+		69B45BB021ECCA8C00F53B4E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 69B45BA721ECCA8B00F53B4E /* libkcp.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 692AE3211EB2EE59006A4B9D;
+			remoteInfo = kcp;
+		};
+		69B45BB221ECCA8C00F53B4E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 69B45BA721ECCA8B00F53B4E /* libkcp.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 692AE3541EB2EF83006A4B9D;
+			remoteInfo = kcptest;
+		};
+		69B45BB421ECCA8C00F53B4E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 69B45BA721ECCA8B00F53B4E /* libkcp.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 69639BD51EE1AAC100893D18;
+			remoteInfo = kcpOSX;
+		};
+		69B45BB621ECCA8C00F53B4E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 69B45BA721ECCA8B00F53B4E /* libkcp.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 69E0492C21E44E8B000FC13E;
+			remoteInfo = KCPOSX;
+		};
+		69B45BB821ECCA8C00F53B4E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 69B45BA721ECCA8B00F53B4E /* libkcp.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 69E0497021E47E6A000FC13E;
+			remoteInfo = KCPiOS;
+		};
+		69B45BBA21ECCA8C00F53B4E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 69B45BA721ECCA8B00F53B4E /* libkcp.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 69E0499621E4A212000FC13E;
+			remoteInfo = TestNew;
+		};
+		69B45BBC21ECCAD000F53B4E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 69B45BA721ECCA8B00F53B4E /* libkcp.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 69E0492B21E44E8B000FC13E;
+			remoteInfo = KCPOSX;
+		};
+		69B45BBF21ECCB0B00F53B4E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 69B45BA721ECCA8B00F53B4E /* libkcp.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 69E0492B21E44E8B000FC13E;
+			remoteInfo = KCPOSX;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -81,6 +137,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				69B45BBE21ECCADE00F53B4E /* KCP.framework in Embed Frameworks */,
 				693A36051FC6C685007FDE26 /* XProxy.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -100,7 +157,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		6903CDD92016242900642B68 /* Test.conf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Test.conf; path = ../../Documents/Surge/Test.conf; sourceTree = "<group>"; };
 		691EBE181FC66D95005FDCAF /* XProxy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = XProxy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		691EBE1B1FC66D95005FDCAF /* XProxy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XProxy.h; sourceTree = "<group>"; };
 		691EBE1C1FC66D95005FDCAF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -134,6 +190,7 @@
 		697FB3111FCBB60100653CA8 /* SFIPAddr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SFIPAddr.swift; sourceTree = "<group>"; };
 		697FB3121FCBB60100653CA8 /* SFIPConnectionInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SFIPConnectionInfo.swift; sourceTree = "<group>"; };
 		69987DAC1FD932A700B41FD6 /* XArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XArray.swift; sourceTree = "<group>"; };
+		69B45BA721ECCA8B00F53B4E /* libkcp.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = libkcp.xcodeproj; path = ../../libkcp/iOSLib/libkcp/libkcp.xcodeproj; sourceTree = "<group>"; };
 		69BE2E6E1FFCB56D0078845A /* iOSTest.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iOSTest.entitlements; sourceTree = "<group>"; };
 		69C1772E200E2914004BDB3A /* env.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = env.swift; sourceTree = "<group>"; };
 		69C7DC431FE25CD400FB7FA2 /* XProxy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = XProxy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -236,7 +293,6 @@
 		693A35E11FC6C5CC007FDE26 /* XProxyTest */ = {
 			isa = PBXGroup;
 			children = (
-				6903CDD92016242900642B68 /* Test.conf */,
 				693A35E21FC6C5CC007FDE26 /* AppDelegate.swift */,
 				693A35E41FC6C5CC007FDE26 /* ViewController.swift */,
 				693A35E61FC6C5CC007FDE26 /* Assets.xcassets */,
@@ -262,10 +318,24 @@
 			path = iOSTest;
 			sourceTree = "<group>";
 		};
+		69B45BA821ECCA8B00F53B4E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				69B45BB121ECCA8C00F53B4E /* kcp.framework */,
+				69B45BB321ECCA8C00F53B4E /* kcptest.app */,
+				69B45BB521ECCA8C00F53B4E /* kcp.framework */,
+				69B45BB721ECCA8C00F53B4E /* KCP.framework */,
+				69B45BB921ECCA8C00F53B4E /* KCP.framework */,
+				69B45BBB21ECCA8C00F53B4E /* TestNew.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		69C1772D200E28FC004BDB3A /* test */ = {
 			isa = PBXGroup;
 			children = (
 				69C1772E200E2914004BDB3A /* env.swift */,
+				69B45BA721ECCA8B00F53B4E /* libkcp.xcodeproj */,
 			);
 			path = test;
 			sourceTree = "<group>";
@@ -314,6 +384,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				69B45BC021ECCB0B00F53B4E /* PBXTargetDependency */,
 			);
 			name = XProxy;
 			productName = XProxy;
@@ -333,6 +404,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				69B45BBD21ECCAD000F53B4E /* PBXTargetDependency */,
 				693A36071FC6C685007FDE26 /* PBXTargetDependency */,
 			);
 			name = XProxyTest;
@@ -385,16 +457,17 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = yarshure;
 				TargetAttributes = {
 					691EBE171FC66D95005FDCAF = {
 						CreatedOnToolsVersion = 9.1;
-						LastSwiftMigration = 0910;
+						LastSwiftMigration = 1010;
 						ProvisioningStyle = Manual;
 					};
 					693A35DF1FC6C5CC007FDE26 = {
 						CreatedOnToolsVersion = 9.1;
+						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Sandbox = {
@@ -428,6 +501,12 @@
 			mainGroup = 691EBE0E1FC66D95005FDCAF;
 			productRefGroup = 691EBE191FC66D95005FDCAF /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 69B45BA821ECCA8B00F53B4E /* Products */;
+					ProjectRef = 69B45BA721ECCA8B00F53B4E /* libkcp.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				691EBE171FC66D95005FDCAF /* XProxy */,
@@ -437,6 +516,51 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		69B45BB121ECCA8C00F53B4E /* kcp.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = kcp.framework;
+			remoteRef = 69B45BB021ECCA8C00F53B4E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		69B45BB321ECCA8C00F53B4E /* kcptest.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = kcptest.app;
+			remoteRef = 69B45BB221ECCA8C00F53B4E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		69B45BB521ECCA8C00F53B4E /* kcp.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = kcp.framework;
+			remoteRef = 69B45BB421ECCA8C00F53B4E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		69B45BB721ECCA8C00F53B4E /* KCP.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = KCP.framework;
+			remoteRef = 69B45BB621ECCA8C00F53B4E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		69B45BB921ECCA8C00F53B4E /* KCP.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = KCP.framework;
+			remoteRef = 69B45BB821ECCA8C00F53B4E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		69B45BBB21ECCA8C00F53B4E /* TestNew.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = TestNew.app;
+			remoteRef = 69B45BBA21ECCA8C00F53B4E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		691EBE161FC66D95005FDCAF /* Resources */ = {
@@ -450,7 +574,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6903CDDA2016242900642B68 /* Test.conf in Resources */,
 				693A35E71FC6C5CC007FDE26 /* Assets.xcassets in Resources */,
 				693A35EA1FC6C5CC007FDE26 /* Main.storyboard in Resources */,
 			);
@@ -582,6 +705,16 @@
 			target = 69C7DC421FE25CD400FB7FA2 /* XProxyiOS */;
 			targetProxy = 69593FEA1FFBA5F600CB8ADF /* PBXContainerItemProxy */;
 		};
+		69B45BBD21ECCAD000F53B4E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = KCPOSX;
+			targetProxy = 69B45BBC21ECCAD000F53B4E /* PBXContainerItemProxy */;
+		};
+		69B45BC021ECCB0B00F53B4E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = KCPOSX;
+			targetProxy = 69B45BBF21ECCB0B00F53B4E /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -626,6 +759,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -633,6 +767,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -686,6 +821,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -693,6 +829,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -752,7 +889,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -783,7 +920,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -806,7 +943,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.yarshure.XProxyTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -829,7 +966,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.yarshure.XProxyTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -880,7 +1017,7 @@
 			baseConfigurationReference = 69C7DC4C1FE25D6500FB7FA2 /* iOS.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 745WQDK4L7;
@@ -907,7 +1044,7 @@
 			baseConfigurationReference = 69C7DC4C1FE25D6500FB7FA2 /* iOS.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 745WQDK4L7;

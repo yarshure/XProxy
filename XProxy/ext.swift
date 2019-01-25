@@ -358,12 +358,12 @@ extension SFHTTPResponseHeader {
             
             //let start = data.startIndex.advanced(by: used)
             //let end = data.startIndex.advanced(by: data.count - used)
-            let r = data.range(of:sepData, options: opt, in: Range(used ..< data.count)  )
+            let r = data.range(of:sepData, options: opt, in: used ..< data.count )
             
             if let r =  r  {
                 XProxy.log("used length: \(used) sepdata location:\(r)",level: .Trace)
                 //let l = data.subdata(with: NSMakeRange(used, r.location - used))
-                let l = data.subdata(in: Range(used ..< r.upperBound ))
+                let l = data.subdata(in: used ..< r.upperBound )
                 
                 used += l.count // count length
                 used += r.length() //算上\r\n
@@ -372,7 +372,7 @@ extension SFHTTPResponseHeader {
                 contentLength += c_leng
                 if c_leng == 0 {
                     
-                    if let r2 = data.range(of: sepData, options: opt, in: Range(used ..< data.count )){
+                    if let r2 = data.range(of: sepData, options: opt, in: used ..< data.count ){
                         used += r2.length()
                     }
                     if used == total{

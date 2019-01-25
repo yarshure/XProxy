@@ -94,11 +94,11 @@ class HTTPConnection: Connection {
     func processBufer(_ d:Data,req:SFRequestInfo,enqueue:Bool) -> Bool {
         
         let len = d.count
-        let r = d.range(of:hData, options: Data.SearchOptions.init(rawValue: 0), in: Range(0 ..< len))
+        let r = d.range(of:hData, options: Data.SearchOptions.init(rawValue: 0), in: 0 ..< len)
         if let r = r {
             // body found
             
-            headerData.append( d.subdata(in: Range(0 ..< r.lowerBound)))
+            headerData.append( d.subdata(in: 0 ..< r.lowerBound))
             XProxy.log("\(cIDString) header-- \(headerData as Data)", level: .Debug)
             //MARK: - todo fixme
             guard let reqHeader   = SFHTTPRequestHeader(data: headerData) else {
@@ -144,7 +144,7 @@ class HTTPConnection: Connection {
             }
             // 头数据优先进发送队列，body再进
             if r.lowerBound + 4 < len {
-                let body = d.subdata(in: Range(r.lowerBound+4 ..< len ))
+                let body = d.subdata(in: r.lowerBound+4 ..< len)
                 //need test
                 bufArray.append(body)
                 
@@ -203,7 +203,7 @@ class HTTPConnection: Connection {
                         XProxy.log("\(cIDString) \(reqInfo.url) ####### CONNECT don't need send header",level: .Error)
                     }
                     if recvHeaderData.count != 0 {
-                        recvHeaderData.replaceSubrange(Range(0 ..< recvHeaderData.endIndex), with: Data())
+                        recvHeaderData.replaceSubrange(0 ..< recvHeaderData.endIndex, with: Data())
                     }
                     updateReq(req)
                     reqInfo = req
@@ -218,7 +218,7 @@ class HTTPConnection: Connection {
                     XProxy.log("\(cIDString) HTTP keep-alive create SFRequestInfo",level: .Warning)
                     let req   = SFRequestInfo.init(rID: reqInfo.reqID, sID:requestIndex )
                     if recvHeaderData.count != 0 {
-                        recvHeaderData.replaceSubrange(Range(0 ..< recvHeaderData.endIndex), with: Data())
+                        recvHeaderData.replaceSubrange(0 ..< recvHeaderData.endIndex, with: Data())
                     }
                     updateReq(req)
                     reqInfo = req
@@ -230,7 +230,7 @@ class HTTPConnection: Connection {
                     XProxy.log("\(cIDString) HTTP keep-alive create SFRequestInfo",level: .Warning)
                     let req   = SFRequestInfo.init(rID: reqInfo.reqID, sID:requestIndex )
                     if recvHeaderData.count != 0 {
-                        recvHeaderData.replaceSubrange(Range(0 ..< recvHeaderData.endIndex), with: Data())
+                        recvHeaderData.replaceSubrange(0 ..< recvHeaderData.endIndex, with: Data())
                     }
                     updateReq(req)
                     reqInfo = req
@@ -384,7 +384,7 @@ class HTTPConnection: Connection {
                 XProxy.log("\(cIDString) find HTTP and hData length: \(r2.lowerBound)",level: .Debug)
                 
                 //let left = recvHeaderData.length - len
-                return Range( r1.lowerBound ..< r2.lowerBound)
+                return  r1.lowerBound ..< r2.lowerBound
             }else {
                 XProxy.log("\(cIDString) only find HTTP \(r1.lowerBound) \(recvHeaderData)",level: .Debug)
             }
@@ -448,7 +448,7 @@ class HTTPConnection: Connection {
                 currentReq.respHeader  = x
                 
                 
-                let left = recvHeaderData.subdata(in: Range(used_length ..< recvHeaderData.count))
+                let left = recvHeaderData.subdata(in: used_length ..< recvHeaderData.count)
                 
                 
                 
@@ -470,12 +470,12 @@ class HTTPConnection: Connection {
                 if left.count - used > 0 {
                     
                     
-                    let x  = left.subdata(in: Range(used ..< left.count))
+                    let x  = left.subdata(in: used ..< left.count)
                     recvHeaderData = x
                     
                     XProxy.log("\(cIDString) have new header \(recvHeaderData)",level: .Debug)
                 }else {
-                    recvHeaderData.replaceSubrange(Range(0 ..< recvHeaderData.endIndex), with: Data())
+                    recvHeaderData.replaceSubrange(0 ..< recvHeaderData.endIndex, with: Data())
                 }
                 
                 XProxy.log("\(cIDString) used \(used_length)",level: .Verbose)
@@ -501,10 +501,10 @@ class HTTPConnection: Connection {
                 }
                 if recvHeaderData.count - used > 0 {
                     
-                    let x  = recvHeaderData.subdata(in:Range(used ..< recvHeaderData.count))
+                    let x  = recvHeaderData.subdata(in:used ..< recvHeaderData.count)
                     recvHeaderData = x
                 }else {
-                    recvHeaderData.replaceSubrange(Range(0 ..< recvHeaderData.endIndex), with: Data())
+                    recvHeaderData.replaceSubrange(0 ..< recvHeaderData.endIndex, with: Data())
                 }
                 //h.bodyLeftLength -= data.length
             }else  if h.mode == .ContentLength{ //fixed reqInfo error bug
@@ -523,10 +523,10 @@ class HTTPConnection: Connection {
                     XProxy.log("\(cIDString) \(requestIndex) unFin left \(currentReq.respHeader!.bodyLeftLength)",level: .Debug)
                 }
                 if recvHeaderData.count - used > 0 {
-                    let x  = recvHeaderData.subdata(in: Range(used ..< recvHeaderData.count))
+                    let x  = recvHeaderData.subdata(in: used ..< recvHeaderData.count)
                     recvHeaderData = x
                 }else {
-                    recvHeaderData.replaceSubrange(Range(0 ..< recvHeaderData.endIndex), with: Data())
+                    recvHeaderData.replaceSubrange(0 ..< recvHeaderData.endIndex, with: Data())
                 }
                 
             }else {
@@ -543,7 +543,7 @@ class HTTPConnection: Connection {
                 XProxy.log("\(cIDString) recv buffer too bigger length:\(recvHeaderData.count) will clear cache",level: .Error)
             }
             
-            recvHeaderData.replaceSubrange(Range(0 ..< recvHeaderData.endIndex), with: Data())
+            recvHeaderData.replaceSubrange(0 ..< recvHeaderData.endIndex, with: Data())
         }
     }
     func connect(){
@@ -1185,7 +1185,7 @@ class HTTPConnection: Connection {
             }
             reqInfo.rule = ruler.result
             findProxy(j,cache: true)
-            reqInfo.waitingRule = false
+            //reqInfo.waitingRule = false
             return reqInfo.waitingRule
         }else {
             if !reqInfo.remoteIPaddress.isEmpty {
@@ -1434,7 +1434,7 @@ class HTTPConnection: Connection {
         XProxy.log("client_socks_recv_send_out", level: .Info)
     }
     func checkBufferHaveData(_ buffer:Data,data:Data) -> Range<Data.Index>? {
-        let r = buffer.range(of: data , options: Data.SearchOptions.init(rawValue: 0), in: Range(0 ..< buffer.count))
+        let r = buffer.range(of: data , options: Data.SearchOptions.init(rawValue: 0), in: 0 ..< buffer.count)
         return r
     }
     func forceCloseRemote(){

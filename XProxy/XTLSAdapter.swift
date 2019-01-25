@@ -185,7 +185,7 @@ class XTLSAdapter {
     func writeData(data:Data) ->Int{
         var result:UnsafeMutablePointer<Int> = UnsafeMutablePointer<Int>.allocate(capacity: 1)
         defer {
-            result.deallocate(capacity: 1)
+            result.deallocate()
         }
         let len:Int = data.count
         _ = data.withUnsafeBytes { (ptr)  in
@@ -199,7 +199,7 @@ class XTLSAdapter {
     func readData(_ max:Int) ->Data?{
         var result:UnsafeMutablePointer<Int> = UnsafeMutablePointer<Int>.allocate(capacity: 1)
         defer {
-            result.deallocate(capacity: 1)
+            result.deallocate()
         }
         var buffer:Data = Data.init(capacity: max)
         _ = buffer.withUnsafeMutableBytes { ptr  in

@@ -8,4 +8,4 @@
 OTHER_LDFLAGS = $(inherited)  -framework Xcon -framework XRuler
     //OTHER_LDFLAGS = $(inherited)  -framework Crypto -framework Sodium -framework IDZSwiftCommonCrypto -framework CocoaAsyncSocket -framework SwiftyJSON -framework MMDB -weak_framework kcp -framework XSocket -framework ObjectMapper -framework Xcon -framework CommonCrypto -framework AxLogger
 FRAMEWORK_SEARCH_PATHS = $(inherited) "$(PROJECT_DIR)/Carthage/Build/Mac/"
-LIBRARY_SEARCH_PATHS = $(inherited) "$(PROJECT_DIR)/Carthage/Build/Mac/"
+//LIBRARY_SEARCH_PATHS = $(inherited) "$(PROJECT_DIR)/Carthage/Build/Mac/"
