@@ -29,7 +29,7 @@ extension Sequence {
         return contents
     }
 }
-public protocol SortedSet: BidirectionalCollection, CustomStringConvertible, CustomPlaygroundQuickLookable where Element: Comparable {
+public protocol SortedSet: BidirectionalCollection, CustomStringConvertible, CustomPlaygroundDisplayConvertible where Element: Comparable {
     init()
     func contains(_ element: Element) -> Bool
     mutating func insert(_ newElement: Element) -> (inserted: Bool, memberAfterInsert: Element)
@@ -58,11 +58,19 @@ extension SortedSet {
     }
 #endif
 public struct SortedArray<Element: Comparable>: SortedSet {
-    public var customPlaygroundQuickLook: PlaygroundQuickLook {
+    public var playgroundDescription: Any {
+        #if os(iOS)
+        return String(describing: self)
+        #else
+        return String(describing: self)
+        #endif
+    }
+    
+    public var customPlaygroundQuickLook: CustomPlaygroundDisplayConvertible {
         #if os(iOS)
             return .monospacedText(String(describing: self))
         #else
-            return .text(String(describing: self))
+            return String(describing: self) as! CustomPlaygroundDisplayConvertible
         #endif
     }
     
