@@ -17,9 +17,20 @@ func testHTTP(){
     }
 }
 func testHTTPKCP(){
-    let x = "http,45.76.141.59,8000,,"
+    let x = "http,45.76.141.59,6001,,"
+    ProxyGroupSettings.share.cleanDeleteProxy()
     if let p = SFProxy.createProxyWithLine(line: x, pname: "CN2"){
         p.kcptun = true
+        p.config.crypt = "aes"
+        _  = ProxyGroupSettings.share.addProxy(p)
+    }
+}
+func testHTTPKCPEncryptNone(){
+    let x = "http,144.34.203.132,6000,,"
+    ProxyGroupSettings.share.cleanDeleteProxy()
+    if let p = SFProxy.createProxyWithLine(line: x, pname: "CN2"){
+        p.kcptun = true
+        p.config.crypt = "none"
         _  = ProxyGroupSettings.share.addProxy(p)
     }
 }

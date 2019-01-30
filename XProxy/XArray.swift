@@ -68,7 +68,7 @@ public struct SortedArray<Element: Comparable>: SortedSet {
     
     public var customPlaygroundQuickLook: CustomPlaygroundDisplayConvertible {
         #if os(iOS)
-            return .monospacedText(String(describing: self))
+            return String(describing: self) as! CustomPlaygroundDisplayConvertible
         #else
             return String(describing: self) as! CustomPlaygroundDisplayConvertible
         #endif

@@ -38,18 +38,18 @@ class TestViewController: NSViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        //Xcon.debugEnable = true
-        //XSocket.debugEnable = true
+        Xcon.debugEnable = true
+        Xsocket.debugEnable = true
         XProxy.debugEanble = true
         XRuler.groupIdentifier = "745WQDK4L7.com.yarshure.Surf"
         //let p = Bundle.main.path(forResource: "Test.conf", ofType: nil)!
         var url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: XRuler.groupIdentifier)!
-         url.appendPathComponent("abigt.conf")
+         url.appendPathComponent("test.conf")
         SFSettingModule.setting.config(url.path)
         
         
         
-        testHTTPKCP()
+        testHTTPKCPEncryptNone()
         print(ProxyGroupSettings.share.proxys)
         if let x = SFSettingModule.setting.findRuleByString("secure-appldnld.apple.com", useragent: ""){
             print(x.result.type)
