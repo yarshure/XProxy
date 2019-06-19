@@ -18,7 +18,7 @@ open class TLSSocketProvider {
     func write(_ data:Data){
         XProxy.log("should write \(data as NSData)", level: .Info)
     }
-    init() {
+    public init() {
         
     }
     //handshake finished call
@@ -121,7 +121,7 @@ class XTLSAdapter {
         //0:SecIdentityRef, SecCertificateRefs
         let originCert:SecCertificate? = SecTrustGetCertificateAtIndex(certs, 0)
         let serverCerts =  TLSToolCommon().logCertificateData(for: certs)
-        print(serverCerts)
+        print(serverCerts as Any)
         let myOIDs : NSDictionary = copyOID(certificate: originCert!)
         
         
