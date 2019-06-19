@@ -9,7 +9,7 @@
 import Foundation
 import Xcon
 import XRuler
-import SwiftyJSON
+
 let KEEP_APPLE_TCP = true
 public class SFRequestInfo {
     //mitm config will add to XRuler
@@ -247,63 +247,63 @@ public class SFRequestInfo {
         r["remoteIP"] = remoteIPaddress as AnyObject?
         return r
     }
-    public func map(_ j:JSON){
-        
-        self.mode = SFConnectionMode(rawValue:j["mode"].stringValue)!
-        self.url = j["url"].stringValue
-        self.app = j["app"].stringValue
-        self.lport = j["port"].uInt16Value
-        var  s = j["start"]
-        self.sTime = Date.init(timeIntervalSince1970: s.doubleValue)
-        self.status = SFConnectionStatus(rawValue:j["status"].stringValue)!
-        let reason = j["closereason"].intValue
-        self.closereason = SFConnectionCompleteReason(rawValue:reason)!
-        
-        if mode != .TCP {
-            var head = j["respHeader"]
-            if head.error == nil {
-                let str = head.stringValue
-                if let d = str.data(using: String.Encoding.utf8) {
-                    if let h = SFHTTPResponseHeader.init(data: d) {
-                        self.respHeader = h
-                    }
-                    
-                    
-                }
-            }
-            
-            head = j["reqHeader"]
-            if head.error == nil {
-                let str = head.stringValue
-                if let d = str.data(using: String.Encoding.utf8) {
-                    if let h = SFHTTPRequestHeader.init(data: d) {
-                         self.reqHeader = h
-                    }
-                   
-                }
-            }
-            
-        }
-        
-        let est = j["Est"]
-        connectionTiming = Double(est.stringValue)!
-        let rjson = j["Rule"]
-        rule.mapObject(rjson)
-        
-        self.reqID = j["reqID"].uIntValue
-        self.subID = j["subID"].uIntValue
-        let transf = j["transferTiming"]
-        self.transferTiming = Double(transf.stringValue)!
-        
-        self.traffice.mapObject(j: j["Traffic"])
-
-        
-        self.eTime = Date.init(timeIntervalSince1970: j["end"].doubleValue)
-        self.interfaceCell = j["interfaceCell"].int64Value
-        self.localIPaddress = j["localIP"].stringValue
-        self.remoteIPaddress = j["remoteIP"].stringValue
-        
-    }
+//    public func map(_ j:JSON){
+//        
+//        self.mode = SFConnectionMode(rawValue:j["mode"].stringValue)!
+//        self.url = j["url"].stringValue
+//        self.app = j["app"].stringValue
+//        self.lport = j["port"].uInt16Value
+//        var  s = j["start"]
+//        self.sTime = Date.init(timeIntervalSince1970: s.doubleValue)
+//        self.status = SFConnectionStatus(rawValue:j["status"].stringValue)!
+//        let reason = j["closereason"].intValue
+//        self.closereason = SFConnectionCompleteReason(rawValue:reason)!
+//        
+//        if mode != .TCP {
+//            var head = j["respHeader"]
+//            if head.error == nil {
+//                let str = head.stringValue
+//                if let d = str.data(using: String.Encoding.utf8) {
+//                    if let h = SFHTTPResponseHeader.init(data: d) {
+//                        self.respHeader = h
+//                    }
+//                    
+//                    
+//                }
+//            }
+//            
+//            head = j["reqHeader"]
+//            if head.error == nil {
+//                let str = head.stringValue
+//                if let d = str.data(using: String.Encoding.utf8) {
+//                    if let h = SFHTTPRequestHeader.init(data: d) {
+//                         self.reqHeader = h
+//                    }
+//                   
+//                }
+//            }
+//            
+//        }
+//        
+//        let est = j["Est"]
+//        connectionTiming = Double(est.stringValue)!
+//        let rjson = j["Rule"]
+//        rule.mapObject(rjson)
+//        
+//        self.reqID = j["reqID"].uIntValue
+//        self.subID = j["subID"].uIntValue
+//        let transf = j["transferTiming"]
+//        self.transferTiming = Double(transf.stringValue)!
+//        
+//        self.traffice.mapObject(j: j["Traffic"])
+//
+//        
+//        self.eTime = Date.init(timeIntervalSince1970: j["end"].doubleValue)
+//        self.interfaceCell = j["interfaceCell"].int64Value
+//        self.localIPaddress = j["localIP"].stringValue
+//        self.remoteIPaddress = j["remoteIP"].stringValue
+//        
+//    }
 
     public func dataDesc(_ d:Date) ->String{
         
